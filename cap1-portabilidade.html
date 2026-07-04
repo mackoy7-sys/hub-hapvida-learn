@@ -300,7 +300,7 @@
 
 <div class="overlay" id="overlay">
   <h2>🎬 Portabilidade de Carências — Capítulo 1</h2>
-  <p>A EugenIA vai apresentar o prazo de análise e toda a documentação obrigatória para o time de vendas.</p>
+  <p>A EugenIA vai apresentar o processo completo de portabilidade: objetivo e regras, emissão do relatório no Guia ANS, canais de envio, prazos e toda a documentação exigida.</p>
   <button class="start-btn" id="startBtn">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     Iniciar apresentação
@@ -328,37 +328,90 @@ const scenes = [
     html:`<div class="hero">
         <div class="kicker">Bem-vindos · Capítulo 1</div>
         <h1>Portabilidade de Carências</h1>
-        <p>Neste capítulo: o <b>prazo de análise</b> e a <b>documentação obrigatória</b> que o cliente precisa apresentar.</p>
+        <p>Neste capítulo você vai dominar <b>todo o processo</b>: o que é, como solicitar no <b>Guia ANS</b>, os canais de envio, os prazos e <b>toda a documentação</b> exigida.</p>
       </div>`,
     narration:["Olá, time de vendas! Eu sou a EugenIA, sua assistente aqui na Hapvida.",
-      "Neste primeiro capítulo, vamos falar sobre portabilidade de carências: o prazo de análise e toda a documentação obrigatória que o cliente precisa apresentar.",
-      "Preparados? Então vamos começar."]
+      "Neste capítulo, vamos percorrer todo o processo de portabilidade de carências: o que é e quando solicitar, o Guia da A-N-S, os canais de envio, os prazos e toda a documentação necessária.",
+      "Vamos começar!"]
   },
   {
-    kicker:"Item 3", title:"Prazo de Análise",
-    html:`<div class="kicker">Prazo</div><h1>Prazo de Análise</h1>
+    kicker:"Objetivo", title:"O que é a Portabilidade",
+    html:`<div class="kicker">Objetivo</div><h1>O que é a Portabilidade</h1>
+      <ul class="points">
+        <li style="animation-delay:.1s"><span class="ic">✓</span><div>Permite ao beneficiário <b>migrar de plano</b> aproveitando as <b>carências já cumpridas</b>.</div></li>
+        <li style="animation-delay:.5s"><span class="ic">§</span><div>Segue os requisitos da <b>RN nº 438/2018</b> da ANS.</div></li>
+        <li class="warn" style="animation-delay:.9s"><span class="ic">!</span><div><b>Importante:</b> solicitar <b>antes da ativação</b> do plano de destino.</div></li>
+      </ul>`,
+    narration:["Primeiro, o objetivo. A portabilidade de carências permite que o beneficiário migre de um plano de saúde para outro aproveitando as carências que já cumpriu,",
+      "desde que atendidos os requisitos da Resolução Normativa número quatrocentos e trinta e oito, de dois mil e dezoito, da A-N-S.",
+      "Atenção a um ponto essencial: a solicitação deve ser feita antes da ativação do plano de destino."]
+  },
+  {
+    kicker:"Fluxo do Processo", title:"O processo em 3 passos",
+    html:`<div class="kicker">Fluxo do Processo</div><h1>O processo em 3 passos</h1>
+      <ul class="points">
+        <li style="animation-delay:.1s"><span class="ic">1</span><div><b>Relatório de Compatibilidade</b> <small>— emitido no Guia ANS</small></div></li>
+        <li style="animation-delay:.5s"><span class="ic">2</span><div><b>Envio da Solicitação</b> <small>— conforme o tipo de plano</small></div></li>
+        <li style="animation-delay:.9s"><span class="ic">3</span><div><b>Prazo de Análise</b> <small>— após a documentação completa</small></div></li>
+      </ul>`,
+    narration:["O processo tem três passos principais.",
+      "Passo um: emitir o relatório de compatibilidade no Guia da A-N-S. Passo dois: enviar a solicitação, conforme o tipo de plano. Passo três: aguardar o prazo de análise.",
+      "Vamos ver cada um em detalhe."]
+  },
+  {
+    kicker:"Passo 1", title:"Relatório de Compatibilidade",
+    html:`<div class="kicker">Passo 1 · Guia ANS</div><h1>Relatório de Compatibilidade</h1>
+      <div class="sub">Como emitir no Guia de Planos da ANS:</div>
+      <ul class="points" style="gap:8px;font-size:14.5px">
+        <li style="animation-delay:.1s"><span class="ic">›</span><div>Acessar o <b>Guia de Planos da ANS</b> e selecionar <b>Portabilidade de Carências</b></div></li>
+        <li style="animation-delay:.28s"><span class="ic">›</span><div>Fazer login pelo <b>Gov.br</b> e preencher as informações</div></li>
+        <li style="animation-delay:.46s"><span class="ic">›</span><div>Emitir o <b>protocolo</b> e salvar o relatório em <b>PDF</b></div></li>
+      </ul>
+      <ul class="points" style="margin-top:12px">
+        <li class="warn" style="animation-delay:.75s"><span class="ic">⏱</span><div>Validade do relatório: <b>5 dias corridos</b> a partir da emissão.</div></li>
+      </ul>`,
+    narration:["Passo um: a emissão do relatório de compatibilidade. Ele compara o plano de origem com o plano de destino e é gerado no Guia de Planos da A-N-S.",
+      "Para emitir: acesse o Guia de Planos da A-N-S e selecione Portabilidade de Carências; faça login pelo Gov ponto B-R e preencha as informações;",
+      "por fim, emita o protocolo e salve o relatório em PDF.",
+      "Fique atento: esse relatório tem validade de apenas cinco dias corridos, contados da emissão."]
+  },
+  {
+    kicker:"Passo 2", title:"Envio da Solicitação",
+    html:`<div class="kicker">Passo 2</div><h1>Envio da Solicitação</h1>
+      <div class="sub">O canal depende do tipo de plano:</div>
+      <ul class="points" style="gap:12px">
+        <li style="animation-delay:.15s"><span class="ic">@</span><div><b>Planos Coletivos</b> → e-mail<br><small style="color:var(--azul);font-weight:700">portabilidade.backoffice@hapvida.com.br</small><br><small>Abrange: Hapvida, CCG, GNDI SP, GNDI Minas e GNDI Sul (Clinipam)</small></div></li>
+        <li style="animation-delay:.6s"><span class="ic">🌐</span><div><b>Planos Individuais</b> → portal da operadora <small>(site cafex)</small><br><small>Hapvida · CCG · Clinipam · GNDI Minas · GNDI SP</small></div></li>
+      </ul>`,
+    narration:["Passo dois: o envio da solicitação, depois de reunir toda a documentação. O canal depende do tipo de plano.",
+      "Para planos coletivos, encaminhe a documentação para o e-mail portabilidade ponto backoffice, arroba hapvida ponto com ponto b-r. Esse canal atende Hapvida, C-C-G, GNDI São Paulo, GNDI Minas e GNDI Sul, a Clinipam.",
+      "Já para planos individuais, a solicitação é feita diretamente no portal da operadora correspondente — Hapvida, C-C-G, Clinipam, GNDI Minas ou GNDI São Paulo — pelo site do cafex de cada uma."]
+  },
+  {
+    kicker:"Passo 3", title:"Prazo de Análise",
+    html:`<div class="kicker">Passo 3</div><h1>Prazo de Análise</h1>
       <div style="display:flex;align-items:baseline;margin:14px 0 4px"><span class="big-num">10<small>dias</small></span></div>
       <ul class="points">
         <li style="animation-delay:.1s"><span class="ic">✓</span><div>Contados <b>exclusivamente após</b> o recebimento da documentação <b>completa</b>.</div></li>
         <li class="warn" style="animation-delay:.5s"><span class="ic">!</span><div>Documentação <b>incompleta</b> enseja em <b>recusa</b>.</div></li>
         <li class="warn" style="animation-delay:.9s"><span class="ic">↻</span><div>Ao reencaminhar, o <b>prazo reinicia</b> do zero.</div></li>
       </ul>`,
-    narration:["Vamos começar pelo prazo de análise. O prazo é de dez dias.",
+    narration:["Passo três: o prazo de análise, que é de dez dias.",
       "Mas atenção: esses dias começam a contar exclusivamente após o recebimento da documentação completa.",
-      "Se a documentação estiver incompleta, o pedido é recusado. Nesse caso, a documentação precisa ser reencaminhada, e o prazo reinicia do zero.",
-      "Por isso, garantir que tudo chegue completo na primeira vez economiza muito tempo."]
+      "Se a documentação estiver incompleta, o pedido é recusado, e ao reencaminhar o prazo reinicia do zero. Por isso, envie tudo completo na primeira vez."]
   },
   {
-    kicker:"Visão geral", title:"Documentação Obrigatória",
-    html:`<div class="kicker">Documentação Obrigatória</div><h1>São 3 documentos</h1>
-      <ul class="points">
-        <li style="animation-delay:.1s"><span class="ic">1</span><div><b>Declaração de Portabilidade</b> <small>— emitida pela operadora de origem</small></div></li>
-        <li style="animation-delay:.5s"><span class="ic">2</span><div><b>Documentos Pessoais</b> <small>— titular e dependentes</small></div></li>
-        <li style="animation-delay:.9s"><span class="ic">3</span><div><b>Relatório de Compatibilidade</b> <small>— via Guia ANS</small></div></li>
+    kicker:"Documentação", title:"Documentação Obrigatória",
+    html:`<div class="kicker">Documentação Obrigatória</div><h1>Os documentos exigidos</h1>
+      <ul class="points" style="gap:9px">
+        <li style="animation-delay:.1s"><span class="ic">1</span><div><b>Declaração de Portabilidade</b> <small>— operadora de origem</small></div></li>
+        <li style="animation-delay:.35s"><span class="ic">2</span><div><b>Documentos Pessoais</b></div></li>
+        <li style="animation-delay:.6s"><span class="ic">3</span><div><b>Relatório de Compatibilidade</b> <small>— Guia ANS</small></div></li>
+        <li style="animation-delay:.85s"><span class="ic">4</span><div><b>Vínculo com a Pessoa Jurídica</b> <small>— planos coletivos</small></div></li>
       </ul>`,
-    narration:["Agora, a documentação obrigatória. São três grupos principais.",
-      "Primeiro, a declaração para fins de portabilidade, emitida pela operadora de origem. Segundo, os documentos pessoais. E terceiro, o relatório de compatibilidade.",
-      "Vamos detalhar cada um deles."]
+    narration:["Agora, a documentação obrigatória. São quatro grupos de documentos.",
+      "Um: a declaração para fins de portabilidade, da operadora de origem. Dois: os documentos pessoais. Três: o relatório de compatibilidade. E quatro: a comprovação de vínculo com a pessoa jurídica, nos planos coletivos.",
+      "Vamos detalhar cada um."]
   },
   {
     kicker:"Documento 1", title:"Declaração de Portabilidade",
@@ -376,7 +429,7 @@ const scenes = [
     narration:["O primeiro documento é a Declaração para fins de Portabilidade, emitida pela operadora de origem. Ela precisa conter, obrigatoriamente:",
       "nome completo, CPF e data de nascimento; o registro da operadora e o registro do produto;",
       "a data de adesão ao plano e o tempo de permanência; a situação do plano, que deve estar ativo; e informação sobre portabilidade anterior;",
-      "existência de mudança de plano e de segmentação; informação sobre CPT, a Cobertura Parcial Temporária, quando houver;",
+      "mudança de plano e de segmentação; informação sobre CPT, a Cobertura Parcial Temporária, quando houver;",
       "se o plano foi adaptado à Lei nove mil, seiscentos e cinquenta e seis, de noventa e oito; o valor da mensalidade;",
       "a comprovação de adimplência; e informação sobre eventual internação."]
   },
@@ -396,7 +449,7 @@ const scenes = [
       </ul>`,
     narration:["O segundo grupo são os documentos pessoais. É preciso um documento oficial com foto — como RG, CNH ou carteira de trabalho;",
       "o CPF, quando não constar no documento; e o comprovante de residência.",
-      "Quando houver dependentes, também é necessário comprovar o vínculo: certidão de nascimento, certidão de casamento, comprovação de união estável, documento de guarda, tutela ou adoção, e certidão de óbito, quando pertinente."]
+      "Quando houver dependentes, também é necessário comprovar o vínculo: certidão de nascimento, certidão de casamento, união estável, guarda, tutela ou adoção, e certidão de óbito, quando pertinente."]
   },
   {
     kicker:"Documento 3", title:"Relatório de Compatibilidade",
@@ -407,22 +460,84 @@ const scenes = [
         <li class="good" style="animation-delay:.55s"><span class="ic">B</span><div><b>Protocolo de Portabilidade</b> emitido pelo Guia ANS</div></li>
         <li class="good" style="animation-delay:.95s"><span class="ic">C</span><div><b>Ofício autorizativo</b> da ANS</div></li>
       </ul>`,
-    narration:["E o terceiro documento é o relatório de compatibilidade. Aqui, basta apresentar um dos seguintes:",
+    narration:["O terceiro documento é o relatório de compatibilidade. Aqui, basta apresentar um dos seguintes:",
       "o relatório emitido pelo Guia A-N-S, que tem validade de apenas cinco dias;",
       "ou o protocolo de portabilidade, também emitido pelo Guia A-N-S;",
       "ou, ainda, o ofício autorizativo da A-N-S."]
   },
   {
+    kicker:"Documento 4", title:"Vínculo com a Pessoa Jurídica",
+    html:`<div class="kicker">Documento 4 · Planos Coletivos</div><h1>Vínculo com a Pessoa Jurídica</h1>
+      <ul class="points" style="gap:10px">
+        <li style="animation-delay:.1s"><span class="ic">🏢</span><div><b>Coletivo Empresarial</b> — um dos: <small>Carteira de Trabalho, holerite, contrato de trabalho ou documento de empresário individual</small></div></li>
+        <li style="animation-delay:.5s"><span class="ic">🤝</span><div><b>Coletivo por Adesão</b> — carta associativa (ou documento da entidade) + comprovação da <b>atividade profissional</b></div></li>
+      </ul>
+      <ul class="points" style="margin-top:10px">
+        <li class="warn" style="animation-delay:.85s"><span class="ic">i</span><div>Plano coletivo de destino: informar também o <b>código interno da empresa</b>.</div></li>
+      </ul>`,
+    narration:["O quarto documento é a comprovação de vínculo com a pessoa jurídica, exigida nos planos coletivos.",
+      "No coletivo empresarial, apresente um destes: carteira de trabalho, holerite, contrato de trabalho ou documento de empresário individual.",
+      "No coletivo por adesão, apresente a carta associativa ou documento da entidade contratante, mais um documento que comprove a atividade profissional.",
+      "E quando o plano de destino for coletivo, informe também o código interno da empresa."]
+  },
+  {
+    kicker:"Atenção", title:"E se não houver a Declaração?",
+    html:`<div class="kicker">Quando falta a Declaração de Portabilidade</div><h1>Comprovar separadamente</h1>
+      <ul class="points" style="gap:10px">
+        <li style="animation-delay:.1s"><span class="ic">A</span><div><b>Adimplência</b> <small>— 3 últimas mensalidades, declaração da operadora ou da empresa</small></div></li>
+        <li style="animation-delay:.4s"><span class="ic">B</span><div><b>Prazo de permanência</b> <small>— proposta/contrato, declaração ou comprovantes de pagamento</small></div></li>
+        <li style="animation-delay:.7s"><span class="ic">C</span><div><b>Plano ativo</b> <small>— declaração ou documento recente que comprove a vigência</small></div></li>
+      </ul>
+      <ul class="points" style="margin-top:10px">
+        <li class="warn" style="animation-delay:1s"><span class="ic">!</span><div>Plano <b>cancelado</b>? Comprovar hipótese do <b>art. 8º da RN 438/2018</b> <small>(ex.: falecimento, demissão, aposentadoria, rescisão do coletivo)</small>.</div></li>
+      </ul>`,
+    narration:["Um cenário importante: quando o beneficiário não apresenta a declaração de portabilidade, é preciso comprovar separadamente três requisitos.",
+      "A, adimplência: com os comprovantes das três últimas mensalidades, uma declaração da operadora, ou da empresa contratante.",
+      "B, prazo de permanência: com a proposta de adesão, o contrato assinado, uma declaração, ou comprovantes de pagamento do período.",
+      "C, plano ativo: com uma declaração da operadora ou documento recente que demonstre que o plano continua vigente.",
+      "E se o plano já tiver sido cancelado, é necessário comprovar uma hipótese excepcional do artigo oitavo da R-N quatrocentos e trinta e oito, como falecimento do titular, demissão, aposentadoria ou rescisão do contrato coletivo."]
+  },
+  {
+    kicker:"Checklist", title:"Checklist da Documentação",
+    html:`<div class="kicker">Checklist</div><h1>Antes de enviar, confira</h1>
+      <ul class="points" style="gap:7px;font-size:14px">
+        <li style="animation-delay:.05s"><span class="ic">☑</span><div>Relatório de Compatibilidade (Guia ANS)</div></li>
+        <li style="animation-delay:.15s"><span class="ic">☑</span><div>Declaração de Portabilidade da operadora de origem</div></li>
+        <li style="animation-delay:.25s"><span class="ic">☑</span><div>Documento oficial com foto · CPF · comprovante de residência</div></li>
+        <li style="animation-delay:.35s"><span class="ic">☑</span><div>Vínculo dos dependentes (quando houver)</div></li>
+        <li style="animation-delay:.45s"><span class="ic">☑</span><div>Vínculo com a empresa/entidade contratante</div></li>
+        <li style="animation-delay:.55s"><span class="ic">☑</span><div>Documentação complementar (se não houver declaração da operadora)</div></li>
+      </ul>`,
+    narration:["Antes de enviar, use este checklist rápido: relatório de compatibilidade do Guia A-N-S; declaração de portabilidade da operadora de origem;",
+      "documento oficial com foto, CPF e comprovante de residência; comprovação de vínculo dos dependentes, quando houver;",
+      "vínculo com a empresa ou entidade contratante; e a documentação complementar, caso não exista a declaração da operadora."]
+  },
+  {
+    kicker:"Base Regulatória", title:"RN nº 438/2018 da ANS",
+    html:`<div class="kicker">Base Regulatória</div><h1>RN nº 438/2018 da ANS</h1>
+      <div class="sub">Toda a análise observa, principalmente:</div>
+      <ul class="points" style="gap:7px;font-size:14px">
+        <li style="animation-delay:.1s"><span class="ic">§</span><div>Compatibilidade entre planos · prazo mínimo de permanência</div></li>
+        <li style="animation-delay:.3s"><span class="ic">§</span><div>Adimplência · vigência do plano de origem</div></li>
+        <li style="animation-delay:.5s"><span class="ic">§</span><div>Vínculo contratual · elegibilidade dos dependentes</div></li>
+        <li style="animation-delay:.7s"><span class="ic">§</span><div>Vínculo com a PJ contratante (planos coletivos)</div></li>
+      </ul>`,
+    narration:["Toda a análise segue a Resolução Normativa número quatrocentos e trinta e oito, de dois mil e dezoito, da A-N-S.",
+      "Ela observa, principalmente: a compatibilidade entre os planos, o prazo mínimo de permanência, a adimplência, a vigência do plano de origem, o vínculo contratual, a elegibilidade dos dependentes e, nos coletivos, o vínculo com a pessoa jurídica.",
+      "O atendimento de todos esses requisitos é indispensável para o deferimento da portabilidade."]
+  },
+  {
     kicker:"Resumo", title:"Resumo do Capítulo 1",
     html:`<div class="kicker">Resumo</div><h1>Fechando o Capítulo 1</h1>
-      <ul class="points" style="gap:12px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">✓</span><div><b>Prazo de 10 dias</b> — só começa com a documentação completa</div></li>
-        <li class="good" style="animation-delay:.5s"><span class="ic">✓</span><div><b>3 documentos:</b> Declaração de Portabilidade · Pessoais · Compatibilidade</div></li>
-        <li class="good" style="animation-delay:.9s"><span class="ic">✓</span><div>Documentação completa na 1ª vez = <b>análise mais rápida</b></div></li>
+      <ul class="points" style="gap:10px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">✓</span><div>Solicitar <b>antes de ativar</b> o destino · relatório do Guia ANS vale <b>5 dias</b></div></li>
+        <li class="good" style="animation-delay:.4s"><span class="ic">✓</span><div><b>Coletivo</b> → e-mail backoffice · <b>Individual</b> → portal da operadora</div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">✓</span><div>Prazo de <b>10 dias</b> após a documentação completa</div></li>
+        <li class="good" style="animation-delay:1s"><span class="ic">✓</span><div>Documentação completa = <b>análise mais rápida</b> e cliente satisfeito</div></li>
       </ul>`,
-    narration:["Para fechar: lembre-se de que o prazo de dez dias só começa com a documentação completa;",
-      "que são três os documentos essenciais — a declaração de portabilidade, os documentos pessoais e o relatório de compatibilidade;",
-      "e que enviar tudo certo na primeira vez agiliza a análise e melhora a experiência do cliente.",
+    narration:["Para fechar: a portabilidade deve ser solicitada antes de ativar o plano de destino, e o relatório do Guia A-N-S vale apenas cinco dias.",
+      "Planos coletivos vão pelo e-mail do backoffice; planos individuais, pelo portal da operadora.",
+      "O prazo de análise é de dez dias após a documentação completa — e enviar tudo certo na primeira vez agiliza o processo e melhora a experiência do cliente.",
       "Esse foi o Capítulo um sobre portabilidade de carências. Até o próximo!"]
   }
 ];
@@ -539,36 +654,51 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Qual é o prazo para análise da portabilidade?",
-    opts:["5 dias corridos a partir da solicitação",
-          "10 dias, contados após o recebimento da documentação completa",
-          "30 dias após a adesão ao novo plano",
-          "10 dias a partir da solicitação, mesmo sem toda a documentação"],
-    a:1, why:"São 10 dias, mas o prazo só começa a contar após o recebimento da documentação completa." },
-  { q:"O que acontece quando a documentação é entregue incompleta?",
-    opts:["O prazo continua correndo normalmente",
-          "A análise é feita com o que foi enviado",
-          "Enseja recusa; ao reencaminhar, o prazo reinicia do zero",
-          "O cliente perde o direito à portabilidade"],
-    a:2, why:"Documentação incompleta enseja recusa. Reencaminhada, o prazo é reiniciado." },
-  { q:"Quais são os documentos obrigatórios da portabilidade?",
-    opts:["Apenas a Declaração da operadora de origem",
-          "Documentos Pessoais e comprovante de residência",
-          "Declaração de Portabilidade, Documentos Pessoais e Relatório de Compatibilidade",
-          "Declaração, laudo médico e comprovante de renda"],
-    a:2, why:"São 3: Declaração de Portabilidade (operadora de origem), Documentos Pessoais e Relatório de Compatibilidade." },
-  { q:"Sobre a Declaração de Portabilidade (operadora de origem), o plano deve estar informado como:",
-    opts:["Inativo há mais de 6 meses",
-          "Ativo, com comprovação de adimplência",
-          "Em processo de cancelamento",
-          "Com mensalidade em atraso"],
-    a:1, why:"A declaração deve indicar a situação do plano como ativo e comprovar a adimplência (entre outros dados)." },
-  { q:"Sobre o Relatório de Compatibilidade, é correto afirmar:",
-    opts:["É preciso apresentar os três documentos juntos",
-          "Basta um: Relatório do Guia ANS (validade 5 dias), Protocolo de Portabilidade do Guia ANS ou Ofício autorizativo da ANS",
-          "O relatório do Guia ANS tem validade de 30 dias",
-          "Somente o ofício autorizativo da ANS é aceito"],
-    a:1, why:"Basta apresentar UM dos três. O relatório do Guia ANS tem validade de apenas 5 dias." }
+  { q:"Quando a portabilidade de carências deve ser solicitada?",
+    opts:["Após a ativação do plano de destino",
+          "Antes da ativação do plano de destino",
+          "Até 30 dias depois de migrar",
+          "A qualquer momento após a migração"],
+    a:1, why:"A solicitação deve ser realizada antes da ativação do plano de destino." },
+  { q:"O Relatório de Compatibilidade, emitido no Guia ANS, tem validade de:",
+    opts:["30 dias","90 dias","5 dias corridos","Validade indeterminada"],
+    a:2, why:"O relatório do Guia ANS vale 5 dias corridos a partir da emissão." },
+  { q:"Para onde enviar a solicitação de portabilidade de um plano COLETIVO?",
+    opts:["No portal cafex da operadora",
+          "Para o e-mail portabilidade.backoffice@hapvida.com.br",
+          "Presencialmente numa loja",
+          "Direto no site da ANS"],
+    a:1, why:"Planos coletivos → e-mail portabilidade.backoffice@hapvida.com.br. Individuais → portal (cafex) da operadora." },
+  { q:"O prazo de análise de 10 dias começa a contar quando?",
+    opts:["Na data da solicitação",
+          "Após o recebimento da documentação completa",
+          "Após a emissão do relatório de compatibilidade",
+          "Após a ativação do plano"],
+    a:1, why:"Os 10 dias contam exclusivamente após a documentação completa; incompleta é recusada e reinicia o prazo." },
+  { q:"Quantos são os grupos de documentos obrigatórios?",
+    opts:["2 grupos",
+          "3 grupos",
+          "4: Declaração, Documentos Pessoais, Relatório de Compatibilidade e Vínculo com a PJ",
+          "5 grupos"],
+    a:2, why:"São 4: Declaração de Portabilidade, Documentos Pessoais, Relatório de Compatibilidade e Vínculo com a PJ (coletivos)." },
+  { q:"Num plano Coletivo Empresarial, o vínculo com a PJ pode ser comprovado por:",
+    opts:["Apenas a carta associativa",
+          "Carteira de Trabalho, holerite, contrato de trabalho ou doc. de empresário individual",
+          "Somente o contrato social da empresa",
+          "Declaração do próprio beneficiário"],
+    a:1, why:"No coletivo empresarial: carteira de trabalho, holerite, contrato de trabalho ou documento de empresário individual. Carta associativa é do coletivo por adesão." },
+  { q:"Se o beneficiário NÃO apresentar a Declaração de Portabilidade, é preciso:",
+    opts:["Considerar o processo automaticamente indeferido",
+          "Comprovar separadamente adimplência, prazo de permanência e plano ativo",
+          "Aguardar 30 dias adicionais",
+          "Nada, pois a declaração é opcional"],
+    a:1, why:"Sem a declaração, comprova-se separadamente: adimplência, prazo de permanência e plano ativo (e, se cancelado, hipótese do art. 8º da RN 438/2018)." },
+  { q:"Qual norma da ANS rege a portabilidade de carências?",
+    opts:["RN nº 195/2009",
+          "RN nº 438/2018",
+          "Lei nº 9.656/98",
+          "RN nº 259/2011"],
+    a:1, why:"A portabilidade de carências é regida pela Resolução Normativa nº 438/2018 da ANS." }
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");
