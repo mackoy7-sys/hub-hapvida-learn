@@ -557,7 +557,21 @@ const dotBtns=[...dotsEl.children];
 /* ---------- Voz ---------- */
 function pickVoice(){
   const vs=speechSynthesis.getVoices();
-  ptVoice = vs.find(v=>/pt[-_]BR/i.test(v.lang)) || vs.find(v=>/^pt/i.test(v.lang)) || null;
+  const pt=vs.filter(v=>/^pt/i.test(v.lang));
+  if(!pt.length){ ptVoice=null; return; }
+  // ranqueia para escolher a voz MAIS natural disponível no aparelho
+  const score=v=>{
+    const n=(v.name||"").toLowerCase(); let s=0;
+    if(/pt[-_]br/i.test(v.lang)) s+=40;                                   // pt-BR de preferência
+    if(/natural|neural|online/.test(n)) s+=30;                            // vozes neurais (Edge/Chrome)
+    if(/google/.test(n)) s+=22;                                           // Google (Chrome) > local
+    if(v.localService===false) s+=12;                                     // online costuma soar melhor
+    if(/(francisca|thalita|brenda|giovanna|yara|leila|let[ií]cia|manuela|camila|vit[óo]ria)/.test(n)) s+=16; // femininas naturais pt-BR
+    if(/(ant[oô]nio|f[áa]bio|julio|humberto|daniel|donato)/.test(n)) s+=8;
+    if(/luciana/.test(n)) s+=6;                                           // macOS pt-BR (razoável)
+    return s;
+  };
+  ptVoice = pt.slice().sort((a,b)=>score(b)-score(a))[0];
 }
 if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
 
