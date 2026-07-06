@@ -169,6 +169,7 @@
   .result .acts button{padding:12px 24px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;transition:.15s}
   .result .primary{background:var(--laranja);color:#fff}.result .primary:hover{background:#ff8b33}
   .result .ghost{background:var(--azul-claro);color:var(--azul)}.result .ghost:hover{background:var(--azul);color:#fff}
+  .result .exit{background:#eef2f8;color:var(--cinza)}.result .exit:hover{background:#dbe3ef}
   @media(max-width:720px){
     .quiz-body{padding:22px}.q-text{font-size:18px}.opt{font-size:14px;padding:12px}
     .stage{grid-template-columns:1fr}
@@ -792,7 +793,7 @@ function answer(chosen){
 function showResult(){
   const total=quizData.length, pct=Math.round(qScore/total*100), deg=Math.round(qScore/total*360);
   let msg,emoji;
-  if(pct>=80){emoji="🏆";msg="Excelente! Você domina o conteúdo de portabilidade de carências.";}
+  if(pct>=80){emoji="🏆";msg="Excelente! Você domina o conteúdo deste capítulo.";}
   else if(pct>=60){emoji="👍";msg="Bom trabalho! Vale revisar alguns pontos para fixar de vez.";}
   else{emoji="📚";msg="Que tal rever a apresentação? Alguns pontos importantes passaram batido.";}
   quizProg.textContent="Resultado";
@@ -806,10 +807,12 @@ function showResult(){
       <div class="acts">
         <button class="primary" id="qretry">↻ Refazer o quiz</button>
         <button class="ghost" id="qreview">◀ Rever a apresentação</button>
+        <button class="exit" id="qexit">⇤ Sair</button>
       </div>
     </div>`;
   document.getElementById("qretry").onclick=startQuiz;
   document.getElementById("qreview").onclick=()=>{ quizEl.classList.remove("on"); stop(); idx=0; play(); };
+  document.getElementById("qexit").onclick=()=>{ stop(); location.href="index.html"; };
 }
 
 window.addEventListener("beforeunload",()=>{ if('speechSynthesis' in window) speechSynthesis.cancel(); });
