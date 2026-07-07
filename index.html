@@ -269,31 +269,38 @@
         if(x.assistido){ assistidos++; score+=10; }
         if(x.quiz_feito && x.quiz_total>0){ feitos++; var ra=x.quiz_acertos/x.quiz_total; score+=ra*10; ratios.push(ra); if(x.quiz_acertos===x.quiz_total) got100=true; }
       });
-      if(assistidos===total) score+=20; score=Math.round(score);
-      var pct=Math.round(assistidos/total*100);
+      if(feitos===total) score+=20; score=Math.round(score);
+      var pct=Math.round(feitos/total*100);
       var expert=feitos===total && ratios.length>0 && ratios.every(function(v){return v>=0.8;});
       var badges=[
-        {e:"🎯",n:"Primeiro passo",on:assistidos>=1},
-        {e:"⭐",n:"Meia trilha",on:assistidos>=Math.ceil(total/2)},
+        {e:"🎯",n:"Primeiro passo",on:feitos>=1},
+        {e:"⭐",n:"Meia trilha",on:feitos>=Math.ceil(total/2)},
         {e:"💯",n:"Nota máxima",on:got100},
-        {e:"🏆",n:"Trilha completa",on:assistidos===total},
+        {e:"🏆",n:"Trilha completa",on:feitos===total},
         {e:"🧠",n:"Expert",on:expert}
       ];
       var nome=(p&&p.nome)?p.nome.split(" ")[0]:"";
       var panel=document.createElement("div"); panel.className="hl-trilha";
       panel.innerHTML='<div class="ht-top"><div><div class="ht-t">Minha trilha'+(nome?", "+nome:"")+'</div>'+
-        '<div class="ht-s">'+assistidos+' de '+total+' capítulos concluídos · '+pct+'%</div></div>'+
+        '<div class="ht-s">'+feitos+' de '+total+' capítulos concluídos · '+pct+'%</div></div>'+
         '<div class="ht-score"><b>'+score+'</b><span>pontos</span></div></div>'+
         '<div class="ht-bar"><i style="width:'+pct+'%"></i></div>'+
         '<div class="ht-badges">'+badges.map(function(b){return '<div class="ht-b'+(b.on?" on":"")+'"><span>'+b.e+'</span>'+b.n+'</div>';}).join("")+'</div>';
       var sec=document.querySelector(".sec"); if(sec&&sec.parentNode) sec.parentNode.insertBefore(panel,sec);
 
       cards.forEach(function(c){
-        var x=byCap[capId(c.getAttribute("href"))];
-        if(!x || !x.assistido) return;   // laranja + selo só para capítulos assistidos (100%)
-        var chip=document.createElement("span"); chip.className="hl-chip done";
-        chip.textContent="✓ Assistido";
-        var th=c.querySelector(".thumb"); if(th){ th.style.position="relative"; th.style.background="linear-gradient(135deg,#f2820f,#d15f00)"; chip.style.cssText="position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip); }
+        var x=byCap[capId(c.getAttribute("href"))]; if(!x || !x.assistido) return;
+        var concluido = x.assistido && x.quiz_feito;
+        var th=c.querySelector(".thumb"); if(!th) return;
+        th.style.position="relative";
+        var chip=document.createElement("span");
+        if(concluido){                       // assistiu + quiz → concluído (laranja)
+          chip.className="hl-chip done"; chip.textContent="✓ Concluído";
+          th.style.background="linear-gradient(135deg,#f2820f,#d15f00)";
+        } else {                             // assistiu, falta o quiz → em andamento (azul)
+          chip.className="hl-chip seen"; chip.textContent="▶ Em andamento";
+        }
+        chip.style.cssText+=";position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip);
       });
     }catch(e){ console.warn("minha trilha",e); }
   });
