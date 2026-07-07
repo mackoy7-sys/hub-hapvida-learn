@@ -243,6 +243,10 @@
 .hl-chip{font-size:10px;font-weight:700;padding:3px 9px;border-radius:11px}
 .hl-chip.done{background:#e1f5ee;color:#0f6e56}
 .hl-chip.seen{background:#fff3d6;color:#8a5a00}
+.hl-steps{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.hl-step{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:9px}
+.hl-step.done{background:#e1f5ee;color:#0f6e56}
+.hl-step.pend{background:#f1f4f9;color:#8a94a6}
 </style>
 <script>
 (function(){
@@ -301,6 +305,16 @@
           chip.className="hl-chip seen"; chip.textContent="▶ Em andamento";
         }
         chip.style.cssText+=";position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip);
+        // etapas concluídas × pendentes
+        var body=c.querySelector(".body");
+        if(body){
+          var steps=document.createElement("div"); steps.className="hl-steps";
+          steps.innerHTML='<span class="hl-step done">🎬 Vídeo ✓</span>'+
+            (x.quiz_feito
+              ? '<span class="hl-step done">📝 Quiz ✓ '+x.quiz_acertos+'/'+x.quiz_total+'</span>'
+              : '<span class="hl-step pend">📝 Quiz pendente</span>');
+          body.appendChild(steps);
+        }
       });
     }catch(e){ console.warn("minha trilha",e); }
   });
