@@ -264,25 +264,25 @@
       var total=cards.length||6;
       var r=await HL.sb.from("progresso").select("capitulo,assistido,quiz_feito,quiz_acertos,quiz_total").eq("usuario_id",HL.user.id);
       var byCap={}; (r.data||[]).forEach(function(x){ byCap[x.capitulo]=x; });
-      var feitos=0, score=0, got100=false, ratios=[];
+      var assistidos=0, feitos=0, score=0, got100=false, ratios=[];
       Object.keys(byCap).forEach(function(k){ var x=byCap[k];
-        if(x.assistido) score+=10;
+        if(x.assistido){ assistidos++; score+=10; }
         if(x.quiz_feito && x.quiz_total>0){ feitos++; var ra=x.quiz_acertos/x.quiz_total; score+=ra*10; ratios.push(ra); if(x.quiz_acertos===x.quiz_total) got100=true; }
       });
-      if(feitos===total) score+=20; score=Math.round(score);
-      var pct=Math.round(feitos/total*100);
+      if(assistidos===total) score+=20; score=Math.round(score);
+      var pct=Math.round(assistidos/total*100);
       var expert=feitos===total && ratios.length>0 && ratios.every(function(v){return v>=0.8;});
       var badges=[
-        {e:"🎯",n:"Primeiro passo",on:feitos>=1},
-        {e:"⭐",n:"Meia trilha",on:feitos>=Math.ceil(total/2)},
+        {e:"🎯",n:"Primeiro passo",on:assistidos>=1},
+        {e:"⭐",n:"Meia trilha",on:assistidos>=Math.ceil(total/2)},
         {e:"💯",n:"Nota máxima",on:got100},
-        {e:"🏆",n:"Trilha completa",on:feitos===total},
+        {e:"🏆",n:"Trilha completa",on:assistidos===total},
         {e:"🧠",n:"Expert",on:expert}
       ];
       var nome=(p&&p.nome)?p.nome.split(" ")[0]:"";
       var panel=document.createElement("div"); panel.className="hl-trilha";
       panel.innerHTML='<div class="ht-top"><div><div class="ht-t">Minha trilha'+(nome?", "+nome:"")+'</div>'+
-        '<div class="ht-s">'+feitos+' de '+total+' capítulos concluídos · '+pct+'%</div></div>'+
+        '<div class="ht-s">'+assistidos+' de '+total+' capítulos concluídos · '+pct+'%</div></div>'+
         '<div class="ht-score"><b>'+score+'</b><span>pontos</span></div></div>'+
         '<div class="ht-bar"><i style="width:'+pct+'%"></i></div>'+
         '<div class="ht-badges">'+badges.map(function(b){return '<div class="ht-b'+(b.on?" on":"")+'"><span>'+b.e+'</span>'+b.n+'</div>';}).join("")+'</div>';
