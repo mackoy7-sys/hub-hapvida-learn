@@ -102,7 +102,35 @@
       await ensurePerfil();
     }
   }
-  function finish(){ user&&(HL.user=user); HL.ready=true; hideGate(); document.dispatchEvent(new Event("hl:ready")); if(typeof window.HL_onReady==="function"){ try{window.HL_onReady(perfil);}catch(e){} } }
+  // Progressão sequencial: só libera um capítulo após concluir o anterior (assistir + quiz)
+  var ORDER=["cap3-institucional","cap1-portabilidade","cap2-nosso-medico","cap4-produtos-sp","cap5-produtos-bh","cap6-ppo"];
+  async function prereqPendente(){
+    var i=ORDER.indexOf(CAP);
+    if(i<=0) return null;                 // index/gestao ou 1º capítulo → nunca bloqueia
+    var prev=ORDER[i-1];
+    try{
+      var r=await sb.from("progresso").select("assistido,quiz_feito").eq("usuario_id",user.id).eq("capitulo",prev).maybeSingle();
+      var d=r.data;
+      if(d && d.assistido && d.quiz_feito) return null;   // anterior concluído → liberado
+    }catch(e){ return null; }             // em erro, não bloqueia
+    return prev;                          // bloqueado
+  }
+  function showLock(){
+    var st=document.createElement("style");
+    st.textContent="#hlLock{position:fixed;inset:0;z-index:100000;background:linear-gradient(160deg,#013ba6,#0a2a6b);display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}#hlLock .b{background:#fff;border-radius:22px;padding:34px 30px;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}#hlLock .i{font-size:42px}#hlLock h2{color:#013ba6;margin:10px 0 6px;font-size:20px}#hlLock p{color:#5b6b82;font-size:14px;line-height:1.55;margin-bottom:20px}#hlLock a{display:inline-block;background:#013ba6;color:#fff;text-decoration:none;padding:12px 22px;border-radius:11px;font-weight:700;font-size:14px}";
+    document.head.appendChild(st);
+    var d=document.createElement("div"); d.id="hlLock";
+    d.innerHTML='<div class="b"><div class="i">🔒</div><h2>Capítulo bloqueado</h2><p>A trilha segue em ordem: conclua o <b>capítulo anterior</b> (assistir o vídeo + fazer o quiz) para liberar este.</p><a href="index.html">← Voltar aos capítulos</a></div>';
+    document.body.appendChild(d);
+  }
+  async function finish(){
+    if(user) HL.user=user;
+    if(ORDER.indexOf(CAP)>0){
+      var prev=await prereqPendente();
+      if(prev){ hideGate(); showLock(); return; }   // não libera o player
+    }
+    HL.ready=true; hideGate(); document.dispatchEvent(new Event("hl:ready")); if(typeof window.HL_onReady==="function"){ try{window.HL_onReady(perfil);}catch(e){} }
+  }
 
   async function doLogin(){
     var email=q("hlLE").value.trim(), pw=q("hlLP").value;
