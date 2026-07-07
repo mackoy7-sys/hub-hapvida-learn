@@ -294,7 +294,7 @@
         if(x.quiz_feito){ chip.classList.add("done"); chip.textContent="✓ "+x.quiz_acertos+"/"+x.quiz_total; }
         else if(x.assistido){ chip.classList.add("seen"); chip.textContent="▶ Assistido"; }
         else return;
-        var th=c.querySelector(".thumb"); if(th){ th.style.position="relative"; chip.style.cssText="position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip); }
+        var th=c.querySelector(".thumb"); if(th){ th.style.position="relative"; th.style.background="linear-gradient(135deg,#f2820f,#d15f00)"; chip.style.cssText="position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip); }
       });
     }catch(e){ console.warn("minha trilha",e); }
   });
