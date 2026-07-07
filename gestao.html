@@ -17,10 +17,13 @@
   .who a{color:#fff;text-decoration:none;font-size:12px;opacity:.85}.who a:hover{opacity:1}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
   .kpi{background:var(--card);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06);border-top:3px solid var(--azul)}
+  .kpi.k2{border-top-color:#0956c6}.kpi.k3{border-top-color:var(--ok)}.kpi.k4{border-top-color:var(--laranja)}
   .kpi .v{font-size:28px;font-weight:800;line-height:1}.kpi .l{font-size:11px;color:var(--txt2);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-top:5px}
+  .kpi .s{font-size:11px;color:var(--txt2);margin-top:3px}
   .card{background:var(--card);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:18px;overflow:hidden}
-  .card h2{font-size:14px;padding:15px 18px;border-bottom:1px solid var(--bord);display:flex;align-items:center;gap:8px}
+  .card h2{font-size:14px;padding:15px 18px;border-bottom:1px solid var(--bord);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .card h2 .cnt{font-size:11px;background:var(--bg);color:var(--txt2);padding:2px 9px;border-radius:10px;font-weight:600}
+  .card h2 .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
   .scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
   th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #f1f4f9;white-space:nowrap}
@@ -35,10 +38,22 @@
   .nota{display:inline-block;background:var(--okbg);color:var(--ok);border-radius:8px;padding:2px 7px;font-weight:700;font-size:12px}
   .bar{background:#eef2f8;border-radius:6px;height:8px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--azul)}
   .tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
-  .tag.v{background:#e6f0ff;color:var(--azul)}.tag.s{background:#ede9fe;color:#5b21b6}.tag.g{background:var(--okbg);color:var(--ok)}.tag.d{background:#fce7f3;color:#9d174d}
+  .st{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:700;white-space:nowrap;display:inline-block}
+  .st.ok{background:var(--okbg);color:var(--ok)} .st.and{background:#e6f0ff;color:var(--azul)}
+  .st.nao{background:#eef2f8;color:var(--txt2)} .st.aprov{background:var(--warnbg);color:var(--warn)}
+  .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800;color:var(--azul);background:#eef2f8;padding:4px 10px;border-radius:8px;letter-spacing:1.5px;cursor:pointer}
+  .code:hover{background:#e0e8f5}
   .btn{border:0;border-radius:9px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff}
+  .btn:disabled{opacity:.6;cursor:default}
   .btn.ghost{background:#eef2f8;color:var(--azul)}
+  .btn.sm{padding:5px 10px;font-size:11px}
+  .sel{padding:7px 10px;border:1px solid var(--bord);border-radius:9px;font-size:13px;background:#fff;color:var(--txt)}
+  .teamrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;border-bottom:1px solid #f1f4f9;flex-wrap:wrap}
+  .teamrow:last-child{border-bottom:0}
+  .teamrow .ti b{font-weight:700}.teamrow .ti small{color:var(--txt2);display:block;font-size:11px}
+  .ra{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .empty{padding:18px;color:var(--txt2);font-size:13px}
+  .hint{padding:12px 16px;background:var(--warnbg);color:var(--warn);font-size:12px;border-radius:10px;margin:0 16px 14px}
   #denied{max-width:440px;margin:16vh auto;background:#fff;border-radius:18px;padding:34px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.12)}
   #denied h2{color:var(--azul);margin-bottom:8px}#denied p{color:var(--txt2);font-size:14px;margin-bottom:18px}
   .loading{text-align:center;padding:40px;color:var(--txt2)}
@@ -69,13 +84,23 @@
 
     <div class="kpis" id="kpis"></div>
 
+    <div class="card" id="cardTimes">
+      <h2>👥 <span id="timesTitle">Times / Equipes</span> <span class="cnt" id="timesCnt"></span>
+        <span class="sp" id="timesTools"></span>
+      </h2>
+      <div id="timesHint"></div>
+      <div id="timesBody"></div>
+    </div>
+
     <div class="card" id="cardAprov" style="display:none">
       <h2>🕓 Cadastros pendentes de aprovação <span class="cnt" id="provCnt">0</span></h2>
       <div class="scroll"><table id="tblProv"><tbody></tbody></table></div>
     </div>
 
     <div class="card">
-      <h2>🏆 Ranking por score <span class="cnt" id="rkCnt">0 vendedores</span></h2>
+      <h2>🏆 Ranking por score <span class="cnt" id="rkCnt">0 vendedores</span>
+        <span class="sp" id="rkFilter"></span>
+      </h2>
       <div class="scroll"><table id="tblRank"></table></div>
     </div>
 
@@ -99,7 +124,8 @@ const CAPS=[
   {id:"cap6-ppo",n:"Produto PPO",cap:6},
 ];
 const PAPEL={vendedor:["v","Vendedor"],supervisor:["s","Supervisor"],gerente:["g","Gerente"],diretor:["d","Diretor"]};
-let PROG={}, PERFIS=[];
+let PROG={}, PERFIS=[], EQUIPES={}, RESUMO=[], MIGRADO=true;
+let FILTRO=""; // equipe_id selecionada (gerente/diretor)
 
 function scoreOf(uid){
   let s=0, feitos=0;
@@ -112,7 +138,16 @@ function scoreOf(uid){
   if(feitos===CAPS.length) s+=20;
   return {score:Math.round(s), feitos};
 }
-function celClass(r){ if(r&&r.quiz_feito) return "nota"; if(r&&r.assistido) return "cel-ok"; return "cel-no"; }
+function iniciou(uid){ const m=PROG[uid]; return !!m && Object.values(m).some(r=>r.assistido||r.quiz_feito); }
+function statusOf(v){
+  if(v.aprovado===false) return ["aprov","Aguardando aprovação"];
+  const {feitos}=scoreOf(v.id);
+  if(feitos===CAPS.length) return ["ok","Concluído"];
+  if(iniciou(v.id)) return ["and","Em andamento"];
+  return ["nao","Não iniciou"];
+}
+function nomeEquipe(id){ return (EQUIPES[id]&&EQUIPES[id].nome)||"—"; }
+function esc(s){ return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
 async function init(){
   const p=HL.perfil;
@@ -121,65 +156,94 @@ async function init(){
   document.getElementById("app").style.display="block";
   document.getElementById("whoName").textContent=(p.nome||HL.user.email)+" · "+(PAPEL[p.papel]?PAPEL[p.papel][1]:p.papel);
   document.getElementById("sair").onclick=(e)=>{e.preventDefault();HL.logout();};
+  await carregar();
+}
 
+async function carregar(){
   const sb=HL.sb;
-  const [rp,rq]=await Promise.all([
+  const [rp,rq,re]=await Promise.all([
     sb.from("perfis").select("id,nome,email,papel,equipe_id,aprovado"),
-    sb.from("progresso").select("usuario_id,capitulo,assistido,quiz_feito,quiz_acertos,quiz_total")
+    sb.from("progresso").select("usuario_id,capitulo,assistido,quiz_feito,quiz_acertos,quiz_total"),
+    sb.from("equipes").select("id,nome,gerente_nome")
   ]);
   PERFIS=(rp.data||[]);
-  PROG={};
-  (rq.data||[]).forEach(r=>{ (PROG[r.usuario_id]=PROG[r.usuario_id]||{})[r.capitulo]=r; });
+  PROG={}; (rq.data||[]).forEach(r=>{ (PROG[r.usuario_id]=PROG[r.usuario_id]||{})[r.capitulo]=r; });
+  EQUIPES={}; (re.data||[]).forEach(e=>EQUIPES[e.id]=e);
+  const rr=await sb.rpc("equipes_resumo");
+  if(rr.error){ MIGRADO=false; RESUMO=[]; } else { MIGRADO=true; RESUMO=rr.data||[]; }
   render();
 }
 
-function render(){
-  const vends=PERFIS.filter(x=>x.papel==="vendedor");
-  // KPIs
-  const totCel=vends.length*CAPS.length;
-  let feitosTot=0, assistTot=0;
-  vends.forEach(v=>CAPS.forEach(c=>{const r=PROG[v.id]&&PROG[v.id][c.id]; if(r&&r.quiz_feito)feitosTot++; if(r&&r.assistido)assistTot++;}));
-  const pend=vends.filter(v=>scoreOf(v.id).feitos<CAPS.length).length;
-  const kpis=[
-    ["Vendedores",vends.length],
-    ["Conclusão média",(totCel?Math.round(feitosTot/totCel*100):0)+"%"],
-    ["Trilhas completas",vends.filter(v=>scoreOf(v.id).feitos===CAPS.length).length],
-    ["Com pendências",pend],
-  ];
-  document.getElementById("kpis").innerHTML=kpis.map(k=>`<div class="kpi"><div class="v">${k[1]}</div><div class="l">${k[0]}</div></div>`).join("");
+function vendsFiltrados(){
+  let v=PERFIS.filter(x=>x.papel==="vendedor");
+  if(FILTRO) v=v.filter(x=>x.equipe_id===FILTRO);
+  return v;
+}
 
-  // Aprovações
-  const pendAprov=PERFIS.filter(x=>x.papel==="vendedor" && x.aprovado===false);
+function render(){
+  const p=HL.perfil, gestor=(p.papel==="gerente"||p.papel==="diretor");
+  const vends=vendsFiltrados();
+
+  // ---- KPIs (funil) ----
+  const cad=vends.length;
+  const ini=vends.filter(v=>iniciou(v.id)).length;
+  const con=vends.filter(v=>scoreOf(v.id).feitos===CAPS.length).length;
+  const pend=cad-con;
+  const kpis=[
+    ["k1","Cadastrados",cad,"colaboradores"],
+    ["k2","Iniciaram",ini, cad?Math.round(ini/cad*100)+"% dos cadastrados":"—"],
+    ["k3","Concluíram a trilha",con, cad?Math.round(con/cad*100)+"% dos cadastrados":"—"],
+    ["k4","Pendentes",pend,"ainda não concluíram"],
+  ];
+  document.getElementById("kpis").innerHTML=kpis.map(k=>
+    `<div class="kpi ${k[0]}"><div class="v">${k[2]}</div><div class="l">${k[1]}</div><div class="s">${k[3]}</div></div>`).join("");
+
+  renderTimes(gestor);
+
+  // ---- Aprovações ----
+  let pendAprov=PERFIS.filter(x=>x.papel==="vendedor" && x.aprovado===false);
+  if(FILTRO) pendAprov=pendAprov.filter(x=>x.equipe_id===FILTRO);
   const cardP=document.getElementById("cardAprov");
   if(pendAprov.length){
     cardP.style.display="block";
     document.getElementById("provCnt").textContent=pendAprov.length;
     document.querySelector("#tblProv tbody").innerHTML=pendAprov.map(v=>
-      `<tr><td class="nome"><b>${v.nome||"—"}</b><small>${v.email||""}</small></td>
+      `<tr><td class="nome"><b>${esc(v.nome)||"—"}</b><small>${esc(v.email)||""} · ${esc(nomeEquipe(v.equipe_id))}</small></td>
        <td class="c"><button class="btn" data-aprovar="${v.id}">Aprovar</button></td></tr>`).join("");
     document.querySelectorAll("[data-aprovar]").forEach(b=>b.onclick=()=>aprovar(b.getAttribute("data-aprovar"),b));
   } else cardP.style.display="none";
 
-  // Ranking
+  // ---- Filtro por equipe (gerente/diretor) ----
+  const rkFilter=document.getElementById("rkFilter");
+  if(gestor){
+    const opts=['<option value="">Todas as equipes</option>']
+      .concat(Object.values(EQUIPES).map(e=>`<option value="${e.id}" ${FILTRO===e.id?"selected":""}>${esc(e.nome)}</option>`));
+    rkFilter.innerHTML=`<select class="sel" id="selEq">${opts.join("")}</select>`;
+    document.getElementById("selEq").onchange=(ev)=>{ FILTRO=ev.target.value; render(); };
+  } else rkFilter.innerHTML="";
+
+  // ---- Ranking ----
   const rank=vends.map(v=>({v,...scoreOf(v.id)})).sort((a,b)=>b.score-a.score);
   document.getElementById("rkCnt").textContent=vends.length+" vendedores";
   document.getElementById("tblRank").innerHTML=
-    `<thead><tr><th class="c">#</th><th>Vendedor</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
+    `<thead><tr><th class="c">#</th><th>Vendedor</th>${gestor?"<th>Equipe</th>":""}<th>Status</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
     (rank.length?rank.map((x,i)=>{
-      const pct=Math.round(x.feitos/CAPS.length*100);
+      const pct=Math.round(x.feitos/CAPS.length*100), st=statusOf(x.v);
       return `<tr><td class="rk">${i+1}</td>
-        <td class="nome"><b>${x.v.nome||"—"}</b><small>${x.v.email||""} ${x.v.aprovado===false?'· <span class="tag" style="background:#fff3d6;color:#8a5a00">pendente</span>':''}</small></td>
+        <td class="nome"><b>${esc(x.v.nome)||"—"}</b><small>${esc(x.v.email)||""}</small></td>
+        ${gestor?`<td>${esc(nomeEquipe(x.v.equipe_id))}</td>`:""}
+        <td><span class="st ${st[0]}">${st[1]}</span></td>
         <td class="c">${x.feitos}/${CAPS.length}</td>
         <td><div class="bar"><i style="width:${pct}%"></i></div></td>
         <td class="c"><span class="score">${x.score}</span></td></tr>`;
-    }).join(""):`<tr><td colspan="5" class="empty">Nenhum vendedor cadastrado ainda.</td></tr>`)+`</tbody>`;
+    }).join(""):`<tr><td colspan="${gestor?7:6}" class="empty">Nenhum vendedor ${FILTRO?"nesta equipe":"cadastrado ainda"}.</td></tr>`)+`</tbody>`;
 
-  // Matriz
+  // ---- Matriz ----
   document.getElementById("tblMatriz").innerHTML=
     `<thead><tr><th>Vendedor</th>${CAPS.map(c=>`<th class="c" title="${c.n}">${c.cap}</th>`).join("")}<th class="c">Score</th></tr></thead><tbody>`+
     (vends.length?vends.map(v=>{
       const sc=scoreOf(v.id);
-      return `<tr><td class="nome"><b>${v.nome||"—"}</b></td>`+
+      return `<tr><td class="nome"><b>${esc(v.nome)||"—"}</b></td>`+
         CAPS.map(c=>{const r=PROG[v.id]&&PROG[v.id][c.id];
           let cell='<span class="cel-no">—</span>';
           if(r&&r.quiz_feito) cell=`<span class="nota">${r.quiz_acertos}/${r.quiz_total}</span>`;
@@ -189,6 +253,50 @@ function render(){
     }).join(""):`<tr><td colspan="${CAPS.length+2}" class="empty">Sem vendedores para exibir.</td></tr>`)+`</tbody>`;
 }
 
+function renderTimes(gestor){
+  const hint=document.getElementById("timesHint"), body=document.getElementById("timesBody"),
+        tools=document.getElementById("timesTools"), title=document.getElementById("timesTitle"),
+        cnt=document.getElementById("timesCnt");
+  hint.innerHTML=""; tools.innerHTML="";
+  if(!MIGRADO){
+    hint.innerHTML=`<div class="hint">⚙️ Para criar equipes e gerar códigos pelo painel, rode a migração <b>supabase_times.sql</b> no SQL Editor do Supabase (uma vez). O acompanhamento abaixo já funciona.</div>`;
+  }
+  if(gestor){
+    title.textContent="Times / Equipes";
+    cnt.textContent=Object.keys(EQUIPES).length+" equipes";
+    if(MIGRADO) tools.innerHTML=`<button class="btn sm" id="btNovaEq">+ Criar equipe</button>`;
+    const lista=(RESUMO.length?RESUMO:Object.values(EQUIPES).map(e=>({equipe_id:e.id,nome:e.nome,gerente_nome:e.gerente_nome,vendedores:PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===e.id).length,codigo_vendedor:null})));
+    body.innerHTML = lista.length? lista.map(t=>{
+      const con=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===t.equipe_id&&scoreOf(x.id).feitos===CAPS.length).length;
+      return `<div class="teamrow">
+        <div class="ti"><b>${esc(t.nome)}</b><small>Líder: ${esc(t.gerente_nome)||"—"} · ${t.vendedores} vendedor(es) · ${con} concluíram</small></div>
+        <div class="ra">
+          ${t.codigo_vendedor?`<span>código vendedor: <span class="code" data-copy="${t.codigo_vendedor}" title="clique para copiar">${t.codigo_vendedor}</span></span>`:""}
+          ${MIGRADO?`<button class="btn ghost sm" data-gerarv="${t.equipe_id}">Gerar cód. vendedor</button>`:""}
+          <button class="btn ghost sm" data-vereq="${t.equipe_id}">Ver time</button>
+        </div></div>`;
+    }).join(""):`<div class="empty">Nenhuma equipe cadastrada.</div>`;
+  } else { // supervisor
+    title.textContent="Minha equipe";
+    cnt.textContent="";
+    const eqId=HL.perfil.equipe_id, minha=RESUMO.find(t=>t.equipe_id===eqId);
+    const nome=nomeEquipe(eqId), nv=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===eqId).length;
+    const con=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===eqId&&scoreOf(x.id).feitos===CAPS.length).length;
+    if(MIGRADO) tools.innerHTML=`<button class="btn sm" id="btNovaEq">Criar minha equipe</button>`;
+    body.innerHTML=`<div class="teamrow">
+      <div class="ti"><b>${esc(nome)}</b><small>${nv} vendedor(es) · ${con} concluíram</small></div>
+      <div class="ra">
+        ${minha&&minha.codigo_vendedor?`<span>compartilhe o código: <span class="code" data-copy="${minha.codigo_vendedor}" title="clique para copiar">${minha.codigo_vendedor}</span></span>`
+          :(MIGRADO?`<button class="btn ghost sm" data-gerarv="${eqId}">Gerar código de vendedor</button>`:"")}
+      </div></div>
+      <div class="hint" style="background:#eef2f8;color:#5b6b82;margin-top:2px">Compartilhe o código com seus vendedores para eles se cadastrarem no seu time. Depois, aprove-os no bloco acima.</div>`;
+  }
+  const bt=document.getElementById("btNovaEq"); if(bt) bt.onclick=criarEquipe;
+  document.querySelectorAll("[data-gerarv]").forEach(b=>b.onclick=()=>gerarCodigo(b.getAttribute("data-gerarv"),"vendedor",b));
+  document.querySelectorAll("[data-vereq]").forEach(b=>b.onclick=()=>{ FILTRO=b.getAttribute("data-vereq"); render(); window.scrollTo({top:document.querySelector('#tblRank').getBoundingClientRect().top+scrollY-80,behavior:'smooth'}); });
+  document.querySelectorAll("[data-copy]").forEach(el=>el.onclick=()=>{ navigator.clipboard&&navigator.clipboard.writeText(el.getAttribute("data-copy")); const o=el.textContent; el.textContent="copiado ✓"; setTimeout(()=>el.textContent=o,1200); });
+}
+
 async function aprovar(id,btn){
   btn.disabled=true; btn.textContent="…";
   const {error}=await HL.sb.from("perfis").update({aprovado:true}).eq("id",id);
@@ -196,11 +304,23 @@ async function aprovar(id,btn){
   const p=PERFIS.find(x=>x.id===id); if(p) p.aprovado=true;
   render();
 }
+async function criarEquipe(){
+  const nome=prompt("Nome da nova equipe:"); if(!nome) return;
+  const {data,error}=await HL.sb.rpc("criar_equipe",{p_nome:nome});
+  if(error){ alert("Não foi possível criar a equipe: "+error.message); return; }
+  const cod=data&&data.codigo_vendedor;
+  await HL.refreshPerfil&&HL.refreshPerfil();
+  await carregar();
+  if(cod) alert("Equipe criada! Código de vendedor: "+cod+"\n\nCompartilhe com o time para se cadastrarem.");
+}
+async function gerarCodigo(equipeId,papel,btn){
+  if(btn){ btn.disabled=true; btn.textContent="…"; }
+  const {data,error}=await HL.sb.rpc("gerar_codigo",{p_equipe_id:equipeId,p_papel:papel});
+  if(error){ if(btn){btn.disabled=false;btn.textContent="Erro";} alert(error.message); return; }
+  await carregar();
+  alert("Código gerado: "+data);
+}
 
-// legenda das colunas da matriz
-window.addEventListener("load",()=>{
-  const leg=document.createElement("div");
-});
 if(window.HL && HL.ready) init(); else document.addEventListener("hl:ready", init);
 </script>
 </body>
