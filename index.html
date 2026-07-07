@@ -247,6 +247,11 @@
 .hl-step{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:9px}
 .hl-step.done{background:#e1f5ee;color:#0f6e56}
 .hl-step.pend{background:#f1f4f9;color:#8a94a6}
+.card.hl-locked{opacity:.62;filter:grayscale(.55);cursor:not-allowed}
+.card.hl-locked:hover{transform:none;box-shadow:0 8px 26px rgba(10,61,143,.06);border-color:var(--linha)}
+.hl-chip.lock{background:#e9edf3;color:#5b6b82}
+.hl-lockov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;background:rgba(255,255,255,.4)}
+.hl-locknote{margin-top:8px;font-size:12px;color:#8a5a00;background:#fff3d6;border-radius:8px;padding:6px 10px;font-weight:600}
 </style>
 <script>
 (function(){
@@ -291,6 +296,27 @@
         '<div class="ht-bar"><i style="width:'+pct+'%"></i></div>'+
         '<div class="ht-badges">'+badges.map(function(b){return '<div class="ht-b'+(b.on?" on":"")+'"><span>'+b.e+'</span>'+b.n+'</div>';}).join("")+'</div>';
       var sec=document.querySelector(".sec"); if(sec&&sec.parentNode) sec.parentNode.insertBefore(panel,sec);
+
+      // Progressão sequencial: trava cada card até concluir o capítulo anterior
+      var prevDone=true;
+      cards.forEach(function(c){
+        var xx=byCap[capId(c.getAttribute("href"))];
+        var concl=!!(xx&&xx.assistido&&xx.quiz_feito);
+        if(!prevDone){
+          c.classList.add("hl-locked");
+          c.addEventListener("click",function(e){ e.preventDefault(); });
+          var th0=c.querySelector(".thumb");
+          if(th0){ th0.style.position="relative";
+            var lk=document.createElement("span"); lk.className="hl-chip lock"; lk.textContent="🔒 Bloqueado";
+            lk.style.cssText+=";position:absolute;top:10px;right:10px;z-index:2"; th0.appendChild(lk);
+            var ov=document.createElement("div"); ov.className="hl-lockov"; ov.textContent="🔒"; th0.appendChild(ov);
+          }
+          var tg=c.querySelector(".tag"); if(tg){ tg.textContent="🔒 Bloqueado"; tg.style.background="#e9edf3"; tg.style.color="#5b6b82"; }
+          var bd=c.querySelector(".body");
+          if(bd){ var nt=document.createElement("div"); nt.className="hl-locknote"; nt.textContent="Conclua o capítulo anterior para liberar."; bd.appendChild(nt); }
+        }
+        prevDone=concl;
+      });
 
       cards.forEach(function(c){
         var x=byCap[capId(c.getAttribute("href"))]; if(!x || !x.assistido) return;
