@@ -226,5 +226,17 @@
   </div>
 
 </div>
+<script>
+document.addEventListener('hl:ready',function(){
+  var p=window.HL&&HL.perfil;
+  var box=document.createElement('div');
+  box.style.cssText='position:fixed;top:14px;right:14px;z-index:9998;display:flex;gap:8px;font-family:-apple-system,BlinkMacSystemFont,sans-serif';
+  var html='';
+  if(p && p.papel!=='vendedor') html+='<a href="gestao.html" style="background:#e8720c;color:#fff;padding:9px 15px;border-radius:22px;font-weight:700;text-decoration:none;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.18)">📊 Gestão</a>';
+  html+='<a href="#" id="hlSair" style="background:rgba(255,255,255,.92);color:#013ba6;padding:9px 15px;border-radius:22px;font-weight:600;text-decoration:none;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.12)">Sair</a>';
+  box.innerHTML=html; document.body.appendChild(box);
+  var s=document.getElementById('hlSair'); if(s) s.onclick=function(e){e.preventDefault();HL.logout();};
+});
+</script>
 </body>
 </html>

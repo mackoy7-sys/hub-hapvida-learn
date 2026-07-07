@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão · Academia de Vendas — Hapvida Learn</title>
+<style>
+  :root{--azul:#013ba6;--azul2:#0a2a6b;--laranja:#e8720c;--bg:#eef2f8;--card:#fff;--txt:#1a2740;--txt2:#5b6b82;--bord:#e4ebf5;--ok:#0f6e56;--okbg:#e1f5ee;--warn:#8a5a00;--warnbg:#fff3d6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--txt);font-size:14px}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px}
+  .top{background:linear-gradient(120deg,var(--azul),var(--azul2));color:#fff;border-radius:16px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+  .top h1{font-size:19px;font-weight:800}.top .brand span{color:var(--laranja)}
+  .top p{font-size:12px;opacity:.85;margin-top:2px}
+  .who{display:flex;align-items:center;gap:12px;font-size:13px}
+  .who .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:20px}
+  .who a{color:#fff;text-decoration:none;font-size:12px;opacity:.85}.who a:hover{opacity:1}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .kpi{background:var(--card);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06);border-top:3px solid var(--azul)}
+  .kpi .v{font-size:28px;font-weight:800;line-height:1}.kpi .l{font-size:11px;color:var(--txt2);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-top:5px}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:18px;overflow:hidden}
+  .card h2{font-size:14px;padding:15px 18px;border-bottom:1px solid var(--bord);display:flex;align-items:center;gap:8px}
+  .card h2 .cnt{font-size:11px;background:var(--bg);color:var(--txt2);padding:2px 9px;border-radius:10px;font-weight:600}
+  .scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #f1f4f9;white-space:nowrap}
+  th{background:#f7f9fc;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--txt2);font-weight:700}
+  td.c,th.c{text-align:center}
+  tr:hover td{background:#fafcff}
+  .rk{font-weight:800;color:var(--azul);width:34px;text-align:center}
+  .nome b{font-weight:600}.nome small{color:var(--txt2);display:block;font-size:11px}
+  .score{font-weight:800;color:var(--laranja)}
+  .cel-ok{color:var(--ok);font-weight:700}
+  .cel-no{color:#c3ccd8}
+  .nota{display:inline-block;background:var(--okbg);color:var(--ok);border-radius:8px;padding:2px 7px;font-weight:700;font-size:12px}
+  .bar{background:#eef2f8;border-radius:6px;height:8px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--azul)}
+  .tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+  .tag.v{background:#e6f0ff;color:var(--azul)}.tag.s{background:#ede9fe;color:#5b21b6}.tag.g{background:var(--okbg);color:var(--ok)}.tag.d{background:#fce7f3;color:#9d174d}
+  .btn{border:0;border-radius:9px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff}
+  .btn.ghost{background:#eef2f8;color:var(--azul)}
+  .empty{padding:18px;color:var(--txt2);font-size:13px}
+  #denied{max-width:440px;margin:16vh auto;background:#fff;border-radius:18px;padding:34px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.12)}
+  #denied h2{color:var(--azul);margin-bottom:8px}#denied p{color:var(--txt2);font-size:14px;margin-bottom:18px}
+  .loading{text-align:center;padding:40px;color:var(--txt2)}
+  @media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div id="denied" style="display:none">
+  <h2>🔒 Área restrita</h2>
+  <p>Esta é a área de <b>gestão</b>, disponível para supervisores, gerentes e diretores. Fale com o seu gestor se precisar de acesso.</p>
+  <a class="btn ghost" href="index.html">← Voltar aos capítulos</a>
+</div>
+
+<div id="app" style="display:none">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1 class="brand"><span>❋</span> Gestão · Academia de Vendas</h1>
+        <p>Acompanhamento de participação e desempenho do time</p>
+      </div>
+      <div class="who">
+        <span class="pill" id="whoName">—</span>
+        <a href="index.html">Capítulos</a>
+        <a href="#" id="sair">Sair</a>
+      </div>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="card" id="cardAprov" style="display:none">
+      <h2>🕓 Cadastros pendentes de aprovação <span class="cnt" id="provCnt">0</span></h2>
+      <div class="scroll"><table id="tblProv"><tbody></tbody></table></div>
+    </div>
+
+    <div class="card">
+      <h2>🏆 Ranking por score <span class="cnt" id="rkCnt">0 vendedores</span></h2>
+      <div class="scroll"><table id="tblRank"></table></div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Matriz — quem fez quais capítulos</h2>
+      <div class="scroll"><table id="tblMatriz"></table></div>
+    </div>
+  </div>
+</div>
+
+<div class="loading" id="loading">Carregando…</div>
+
+<script src="hl-auth.js"></script>
+<script>
+const CAPS=[
+  {id:"cap3-institucional",n:"Institucional",cap:1},
+  {id:"cap1-portabilidade",n:"Portabilidade",cap:2},
+  {id:"cap2-nosso-medico",n:"Nosso Médico",cap:3},
+  {id:"cap4-produtos-sp",n:"Interior SP",cap:4},
+  {id:"cap5-produtos-bh",n:"Belo Horizonte",cap:5},
+  {id:"cap6-ppo",n:"Produto PPO",cap:6},
+];
+const PAPEL={vendedor:["v","Vendedor"],supervisor:["s","Supervisor"],gerente:["g","Gerente"],diretor:["d","Diretor"]};
+let PROG={}, PERFIS=[];
+
+function scoreOf(uid){
+  let s=0, feitos=0;
+  for(const c of CAPS){
+    const r=PROG[uid]&&PROG[uid][c.id];
+    if(!r) continue;
+    if(r.assistido) s+=10;
+    if(r.quiz_feito && r.quiz_total>0){ s+=(r.quiz_acertos/r.quiz_total)*10; feitos++; }
+  }
+  if(feitos===CAPS.length) s+=20;
+  return {score:Math.round(s), feitos};
+}
+function celClass(r){ if(r&&r.quiz_feito) return "nota"; if(r&&r.assistido) return "cel-ok"; return "cel-no"; }
+
+async function init(){
+  const p=HL.perfil;
+  document.getElementById("loading").style.display="none";
+  if(!p || p.papel==="vendedor"){ document.getElementById("denied").style.display="block"; return; }
+  document.getElementById("app").style.display="block";
+  document.getElementById("whoName").textContent=(p.nome||HL.user.email)+" · "+(PAPEL[p.papel]?PAPEL[p.papel][1]:p.papel);
+  document.getElementById("sair").onclick=(e)=>{e.preventDefault();HL.logout();};
+
+  const sb=HL.sb;
+  const [rp,rq]=await Promise.all([
+    sb.from("perfis").select("id,nome,email,papel,equipe_id,aprovado"),
+    sb.from("progresso").select("usuario_id,capitulo,assistido,quiz_feito,quiz_acertos,quiz_total")
+  ]);
+  PERFIS=(rp.data||[]);
+  PROG={};
+  (rq.data||[]).forEach(r=>{ (PROG[r.usuario_id]=PROG[r.usuario_id]||{})[r.capitulo]=r; });
+  render();
+}
+
+function render(){
+  const vends=PERFIS.filter(x=>x.papel==="vendedor");
+  // KPIs
+  const totCel=vends.length*CAPS.length;
+  let feitosTot=0, assistTot=0;
+  vends.forEach(v=>CAPS.forEach(c=>{const r=PROG[v.id]&&PROG[v.id][c.id]; if(r&&r.quiz_feito)feitosTot++; if(r&&r.assistido)assistTot++;}));
+  const pend=vends.filter(v=>scoreOf(v.id).feitos<CAPS.length).length;
+  const kpis=[
+    ["Vendedores",vends.length],
+    ["Conclusão média",(totCel?Math.round(feitosTot/totCel*100):0)+"%"],
+    ["Trilhas completas",vends.filter(v=>scoreOf(v.id).feitos===CAPS.length).length],
+    ["Com pendências",pend],
+  ];
+  document.getElementById("kpis").innerHTML=kpis.map(k=>`<div class="kpi"><div class="v">${k[1]}</div><div class="l">${k[0]}</div></div>`).join("");
+
+  // Aprovações
+  const pendAprov=PERFIS.filter(x=>x.papel==="vendedor" && x.aprovado===false);
+  const cardP=document.getElementById("cardAprov");
+  if(pendAprov.length){
+    cardP.style.display="block";
+    document.getElementById("provCnt").textContent=pendAprov.length;
+    document.querySelector("#tblProv tbody").innerHTML=pendAprov.map(v=>
+      `<tr><td class="nome"><b>${v.nome||"—"}</b><small>${v.email||""}</small></td>
+       <td class="c"><button class="btn" data-aprovar="${v.id}">Aprovar</button></td></tr>`).join("");
+    document.querySelectorAll("[data-aprovar]").forEach(b=>b.onclick=()=>aprovar(b.getAttribute("data-aprovar"),b));
+  } else cardP.style.display="none";
+
+  // Ranking
+  const rank=vends.map(v=>({v,...scoreOf(v.id)})).sort((a,b)=>b.score-a.score);
+  document.getElementById("rkCnt").textContent=vends.length+" vendedores";
+  document.getElementById("tblRank").innerHTML=
+    `<thead><tr><th class="c">#</th><th>Vendedor</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
+    (rank.length?rank.map((x,i)=>{
+      const pct=Math.round(x.feitos/CAPS.length*100);
+      return `<tr><td class="rk">${i+1}</td>
+        <td class="nome"><b>${x.v.nome||"—"}</b><small>${x.v.email||""} ${x.v.aprovado===false?'· <span class="tag" style="background:#fff3d6;color:#8a5a00">pendente</span>':''}</small></td>
+        <td class="c">${x.feitos}/${CAPS.length}</td>
+        <td><div class="bar"><i style="width:${pct}%"></i></div></td>
+        <td class="c"><span class="score">${x.score}</span></td></tr>`;
+    }).join(""):`<tr><td colspan="5" class="empty">Nenhum vendedor cadastrado ainda.</td></tr>`)+`</tbody>`;
+
+  // Matriz
+  document.getElementById("tblMatriz").innerHTML=
+    `<thead><tr><th>Vendedor</th>${CAPS.map(c=>`<th class="c" title="${c.n}">${c.cap}</th>`).join("")}<th class="c">Score</th></tr></thead><tbody>`+
+    (vends.length?vends.map(v=>{
+      const sc=scoreOf(v.id);
+      return `<tr><td class="nome"><b>${v.nome||"—"}</b></td>`+
+        CAPS.map(c=>{const r=PROG[v.id]&&PROG[v.id][c.id];
+          let cell='<span class="cel-no">—</span>';
+          if(r&&r.quiz_feito) cell=`<span class="nota">${r.quiz_acertos}/${r.quiz_total}</span>`;
+          else if(r&&r.assistido) cell='<span class="cel-ok">✓</span>';
+          return `<td class="c">${cell}</td>`;}).join("")+
+        `<td class="c"><span class="score">${sc.score}</span></td></tr>`;
+    }).join(""):`<tr><td colspan="${CAPS.length+2}" class="empty">Sem vendedores para exibir.</td></tr>`)+`</tbody>`;
+}
+
+async function aprovar(id,btn){
+  btn.disabled=true; btn.textContent="…";
+  const {error}=await HL.sb.from("perfis").update({aprovado:true}).eq("id",id);
+  if(error){ btn.disabled=false; btn.textContent="Erro"; return; }
+  const p=PERFIS.find(x=>x.id===id); if(p) p.aprovado=true;
+  render();
+}
+
+// legenda das colunas da matriz
+window.addEventListener("load",()=>{
+  const leg=document.createElement("div");
+});
+if(window.HL && HL.ready) init(); else document.addEventListener("hl:ready", init);
+</script>
+</body>
+</html>
