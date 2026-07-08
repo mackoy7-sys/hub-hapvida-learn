@@ -110,6 +110,8 @@
     <div class="divider"></div>
     <div class="t">Learn<small>Academia de Vendas Digital</small></div>
     <div class="badge">🎓 Trilha de Capacitação</div>
+    <a class="badge gestao" id="hlGestao" href="gestao.html" style="display:none">📊 Área de Gestão</a>
+    <a class="badge sairtop" id="hlSairTop" href="#" style="display:none">Sair</a>
   </div>
 
   <div class="hero">
@@ -247,20 +249,22 @@
 .hl-step{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:9px}
 .hl-step.done{background:#e1f5ee;color:#0f6e56}
 .hl-step.pend{background:#f1f4f9;color:#8a94a6}
+.top .badge.gestao{margin-left:8px;background:#e8720c;color:#fff;text-decoration:none;cursor:pointer}
+.top .badge.gestao:hover{filter:brightness(1.07)}
+.top .badge.sairtop{margin-left:8px;background:rgba(255,255,255,.9);color:#013ba6;text-decoration:none;cursor:pointer}
+.top .badge.sairtop:hover{background:#fff}
+@media(max-width:560px){.top .badge{font-size:11px;padding:6px 10px}}
 </style>
 <script>
 (function(){
   function capId(h){ return (h||"").split("/").pop().replace(/\.html.*$/,""); }
   document.addEventListener("hl:ready", async function(){
     var p=window.HL&&HL.perfil;
-    // barra de ações (Gestão p/ gestores + Sair)
-    var box=document.createElement("div");
-    box.style.cssText="position:fixed;top:14px;right:14px;z-index:9998;display:flex;gap:8px;font-family:-apple-system,BlinkMacSystemFont,sans-serif";
-    var bh="";
-    if(p && p.papel!=="vendedor") bh+='<a href="gestao.html" style="background:#e8720c;color:#fff;padding:9px 15px;border-radius:22px;font-weight:700;text-decoration:none;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.18)">📊 Gestão</a>';
-    bh+='<a href="#" id="hlSair" style="background:rgba(255,255,255,.92);color:#013ba6;padding:9px 15px;border-radius:22px;font-weight:600;text-decoration:none;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.12)">Sair</a>';
-    box.innerHTML=bh; document.body.appendChild(box);
-    var sb0=document.getElementById("hlSair"); if(sb0) sb0.onclick=function(e){e.preventDefault();HL.logout();};
+    // links no cabeçalho: Gestão (só gestores) + Sair (todos)
+    var gLink=document.getElementById("hlGestao");
+    if(gLink && p && p.papel!=="vendedor") gLink.style.display="inline-block";
+    var sLink=document.getElementById("hlSairTop");
+    if(sLink){ sLink.style.display="inline-block"; sLink.onclick=function(e){e.preventDefault();HL.logout();}; }
 
     // Minha trilha
     try{
