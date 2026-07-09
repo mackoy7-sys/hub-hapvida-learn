@@ -63,6 +63,13 @@
   .name-tag b{color:var(--laranja)}
   /* Slide */
   .slide{padding:34px 38px;display:flex;flex-direction:column;position:relative}
+  /* screenshot do tema (cotador) */
+  .shot{margin-top:18px;align-self:stretch;text-align:center;background:#f7f9fc;
+    border:1px solid #e4ebf5;border-radius:12px;overflow:hidden;
+    box-shadow:0 8px 24px rgba(10,61,143,.12)}
+  .shot img{max-width:100%;height:auto;display:inline-block;vertical-align:top}
+  .shot figcaption{font-size:11.5px;color:var(--cinza);padding:7px 12px;
+    background:#eef3fb;border-top:1px solid #e1e9f6;text-align:left}
   .kicker{color:var(--laranja);font-weight:700;font-size:12px;letter-spacing:1.5px;
     text-transform:uppercase;margin-bottom:8px}
   .slide h1{font-size:27px;line-height:1.15;color:var(--azul);margin-bottom:4px}
@@ -252,7 +259,7 @@
 
 <div class="overlay" id="overlay">
   <h2>🎬 Cotador Hapon — Capítulo 7</h2>
-  <p>A EugenIA vai apresentar a linha PPO de Livre Escolha: o que é, os 5 produtos (Advance, Premium e Infinity), coberturas e reembolso, odontologia inclusa, coparticipação e as regras de aceitação e comercialização. Ao final, um quiz.</p>
+  <p>A EugenIA vai mostrar, passo a passo, como usar o cotador: distribuir as vidas por faixa etária, aplicar os filtros, selecionar planos, ler o resultado consolidado e gerar o folder em PDF — além das abas de Comparativo e Rede. Ao final, um quiz.</p>
   <button class="start-btn" id="startBtn">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     Iniciar apresentação
@@ -488,10 +495,28 @@ if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pi
 /* Chrome corta falas longas: resume periódico */
 setInterval(()=>{ if(playing && speechSynthesis.speaking && !speechSynthesis.paused) speechSynthesis.resume(); },9000);
 
+const SHOTS={
+  0:{src:"img7/sc01.jpg",cap:"O cotador com uma simulação montada — visão geral da Calculadora."},
+  1:{src:"img7/sc02.jpg",cap:"As três abas de trabalho: Calculadora, Comparativo e Rede."},
+  2:{src:"img7/sc03.jpg",cap:"Acesse pelo navegador: cotador-hapon.vercel.app"},
+  3:{src:"img7/sc04.jpg",cap:"Passo 1 — distribua as vidas por faixa etária (e use o conversor de datas)."},
+  4:{src:"img7/sc05.jpg",cap:"Filtros: Produto (Empresarial/Individual), Contrato (Não-MEI/MEI) e Operadoras."},
+  5:{src:"img7/sc06.jpg",cap:"Passo 2 — escolha plano, acomodação e segmentação em cada operadora."},
+  6:{src:"img7/sc07.jpg",cap:"O valor da coluna = soma de (vidas × preço por faixa etária)."},
+  7:{src:"img7/sc08.jpg",cap:"Resultado consolidado: ranking do menor ao maior custo mensal."},
+  8:{src:"img7/sc09.jpg",cap:"Informe o nome do cliente e clique em Gerar folder (PDF)."},
+  9:{src:"img7/sc10.jpg",cap:"No folder: planos cotados, valores por faixa, coparticipação e rede."},
+  10:{src:"img7/sc11.jpg",cap:"Aba Comparativo: Hapvida × concorrente, faixa a faixa, em gráfico e tabela."},
+  11:{src:"img7/sc12.jpg",cap:"Aba Rede: rede credenciada comparada lado a lado, por hospital."},
+  12:{src:"img7/sc13.jpg",cap:"Use a diferença de preço como argumento na negociação."},
+  13:{src:"img7/sc14.jpg",cap:"A proposta pronta para enviar ao cliente."}
+};
 function renderScene(i){
   const s=scenes[i];
   slideEl.style.animation="none"; void slideEl.offsetWidth;
   slideEl.innerHTML=s.html;
+  if(SHOTS[i]) slideEl.insertAdjacentHTML("beforeend",
+    `<figure class="shot"><img src="${SHOTS[i].src}" alt="${SHOTS[i].cap}" loading="lazy"><figcaption>${SHOTS[i].cap}</figcaption></figure>`);
   slideEl.style.animation="";
   metaEl.textContent=`Cena ${i+1} / ${N}`;
   fillEl.style.width=((i)/(N-1)*100)+"%";
