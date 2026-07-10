@@ -257,10 +257,10 @@
      titulo:"Portal LG e Ponto SISQUAL",
      desc:"O autoatendimento de RH e o seu ponto: como acessar, os serviços disponíveis, o painel do SISQUAL e as funções de banco de horas, justificativas e ajustes de marcação.",
      dur:"~8 min + quiz", pub:"2026-07-09"},
-    {cap:10, id:"cap10-organograma", trilha:"onboarding", href:"cap10-organograma.html",
+    {cap:10, id:"cap10-organograma", trilha:"onboarding", href:"cap10-organograma.html", noquiz:true,
      titulo:"Organograma da Área de Vendas",
      desc:"A estrutura da Vendas Digital: as frentes comerciais, o time de Ribeirão Preto e as áreas de apoio (estratégia, processos, sistemas, capacitação e qualidade) — para saber quem é quem.",
-     dur:"~6 min + quiz", pub:"2026-07-09"}
+     dur:"~6 min", pub:"2026-07-09"}
   ];
 
   function diasDesde(iso){ try{ return Math.floor((Date.now()-new Date(iso+"T00:00:00").getTime())/86400000); }catch(e){ return 9999; } }
@@ -336,13 +336,16 @@
       var total=CATALOGO.length;
       var r=await HL.sb.from("progresso").select("capitulo,assistido,quiz_feito,quiz_acertos,quiz_total").eq("usuario_id",HL.user.id);
       var byCap={}; (r.data||[]).forEach(function(x){ byCap[x.capitulo]=x; });
+      // capítulos sem quiz (concluídos só com "assistido")
+      var NOQUIZ={}; CATALOGO.forEach(function(c){ if(c.noquiz) NOQUIZ[c.id]=true; });
+      function concluido(id,x){ return !!(x && x.assistido && (x.quiz_feito || NOQUIZ[id])); }
 
-      // Novidades: esconder os capítulos que o usuário JÁ concluiu (assistido + quiz)
+      // Novidades: esconder os capítulos que o usuário JÁ concluiu
       var novWrap=document.querySelector("#hlNovidades .novid-wrap");
       if(novWrap){
         [].slice.call(novWrap.querySelectorAll("a.card[data-cap]")).forEach(function(c){
-          var x=byCap[c.getAttribute("data-cap")];
-          if(x && x.assistido && x.quiz_feito) c.remove();
+          var id=c.getAttribute("data-cap");
+          if(concluido(id,byCap[id])) c.remove();
         });
         if(!novWrap.querySelector("a.card")) novWrap.remove();  // sem destaques → some a faixa inteira
       }
@@ -350,7 +353,8 @@
       var feitos=0, score=0, got100=false, ratios=[];
       Object.keys(byCap).forEach(function(k){ var x=byCap[k];
         if(x.assistido){ score+=10; }
-        if(x.quiz_feito && x.quiz_total>0){ feitos++; var ra=x.quiz_acertos/x.quiz_total; score+=ra*10; ratios.push(ra); if(x.quiz_acertos===x.quiz_total) got100=true; }
+        if(x.quiz_feito && x.quiz_total>0){ var ra=x.quiz_acertos/x.quiz_total; score+=ra*10; ratios.push(ra); if(x.quiz_acertos===x.quiz_total) got100=true; }
+        if(concluido(k,x)){ feitos++; }
       });
       if(feitos===total) score+=20; score=Math.round(score);
       var pct=Math.round(feitos/total*100);
@@ -383,18 +387,18 @@
       TRILHAS.forEach(function(t){
         var itens=CATALOGO.filter(function(c){return c.trilha===t.id;});
         if(!itens.length) return;
-        var done=itens.filter(function(c){var x=byCap[c.id]; return x&&x.assistido&&x.quiz_feito;}).length;
+        var done=itens.filter(function(c){return concluido(c.id,byCap[c.id]);}).length;
         var el=document.getElementById("prog-"+t.id);
         if(el) el.textContent=done+" de "+itens.length+" concluídos";
       });
 
       // decora só os cards das seções de Trilha (Novidades fica "limpo", como vitrine)
       [].slice.call(document.querySelectorAll("#hlTrilhas a.card[data-cap]")).forEach(function(c){
-        var x=byCap[c.getAttribute("data-cap")]; if(!x || !x.assistido) return;
-        var concluido = x.assistido && x.quiz_feito;
+        var id=c.getAttribute("data-cap"); var x=byCap[id]; if(!x || !x.assistido) return;
+        var isConcl = concluido(id,x);
         var th=c.querySelector(".thumb"); if(!th) return;
         var chip=document.createElement("span");
-        if(concluido){
+        if(isConcl){
           chip.className="hl-chip done"; chip.textContent="✓ Concluído";
           th.style.background="linear-gradient(135deg,#f2820f,#d15f00)";
         } else {
@@ -405,9 +409,11 @@
         if(body){
           var steps=document.createElement("div"); steps.className="hl-steps";
           steps.innerHTML='<span class="hl-step done">🎬 Vídeo ✓</span>'+
-            (x.quiz_feito
-              ? '<span class="hl-step done">📝 Quiz ✓ '+x.quiz_acertos+'/'+x.quiz_total+'</span>'
-              : '<span class="hl-step pend">📝 Quiz pendente</span>');
+            (NOQUIZ[id]
+              ? ''
+              : (x.quiz_feito
+                  ? '<span class="hl-step done">📝 Quiz ✓ '+x.quiz_acertos+'/'+x.quiz_total+'</span>'
+                  : '<span class="hl-step pend">📝 Quiz pendente</span>'));
           body.appendChild(steps);
         }
       });

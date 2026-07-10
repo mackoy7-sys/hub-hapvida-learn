@@ -125,7 +125,7 @@ const CAPS=[
   {id:"cap7-cotador",n:"Cotador Hapon",cap:7},
   {id:"cap8-nossagente",n:"Nossa Gente",cap:8},
   {id:"cap9-portal-lg",n:"Portal LG / SISQUAL",cap:9},
-  {id:"cap10-organograma",n:"Organograma",cap:10},
+  {id:"cap10-organograma",n:"Organograma",cap:10,noquiz:true},
 ];
 const PAPEL={vendedor:["v","Vendedor"],supervisor:["s","Supervisor"],gerente:["g","Gerente"],diretor:["d","Diretor"]};
 let PROG={}, PERFIS=[], EQUIPES={}, RESUMO=[], MIGRADO=true;
@@ -137,7 +137,8 @@ function scoreOf(uid){
     const r=PROG[uid]&&PROG[uid][c.id];
     if(!r) continue;
     if(r.assistido) s+=10;
-    if(r.quiz_feito && r.quiz_total>0){ s+=(r.quiz_acertos/r.quiz_total)*10; feitos++; }
+    if(r.quiz_feito && r.quiz_total>0){ s+=(r.quiz_acertos/r.quiz_total)*10; }
+    if((r.quiz_feito && r.quiz_total>0) || (c.noquiz && r.assistido)) feitos++;
   }
   if(feitos===CAPS.length) s+=20;
   return {score:Math.round(s), feitos};
