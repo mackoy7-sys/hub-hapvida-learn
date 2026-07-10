@@ -91,7 +91,7 @@
   function hideGate(){ if(gate) gate.classList.add("hlHidden"); }
 
   async function ensurePerfil(){
-    var r=await sb.from("perfis").select("nome,papel,aprovado,equipe_id").eq("id",user.id).maybeSingle();
+    var r=await sb.from("perfis").select("nome,papel,aprovado,equipe_id,criado_em").eq("id",user.id).maybeSingle();
     perfil=r.data||null; HL.perfil=perfil; return perfil;
   }
   async function tryPending(){
