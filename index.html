@@ -317,6 +317,17 @@
       var total=CATALOGO.length;
       var r=await HL.sb.from("progresso").select("capitulo,assistido,quiz_feito,quiz_acertos,quiz_total").eq("usuario_id",HL.user.id);
       var byCap={}; (r.data||[]).forEach(function(x){ byCap[x.capitulo]=x; });
+
+      // Novidades: esconder os capítulos que o usuário JÁ concluiu (assistido + quiz)
+      var novWrap=document.querySelector("#hlNovidades .novid-wrap");
+      if(novWrap){
+        [].slice.call(novWrap.querySelectorAll("a.card[data-cap]")).forEach(function(c){
+          var x=byCap[c.getAttribute("data-cap")];
+          if(x && x.assistido && x.quiz_feito) c.remove();
+        });
+        if(!novWrap.querySelector("a.card")) novWrap.remove();  // sem destaques → some a faixa inteira
+      }
+
       var feitos=0, score=0, got100=false, ratios=[];
       Object.keys(byCap).forEach(function(k){ var x=byCap[k];
         if(x.assistido){ score+=10; }
