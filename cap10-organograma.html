@@ -203,6 +203,37 @@
     .quiz-bar .chapter{margin-left:auto}
     .q-text{font-size:18px}
   }
+
+  /* ---- Organograma (fotos + diagrama) ---- */
+  .lead{display:flex;align-items:center;gap:18px;margin-top:16px}
+  .lead img{width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid var(--laranja);
+    box-shadow:0 8px 22px rgba(244,123,32,.30);flex:0 0 auto}
+  .lead .li b{font-size:19px;color:var(--azul);line-height:1.15}
+  .lead .li span{display:block;font-size:13.5px;color:var(--cinza);margin-top:3px;max-width:360px;line-height:1.35}
+  .people{display:flex;flex-wrap:wrap;gap:14px 16px;margin-top:16px}
+  .person{display:flex;flex-direction:column;align-items:center;gap:6px;width:94px}
+  .person img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid #e4ebf5;
+    box-shadow:0 6px 16px rgba(10,61,143,.16)}
+  .person .pn{font-size:12px;font-weight:700;color:var(--tinta);text-align:center;line-height:1.15}
+  /* diagrama completo */
+  .org{display:flex;flex-direction:column;align-items:center;gap:7px;margin-top:8px}
+  .org .conn{width:2px;height:10px;background:#c9d7ee}
+  .org .node{background:#eef3fb;border:1px solid #dce6f5;border-radius:10px;padding:6px 12px;text-align:center;
+    color:var(--tinta);font-weight:700;font-size:12px}
+  .org .node small{display:block;font-weight:500;opacity:.85;font-size:10px}
+  .org .node.top{background:linear-gradient(135deg,#0a3d8f,#0956c6);color:#fff;border:0;display:flex;align-items:center;gap:9px;padding:7px 14px 7px 7px}
+  .org .node.top img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.7)}
+  .org .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .org .team{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:2px}
+  .org .tm{display:flex;flex-direction:column;align-items:center;gap:3px;width:52px}
+  .org .tm img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(10,61,143,.18)}
+  .org .tm span{font-size:9px;color:var(--cinza);text-align:center;line-height:1.1}
+  .org .apoio .node{background:#fff6ee;border-color:#ffe0c2}
+  @media(max-width:720px){
+    .lead img{width:84px;height:84px}.person{width:80px}.person img{width:64px;height:64px}
+    .org .node{font-size:11px}.org .tm{width:46px}
+  }
+
 </style>
 
 <!-- Hapvida Learn · login/progresso -->
@@ -297,38 +328,50 @@ const scenes = [
   {
     kicker:"Visão geral", title:"Vendas dentro do Growth",
     html:`<div class="kicker">Visão geral</div><h1>Onde a Vendas se conecta</h1>
-      <ul class="points">
-        <li class="good" style="animation-delay:.1s"><span class="ic">📈</span><div>A área faz parte da agenda de <b>Growth</b> da Hapvida</div></li>
-        <li style="animation-delay:.4s"><span class="ic">🌐</span><div>Reúne <b>marketing digital, performance, vendas on-line</b> e experiência do cliente</div></li>
-        <li style="animation-delay:.7s"><span class="ic">🧭</span><div>Tudo voltado a uma <b>jornada digital</b> cada vez melhor</div></li>
-      </ul>`,
+      <div class="lead">
+        <img src="img10/bernardo.jpg" alt="Bernardo Marotta">
+        <div class="li"><b>Bernardo Marotta</b><span>Chief Growth Officer — lidera marketing digital, performance, vendas on-line e a experiência do cliente na Hapvida.</span></div>
+      </div>`,
     narration:["Antes de ver os times, o contexto.",
-      "A nossa área faz parte da agenda de crescimento, o Growth, da Hapvida. Ela reúne marketing digital, performance, vendas on-line e experiência do cliente.",
-      "Tudo isso conectado, com foco em uma jornada digital cada vez melhor para quem compra com a gente."]
+      "A nossa área faz parte da agenda de crescimento, o Growth da Apvida, liderada pelo Chief Growth Officer, Bernardo Marotta.",
+      "Essa agenda reúne marketing digital, performance, vendas on-line e experiência do cliente, com foco em uma jornada digital cada vez melhor."]
+  },
+  {
+    kicker:"Liderança", title:"Diretor da área",
+    html:`<div class="kicker">Liderança</div><h1>Quem lidera a nossa área</h1>
+      <div class="lead">
+        <img src="img10/marcos.jpg" alt="Marcos Correa">
+        <div class="li"><b>Marcos Correa</b><span>Diretor de Vendas Digital — lidera a estratégia comercial e conecta todos os times em torno das metas.</span></div>
+      </div>`,
+    narration:["À frente da nossa área de Vendas Digital está o diretor Marcos Correa.",
+      "É ele quem lidera a estratégia comercial e conecta todos os times em torno das nossas metas.",
+      "A partir da diretoria, a área se organiza em frentes de venda e em áreas de apoio. Vamos conhecê-las."]
   },
   {
     kicker:"Frentes comerciais", title:"As frentes de venda",
-    html:`<div class="kicker">Frentes comerciais</div><h1>Duas gerências de vendas</h1>
+    html:`<div class="kicker">Frentes comerciais</div><h1>Duas frentes de vendas</h1>
       <ul class="points" style="gap:11px">
-        <li style="animation-delay:.1s"><span class="ic">📍</span><div><b>Ribeirão Preto</b> — gerência comercial da região</div></li>
-        <li style="animation-delay:.45s"><span class="ic">📍</span><div><b>São Paulo, Fortaleza e Pirassununga</b> — gerência das demais praças</div></li>
-        <li class="good" style="animation-delay:.8s"><span class="ic">🎯</span><div>Cada gerência cuida das suas praças e metas comerciais</div></li>
+        <li style="animation-delay:.1s"><span class="ic">📍</span><div><b>Ribeirão Preto</b> — frente comercial da região</div></li>
+        <li style="animation-delay:.45s"><span class="ic">📍</span><div><b>São Paulo, Fortaleza e Pirassununga</b> — frente das demais praças</div></li>
+        <li class="good" style="animation-delay:.8s"><span class="ic">🎯</span><div>Cada frente cuida das suas praças e metas comerciais</div></li>
       </ul>`,
-    narration:["A nossa venda se organiza em duas grandes frentes, cada uma com o seu gerente.",
+    narration:["A nossa venda se organiza em duas grandes frentes.",
       "Uma frente cuida de Ribeirão Preto. A outra cuida de São Paulo, Fortaleza e Pirassununga.",
-      "Cada gerência é responsável pelas suas praças e pelas suas metas comerciais."]
+      "Cada frente é responsável pelas suas praças e pelas suas metas comerciais."]
   },
   {
     kicker:"Time", title:"Time Ribeirão Preto",
     html:`<div class="kicker">Time · Ribeirão Preto</div><h1>Quem faz acontecer</h1>
-      <ul class="points" style="gap:8px;font-size:14.5px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">★</span><div><b>Marcos Correa</b> — Gerente</div></li>
-        <li style="animation-delay:.35s"><span class="ic">👤</span><div>Josy Bomfim · Fabio Andrade</div></li>
-        <li style="animation-delay:.6s"><span class="ic">👤</span><div>Natalia Tramarin · Thalyta Sampaio · Tamires Ciboff</div></li>
-      </ul>`,
-    narration:["Vamos conhecer o time de Ribeirão Preto.",
-      "A gerência é do Marcos Correa.",
-      "E a equipe conta com Josy Bomfim, Fábio Andrade, Natália Tramarin, Thalyta Sampaio e Tamires Ciboff."]
+      <div class="people">
+        <div class="person"><img src="img10/josy.jpg" alt="Josy Bomfim"><div class="pn">Josy Bomfim</div></div>
+        <div class="person"><img src="img10/fabio.jpg" alt="Fabio Andrade"><div class="pn">Fabio Andrade</div></div>
+        <div class="person"><img src="img10/natalia.jpg" alt="Natalia Tramarin"><div class="pn">Natalia Tramarin</div></div>
+        <div class="person"><img src="img10/thalyta.jpg" alt="Thalyta Sampaio"><div class="pn">Thalyta Sampaio</div></div>
+        <div class="person"><img src="img10/tamires.jpg" alt="Tamires Ciboff"><div class="pn">Tamires Ciboff</div></div>
+      </div>`,
+    narration:["Conheça o time comercial de Ribeirão Preto.",
+      "São eles: Josy Bomfim, Fábio Andrade, Natália Tramarin, Thalyta Sampaio e Tamires Ciboff.",
+      "É esse time que está na linha de frente, todos os dias, para vender mais e melhor."]
   },
   {
     kicker:"Áreas de apoio", title:"Estratégia comercial",
@@ -365,6 +408,34 @@ const scenes = [
     narration:["E a terceira área de apoio é a que está mais perto de você agora.",
       "É a de capacitação, treinamento, onboarding e qualidade.",
       "É justamente essa área que traz a Academia de Vendas e a EugenIA até você. Ou seja, este treinamento nasceu aqui!"]
+  },
+  {
+    kicker:"Organograma", title:"O organograma completo",
+    html:`<div class="kicker">Visão completa</div><h1 style="margin-bottom:2px">O organograma completo</h1>
+      <div class="org">
+        <div class="node top"><img src="img10/marcos.jpg" alt="Marcos Correa"><div>Marcos Correa<small>Diretor · Vendas Digital</small></div></div>
+        <div class="conn"></div>
+        <div class="row">
+          <div class="node">Ribeirão Preto<small>Frente comercial</small></div>
+          <div class="node">São Paulo · Fortaleza · Pirassununga<small>Frente comercial</small></div>
+        </div>
+        <div class="team">
+          <div class="tm"><img src="img10/josy.jpg"><span>Josy</span></div>
+          <div class="tm"><img src="img10/fabio.jpg"><span>Fabio</span></div>
+          <div class="tm"><img src="img10/natalia.jpg"><span>Natalia</span></div>
+          <div class="tm"><img src="img10/thalyta.jpg"><span>Thalyta</span></div>
+          <div class="tm"><img src="img10/tamires.jpg"><span>Tamires</span></div>
+        </div>
+        <div class="conn"></div>
+        <div class="row apoio">
+          <div class="node">Estratégia comercial<small>Campanhas · Comissões · Auditoria</small></div>
+          <div class="node">Processos · Sistemas · Backoffice</div>
+          <div class="node">Capacitação · Qualidade<small>Treinamento · Onboarding</small></div>
+        </div>
+      </div>`,
+    narration:["Juntando tudo, este é o nosso organograma.",
+      "No topo, o diretor Marcos Correa. Abaixo, as duas frentes comerciais e o time de Ribeirão Preto.",
+      "E, dando suporte a todos, as áreas de estratégia comercial, de processos e sistemas, e de capacitação e qualidade."]
   },
   {
     kind:"hero", kicker:"Encerramento",
