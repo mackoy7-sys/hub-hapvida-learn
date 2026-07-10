@@ -97,6 +97,29 @@
     .hero h1{font-size:26px}
     .top .badge{display:none}
   }
+  /* Barra do participante */
+  .pbar{display:flex;gap:22px;flex-wrap:wrap;align-items:center;background:#0a2a6b;color:#fff;
+    padding:10px 22px;border-radius:14px;font-size:12.5px;margin:-16px 0 26px;
+    box-shadow:0 8px 20px rgba(10,42,107,.22)}
+  .pbar b{font-weight:800}
+  .pb-cat{font-weight:800;padding:2px 11px;border-radius:999px;background:rgba(255,255,255,.16)}
+  .pb-cat.cat-ouro{background:#ffd27a;color:#5c3d00}
+  .pb-cat.cat-prata{background:#e2e8f0;color:#334155}
+  .pb-cat.cat-bronze{background:#e8b98a;color:#5c3300}
+  @media(max-width:640px){.pbar{font-size:11px;gap:10px 16px;margin-top:0}}
+  /* Novidades */
+  .novid-wrap{margin-bottom:8px}
+  .novid-tag{display:inline-block;background:#fff350;color:#1a2740;font-weight:800;font-size:14px;
+    padding:6px 18px;border-radius:6px;transform:rotate(-2deg);border:2px solid #1a2740;
+    letter-spacing:.3px;margin-bottom:6px}
+  .thumb .ep2{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.9);color:var(--azul);
+    font-size:10px;font-weight:800;letter-spacing:.2px;padding:4px 9px;border-radius:999px;text-align:right}
+  /* Trilhas */
+  .trilha-bloco{margin-bottom:8px}
+  .trilha-mini{font-weight:600}
+  .soon-card{cursor:default}
+  .soon-card .thumb.soon{display:flex;align-items:center;justify-content:center}
+  .soon-card .thumb.soon .lock{font-size:28px;opacity:.85}
 </style>
 </head>
 <body>
@@ -114,6 +137,12 @@
     <a class="badge sairtop" id="hlSairTop" href="#" style="display:none">Sair</a>
   </div>
 
+  <div class="pbar" id="pbBar" style="display:none">
+    <span>Participante: <b id="pbNome">—</b></span>
+    <span>Conquistas: <span class="pb-cat" id="pbCat">—</span></span>
+    <span>Data de inclusão: <b id="pbData">—</b></span>
+  </div>
+
   <div class="hero">
     <div class="hero-txt">
       <span class="kick">Apresentado por EugenIA</span>
@@ -126,115 +155,8 @@
     </div>
   </div>
 
-  <div class="sec"><h2>Capítulos</h2><span>Trilha de Portabilidade & Processos</span><div class="line"></div></div>
-
-  <div class="grid">
-
-    <a class="card" href="cap3-institucional.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 1</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Institucional Hapvida</h3>
-        <p>Quem somos: a maior operadora de saúde e odonto da América Latina — números, rede própria nacional, qualidade, telessaúde e o nosso jeito de cuidar.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~8 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-    <a class="card" href="cap1-portabilidade.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 2</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Portabilidade de Carências</h3>
-        <p>Processo completo: objetivo e regras (RN 438/2018), emissão do relatório no Guia ANS, canais de envio, prazos e toda a documentação exigida — incluindo vínculo com a PJ.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~8 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-    <a class="card" href="cap2-nosso-medico.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 3</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Produto Nosso Médico</h3>
-        <p>O modelo de Medicina da Família: benefícios, jornada do cliente, características comerciais, protocolos e programas, canais e rede de atendimento.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~7 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-    <a class="card" href="cap4-produtos-sp.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 4</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Produtos Interior de SP</h3>
-        <p>O portfólio do interior: 3 níveis de produtos e preços, regras comerciais, odonto, a rede de atendimento por região, Ribeirão Preto, teleconsulta e Clube de Vantagens.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~10 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-    <a class="card" href="cap5-produtos-bh.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 5</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Produtos Belo Horizonte</h3>
-        <p>O portfólio de BH: 4 produtos em 2 níveis, preços e novidades, a rede de atendimento (própria e credenciada), regras comerciais, programas e Clube de Vantagens.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~8 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-    <a class="card" href="cap6-ppo.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 6</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Produto PPO</h3>
-        <p>A linha de Livre Escolha: o que é o PPO, os 5 produtos (Advance 600/700, Premium 900 Care/900 e Infinity 1.000), coberturas e reembolso, odonto inclusa, coparticipação e regras de aceitação.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~10 min + quiz</small>
-        </div>
-      </div>
-    </a>
-    <a class="card" href="cap7-cotador.html">
-      <div class="thumb">
-        <span class="ep">Capítulo 7</span>
-        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="body">
-        <h3>Cotador Hapon</h3>
-        <p>Como simular preços e gerar cotações: distribuição de vidas, seleção de planos, filtros (produto, contrato e operadoras), resultado consolidado e o folder em PDF para enviar ao cliente.</p>
-        <div class="meta">
-          <span class="tag ativo">● Disponível</span>
-          <small>🎬 ~10 min + quiz</small>
-        </div>
-      </div>
-    </a>
-
-  </div>
+  <div id="hlNovidades"></div>
+  <div id="hlTrilhas"></div>
 
   <div class="foot">
     <b>Hapvida Learn</b> · Academia de Vendas Digital &nbsp;·&nbsp; conteúdo interno para capacitação do time comercial<br>
@@ -271,7 +193,101 @@
 </style>
 <script>
 (function(){
-  function capId(h){ return (h||"").split("/").pop().replace(/\.html.*$/,""); }
+  // ===== Config: ajuste aqui quando publicar um capítulo novo =====
+  var JANELA_NOVIDADES_DIAS = 14;   // capítulo some de "Novidades" depois de N dias publicado
+  var MAX_NOVIDADES = 3;            // no máx. de cards em destaque
+
+  var TRILHAS = [
+    {id:"onboarding",       nome:"Onboarding"},
+    {id:"regulamentacao",   nome:"Regulamentação"},
+    {id:"produtos",         nome:"Produtos"},
+    {id:"comercializacao",  nome:"Comercialização"},
+    {id:"sistemas",         nome:"Sistemas | Processos"},
+    {id:"roteiros",         nome:"Roteiros | Scripts"},
+    {id:"argumentacao",     nome:"Argumentação"}
+  ];
+  function trilhaNome(id){ var t=TRILHAS.filter(function(x){return x.id===id;})[0]; return t?t.nome:id; }
+
+  // cap = número global do capítulo (mesmo número usado na Área de Gestão). pub = data de publicação.
+  var CATALOGO = [
+    {cap:1, id:"cap3-institucional", trilha:"onboarding", href:"cap3-institucional.html",
+     titulo:"Institucional Hapvida",
+     desc:"Quem somos: a maior operadora de saúde e odonto da América Latina — números, rede própria nacional, qualidade, telessaúde e o nosso jeito de cuidar.",
+     dur:"~8 min + quiz", pub:"2026-07-05"},
+    {cap:2, id:"cap1-portabilidade", trilha:"regulamentacao", href:"cap1-portabilidade.html",
+     titulo:"Portabilidade de Carências",
+     desc:"Processo completo: objetivo e regras (RN 438/2018), emissão do relatório no Guia ANS, canais de envio, prazos e toda a documentação exigida — incluindo vínculo com a PJ.",
+     dur:"~8 min + quiz", pub:"2026-07-04"},
+    {cap:3, id:"cap2-nosso-medico", trilha:"produtos", href:"cap2-nosso-medico.html",
+     titulo:"Produto Nosso Médico",
+     desc:"O modelo de Medicina da Família: benefícios, jornada do cliente, características comerciais, protocolos e programas, canais e rede de atendimento.",
+     dur:"~7 min + quiz", pub:"2026-07-04"},
+    {cap:4, id:"cap4-produtos-sp", trilha:"produtos", href:"cap4-produtos-sp.html",
+     titulo:"Produtos Interior de SP",
+     desc:"O portfólio do interior: 3 níveis de produtos e preços, regras comerciais, odonto, a rede de atendimento por região, Ribeirão Preto, teleconsulta e Clube de Vantagens.",
+     dur:"~10 min + quiz", pub:"2026-07-06"},
+    {cap:5, id:"cap5-produtos-bh", trilha:"produtos", href:"cap5-produtos-bh.html",
+     titulo:"Produtos Belo Horizonte",
+     desc:"O portfólio de BH: 4 produtos em 2 níveis, preços e novidades, a rede de atendimento (própria e credenciada), regras comerciais, programas e Clube de Vantagens.",
+     dur:"~8 min + quiz", pub:"2026-07-05"},
+    {cap:6, id:"cap6-ppo", trilha:"produtos", href:"cap6-ppo.html",
+     titulo:"Produto PPO",
+     desc:"A linha de Livre Escolha: o que é o PPO, os 5 produtos (Advance 600/700, Premium 900 Care/900 e Infinity 1.000), coberturas e reembolso, odonto inclusa, coparticipação e regras de aceitação.",
+     dur:"~10 min + quiz", pub:"2026-06-20"}
+  ];
+
+  function diasDesde(iso){ try{ return Math.floor((Date.now()-new Date(iso+"T00:00:00").getTime())/86400000); }catch(e){ return 9999; } }
+  function fmtData(iso){
+    if(!iso) return "—";
+    var m=String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);   // usa a data "de calendário", sem deslocar por fuso
+    if(!m) return "—";
+    return m[3]+"/"+m[2]+"/"+m[1];
+  }
+  function esc(s){ return String(s==null?"":s); }
+
+  function cardHTML(item, showTrilha){
+    var ep2 = showTrilha ? '<span class="ep2">Trilha: '+esc(trilhaNome(item.trilha))+'</span>' : "";
+    return '<a class="card" href="'+item.href+'" data-cap="'+item.id+'">'+
+      '<div class="thumb"><span class="ep">Capítulo '+item.cap+'</span>'+ep2+
+      '<div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>'+
+      '<div class="body"><h3>'+esc(item.titulo)+'</h3><p>'+esc(item.desc)+'</p>'+
+      '<div class="meta"><span class="tag ativo">● Disponível</span><small>🎬 '+esc(item.dur)+'</small></div></div></a>';
+  }
+  function emBreveHTML(nomeTrilha){
+    return '<div class="card soon-card">'+
+      '<div class="thumb soon"><div class="lock">🔒</div></div>'+
+      '<div class="body"><h3>Em breve</h3><p>Novos capítulos da trilha <b>'+esc(nomeTrilha)+'</b> chegam em breve.</p>'+
+      '<div class="meta"><span class="tag breve">Em produção</span></div></div></div>';
+  }
+
+  function renderCatalogo(){
+    // Novidades: automático — dentro da janela de dias, limitado ao máximo configurado
+    var novos=CATALOGO.filter(function(c){ return diasDesde(c.pub)<=JANELA_NOVIDADES_DIAS; })
+      .sort(function(a,b){ return diasDesde(a.pub)-diasDesde(b.pub); })
+      .slice(0,MAX_NOVIDADES);
+    var novEl=document.getElementById("hlNovidades");
+    novEl.innerHTML = novos.length ? (
+      '<div class="novid-wrap">'+
+      '<span class="novid-tag">✨ Novidades!</span>'+
+      '<div class="sec" style="margin-top:8px"><h2>Destaques recentes</h2><span>Capítulos adicionados há pouco tempo</span><div class="line"></div></div>'+
+      '<div class="grid">'+novos.map(function(c){return cardHTML(c,true);}).join("")+'</div>'+
+      '</div>'
+    ) : "";
+
+    // Trilhas, em ordem fixa
+    var trEl=document.getElementById("hlTrilhas");
+    trEl.innerHTML = TRILHAS.map(function(t){
+      var itens=CATALOGO.filter(function(c){return c.trilha===t.id;});
+      var corpo = itens.length ? itens.map(function(c){return cardHTML(c,false);}).join("") : emBreveHTML(t.nome);
+      var miniTxt = itens.length ? (itens.length+(itens.length===1?" capítulo":" capítulos")) : "em construção";
+      return '<div class="trilha-bloco" data-trilha="'+t.id+'">'+
+        '<div class="sec"><h2>'+esc(t.nome)+'</h2><span id="prog-'+t.id+'" class="trilha-mini">'+miniTxt+'</span><div class="line"></div></div>'+
+        '<div class="grid">'+corpo+'</div>'+
+        '</div>';
+    }).join("");
+  }
+  renderCatalogo();
+
   document.addEventListener("hl:ready", async function(){
     var p=window.HL&&HL.perfil;
     // links no cabeçalho: Gestão (só gestores) + Sair (todos)
@@ -280,20 +296,35 @@
     var sLink=document.getElementById("hlSairTop");
     if(sLink){ sLink.style.display="inline-block"; sLink.onclick=function(e){e.preventDefault();HL.logout();}; }
 
-    // Minha trilha
+    // barra do participante
     try{
-      var cards=[].slice.call(document.querySelectorAll(".grid .card"));
-      var total=cards.length||6;
+      var nomeFull=(p&&p.nome)?p.nome:((HL.user&&HL.user.email)||"—");
+      document.getElementById("pbNome").textContent=nomeFull;
+      document.getElementById("pbData").textContent=fmtData(p&&p.criado_em);
+      document.getElementById("pbBar").style.display="flex";
+    }catch(e){}
+
+    // Minha trilha + progresso por trilha + decoração dos cards
+    try{
+      var total=CATALOGO.length;
       var r=await HL.sb.from("progresso").select("capitulo,assistido,quiz_feito,quiz_acertos,quiz_total").eq("usuario_id",HL.user.id);
       var byCap={}; (r.data||[]).forEach(function(x){ byCap[x.capitulo]=x; });
-      var assistidos=0, feitos=0, score=0, got100=false, ratios=[];
+      var feitos=0, score=0, got100=false, ratios=[];
       Object.keys(byCap).forEach(function(k){ var x=byCap[k];
-        if(x.assistido){ assistidos++; score+=10; }
+        if(x.assistido){ score+=10; }
         if(x.quiz_feito && x.quiz_total>0){ feitos++; var ra=x.quiz_acertos/x.quiz_total; score+=ra*10; ratios.push(ra); if(x.quiz_acertos===x.quiz_total) got100=true; }
       });
       if(feitos===total) score+=20; score=Math.round(score);
       var pct=Math.round(feitos/total*100);
       var expert=feitos===total && ratios.length>0 && ratios.every(function(v){return v>=0.8;});
+
+      // Conquistas / categoria (Bronze <40% · Prata 40-79% · Ouro ≥80%)
+      var catEl=document.getElementById("pbCat");
+      if(catEl){
+        var cat = pct>=80?"Ouro":(pct>=40?"Prata":"Bronze");
+        catEl.textContent=cat; catEl.className="pb-cat cat-"+cat.toLowerCase();
+      }
+
       var badges=[
         {e:"🎯",n:"Primeiro passo",on:feitos>=1},
         {e:"⭐",n:"Meia trilha",on:feitos>=Math.ceil(total/2)},
@@ -301,29 +332,37 @@
         {e:"🏆",n:"Trilha completa",on:feitos===total},
         {e:"🧠",n:"Expert",on:expert}
       ];
-      var nome=(p&&p.nome)?p.nome.split(" ")[0]:"";
+      var primeiroNome=(p&&p.nome)?p.nome.split(" ")[0]:"";
       var panel=document.createElement("div"); panel.className="hl-trilha";
-      panel.innerHTML='<div class="ht-top"><div><div class="ht-t">Minha trilha'+(nome?", "+nome:"")+'</div>'+
+      panel.innerHTML='<div class="ht-top"><div><div class="ht-t">Minha trilha'+(primeiroNome?", "+primeiroNome:"")+'</div>'+
         '<div class="ht-s">'+feitos+' de '+total+' capítulos concluídos · '+pct+'%</div></div>'+
         '<div class="ht-score"><b>'+score+'</b><span>pontos</span></div></div>'+
         '<div class="ht-bar"><i style="width:'+pct+'%"></i></div>'+
         '<div class="ht-badges">'+badges.map(function(b){return '<div class="ht-b'+(b.on?" on":"")+'"><span>'+b.e+'</span>'+b.n+'</div>';}).join("")+'</div>';
-      var sec=document.querySelector(".sec"); if(sec&&sec.parentNode) sec.parentNode.insertBefore(panel,sec);
+      var anchor=document.getElementById("hlNovidades"); if(anchor&&anchor.parentNode) anchor.parentNode.insertBefore(panel,anchor);
 
-      cards.forEach(function(c){
-        var x=byCap[capId(c.getAttribute("href"))]; if(!x || !x.assistido) return;
+      // progresso por trilha (texto no cabeçalho de cada seção)
+      TRILHAS.forEach(function(t){
+        var itens=CATALOGO.filter(function(c){return c.trilha===t.id;});
+        if(!itens.length) return;
+        var done=itens.filter(function(c){var x=byCap[c.id]; return x&&x.assistido&&x.quiz_feito;}).length;
+        var el=document.getElementById("prog-"+t.id);
+        if(el) el.textContent=done+" de "+itens.length+" concluídos";
+      });
+
+      // decora só os cards das seções de Trilha (Novidades fica "limpo", como vitrine)
+      [].slice.call(document.querySelectorAll("#hlTrilhas a.card[data-cap]")).forEach(function(c){
+        var x=byCap[c.getAttribute("data-cap")]; if(!x || !x.assistido) return;
         var concluido = x.assistido && x.quiz_feito;
         var th=c.querySelector(".thumb"); if(!th) return;
-        th.style.position="relative";
         var chip=document.createElement("span");
-        if(concluido){                       // assistiu + quiz → concluído (laranja)
+        if(concluido){
           chip.className="hl-chip done"; chip.textContent="✓ Concluído";
           th.style.background="linear-gradient(135deg,#f2820f,#d15f00)";
-        } else {                             // assistiu, falta o quiz → em andamento (azul)
+        } else {
           chip.className="hl-chip seen"; chip.textContent="▶ Em andamento";
         }
         chip.style.cssText+=";position:absolute;top:10px;right:10px;z-index:2"; th.appendChild(chip);
-        // etapas concluídas × pendentes
         var body=c.querySelector(".body");
         if(body){
           var steps=document.createElement("div"); steps.className="hl-steps";
