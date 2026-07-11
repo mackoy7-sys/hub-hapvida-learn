@@ -537,17 +537,17 @@ document.addEventListener("keydown",e=>{
 /* ================= QUIZ ================= */
 const quizData=[
   { q:"A rede de dentistas do Hapvida +odonto é:", opts:["Regional, só em SP","Nacional, com +20 mil dentistas credenciados","Exclusiva para grandes empresas","Somente própria"],
-    correct:1, fb:"São +20 mil dentistas credenciados, com rede 100% credenciada em todo o Brasil." },
+    a:1, why:"São +20 mil dentistas credenciados, com rede 100% credenciada em todo o Brasil." },
   { q:"Qual a carência de Urgência e Emergência no plano odontológico?", opts:["24 horas","60 dias","120 dias","180 dias"],
-    correct:0, fb:"Urgência e Emergência: 24 horas. Prótese é a maior carência (180 dias)." },
+    a:0, why:"Urgência e Emergência: 24 horas. Prótese é a maior carência (180 dias)." },
   { q:"Qual procedimento tem carência de 180 dias?", opts:["Prevenção","Radiologia","Prótese","Urgência"],
-    correct:2, fb:"Prótese: 180 dias. Periodontia/Endodontia: 120 dias. Diagnóstico/Prevenção/Dentística/Radiologia/Cirurgia: 60 dias." },
+    a:2, why:"Prótese: 180 dias. Periodontia/Endodontia: 120 dias. Diagnóstico/Prevenção/Dentística/Radiologia/Cirurgia: 60 dias." },
   { q:"O que a odontologia protege, além dos dentes?", opts:["Apenas a estética","A saúde geral — coração e controle do diabetes","Só a gengiva","Nada além dos dentes"],
-    correct:1, fb:"Saúde bucal é saúde geral: doença periodontal afeta o coração e tem relação de mão dupla com o diabetes." },
+    a:1, why:"Saúde bucal é saúde geral: doença periodontal afeta o coração e tem relação de mão dupla com o diabetes." },
   { q:"Um diferencial tecnológico do Hapvida +odonto é:", opts:["Atendimento só presencial","App com biometria facial e agenda 100% online","Sem aplicativo","Marcação apenas por telefone"],
-    correct:1, fb:"Agenda internalizada com marcação 100% online e app com biometria facial." },
+    a:1, why:"Agenda internalizada com marcação 100% online e app com biometria facial." },
   { q:"Nas novas vendas de plano de saúde até 99 vidas, o odonto completo:", opts:["Custa à parte","Vem incluso, sem custo adicional","Só para 1 vida","Não está disponível"],
-    correct:1, fb:"O odonto completo (ROL ANS) vem incluso, sem custo adicional — um ótimo argumento de venda." }
+    a:1, why:"O odonto completo (ROL ANS) vem incluso, sem custo adicional — um ótimo argumento de venda." }
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

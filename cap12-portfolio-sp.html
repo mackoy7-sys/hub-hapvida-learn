@@ -557,17 +557,17 @@ document.addEventListener("keydown",e=>{
 /* ================= QUIZ ================= */
 const quizData=[
   { q:"Qual é o produto de entrada do portfólio de SP, em rede própria?", opts:["Smart Prime","Nosso Médico","Infinity 1.000","Smart Flex"],
-    correct:1, fb:"O Nosso Médico (a partir de R$ 79,35) é o modelo de Medicina da Família, em rede própria." },
+    a:1, why:"O Nosso Médico (a partir de R$ 79,35) é o modelo de Medicina da Família, em rede própria." },
   { q:"O que caracteriza o Smart Flex SP?", opts:["Só rede própria","Rede própria + credenciada ampliada (56 municípios)","Cobertura nacional","Somente odontológico"],
-    correct:1, fb:"O Smart Flex traz a rede credenciada ampliada em 56 municípios — mais liberdade de escolha." },
+    a:1, why:"O Smart Flex traz a rede credenciada ampliada em 56 municípios — mais liberdade de escolha." },
   { q:"Qual produto tem cobertura nacional?", opts:["Nosso Médico","Smart Up","Smart Prime","Nenhum"],
-    correct:2, fb:"O Smart Prime tem cobertura nacional — atendimento Hapvida em todo o país." },
+    a:2, why:"O Smart Prime tem cobertura nacional — atendimento Hapvida em todo o país." },
   { q:"O que está incluso nas novas vendas de plano de saúde até 99 vidas?", opts:["Reembolso internacional","Plano odontológico completo (ROL ANS)","Seguro de vida","Academia gratuita"],
-    correct:1, fb:"Todos os produtos incluem odontologia completa (ROL ANS) nas novas vendas até 99 vidas." },
+    a:1, why:"Todos os produtos incluem odontologia completa (ROL ANS) nas novas vendas até 99 vidas." },
   { q:"Sobre o reajuste do Grupo Hapvida em 2024:", opts:["Acima do mercado","Igual ao mercado","Cerca de 1,6 p.p. abaixo do mercado","Não houve reajuste"],
-    correct:2, fb:"O reajuste ficou ~1,6 ponto percentual abaixo do mercado — mais previsibilidade para o cliente." },
+    a:2, why:"O reajuste ficou ~1,6 ponto percentual abaixo do mercado — mais previsibilidade para o cliente." },
   { q:"Na escada do portfólio, qual produto é o topo?", opts:["Smart Prime","Premium 900","Infinity 1.000","Advance 700"],
-    correct:2, fb:"O Infinity 1.000 é o topo do portfólio, na linha de livre escolha (PPO)." }
+    a:2, why:"O Infinity 1.000 é o topo do portfólio, na linha de livre escolha (PPO)." }
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");
