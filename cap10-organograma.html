@@ -360,18 +360,30 @@ const scenes = [
       "Cada frente é responsável pelas suas praças e pelas suas metas comerciais."]
   },
   {
-    kicker:"Time", title:"Time Ribeirão Preto",
-    html:`<div class="kicker">Time · Ribeirão Preto</div><h1>Quem faz acontecer</h1>
-      <div class="people">
-        <div class="person"><img src="img10/josy.jpg" alt="Josy Bomfim"><div class="pn">Josy Bomfim</div></div>
-        <div class="person"><img src="img10/fabio.jpg" alt="Fabio Andrade"><div class="pn">Fabio Andrade</div></div>
-        <div class="person"><img src="img10/natalia.jpg" alt="Natalia Tramarin"><div class="pn">Natalia Tramarin</div></div>
-        <div class="person"><img src="img10/thalyta.jpg" alt="Thalyta Sampaio"><div class="pn">Thalyta Sampaio</div></div>
-        <div class="person"><img src="img10/tamires.jpg" alt="Tamires Ciboff"><div class="pn">Tamires Ciboff</div></div>
+    kicker:"Organograma", title:"O organograma completo",
+    html:`<div class="kicker">Visão completa</div><h1 style="margin-bottom:2px">O organograma completo</h1>
+      <div class="org">
+        <div class="node top"><img src="img10/marcos.jpg" alt="Marcos Correa"><div>Marcos Correa<small>Diretor · Vendas Digital</small></div></div>
+        <div class="conn"></div>
+        <div class="row">
+          <div class="node" style="display:flex;align-items:center;gap:8px;text-align:left"><img src="img10/josy.jpg" alt="Josy Bomfim" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(10,61,143,.18);flex:0 0 auto"><div>Ribeirão Preto<small>Josy Bomfim</small></div></div>
+          <div class="node" style="display:flex;align-items:center;gap:8px;text-align:left"><img src="img10/fabio.jpg" alt="Fabio Andrade" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(10,61,143,.18);flex:0 0 auto"><div>SP · Fortaleza · Pirassununga<small>Fabio Andrade</small></div></div>
+        </div>
+        <div class="team">
+          <div class="tm"><img src="img10/natalia.jpg"><span>Natalia</span></div>
+          <div class="tm"><img src="img10/thalyta.jpg"><span>Thalyta</span></div>
+          <div class="tm"><img src="img10/tamires.jpg"><span>Tamires</span></div>
+        </div>
+        <div class="conn"></div>
+        <div class="row apoio">
+          <div class="node">Estratégia comercial<small>Campanhas · Comissões · Auditoria</small></div>
+          <div class="node">Processos · Sistemas · Backoffice</div>
+          <div class="node">Capacitação · Qualidade<small>Treinamento · Onboarding</small></div>
+        </div>
       </div>`,
-    narration:["Conheça o time comercial de Ribeirão Preto.",
-      "São eles: Josy Bomfim, Fábio Andrade, Natália Tramarin, Thalyta Sampaio e Tamires Ciboff.",
-      "É esse time que está na linha de frente, todos os dias, para vender mais e melhor."]
+    narration:["Juntando tudo, este é o nosso organograma.",
+      "No topo, o diretor Marcos Correa. Abaixo, as duas frentes comerciais e o time de Ribeirão Preto.",
+      "E, dando suporte a todos, as áreas de estratégia comercial, de processos e sistemas, e de capacitação e qualidade."]
   },
   {
     kicker:"Áreas de apoio", title:"Estratégia comercial",
@@ -408,34 +420,6 @@ const scenes = [
     narration:["E a terceira área de apoio é a que está mais perto de você agora.",
       "É a de capacitação, treinamento, onboarding e qualidade.",
       "É justamente essa área que traz a Academia de Vendas e a EugenIA até você. Ou seja, este treinamento nasceu aqui!"]
-  },
-  {
-    kicker:"Organograma", title:"O organograma completo",
-    html:`<div class="kicker">Visão completa</div><h1 style="margin-bottom:2px">O organograma completo</h1>
-      <div class="org">
-        <div class="node top"><img src="img10/marcos.jpg" alt="Marcos Correa"><div>Marcos Correa<small>Diretor · Vendas Digital</small></div></div>
-        <div class="conn"></div>
-        <div class="row">
-          <div class="node">Ribeirão Preto<small>Frente comercial</small></div>
-          <div class="node">São Paulo · Fortaleza · Pirassununga<small>Frente comercial</small></div>
-        </div>
-        <div class="team">
-          <div class="tm"><img src="img10/josy.jpg"><span>Josy</span></div>
-          <div class="tm"><img src="img10/fabio.jpg"><span>Fabio</span></div>
-          <div class="tm"><img src="img10/natalia.jpg"><span>Natalia</span></div>
-          <div class="tm"><img src="img10/thalyta.jpg"><span>Thalyta</span></div>
-          <div class="tm"><img src="img10/tamires.jpg"><span>Tamires</span></div>
-        </div>
-        <div class="conn"></div>
-        <div class="row apoio">
-          <div class="node">Estratégia comercial<small>Campanhas · Comissões · Auditoria</small></div>
-          <div class="node">Processos · Sistemas · Backoffice</div>
-          <div class="node">Capacitação · Qualidade<small>Treinamento · Onboarding</small></div>
-        </div>
-      </div>`,
-    narration:["Juntando tudo, este é o nosso organograma.",
-      "No topo, o diretor Marcos Correa. Abaixo, as duas frentes comerciais e o time de Ribeirão Preto.",
-      "E, dando suporte a todos, as áreas de estratégia comercial, de processos e sistemas, e de capacitação e qualidade."]
   },
   {
     kind:"hero", kicker:"Encerramento",
