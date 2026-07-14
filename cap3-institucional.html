@@ -274,195 +274,144 @@
 <script>
 /* ---------- Roteiro das cenas ---------- */
 const scenes = [
-  {
-    kind:"hero", kicker:"Bem-vindos",
+  { kind:"hero", kicker:"Bem-vindos",
     title:"Institucional Hapvida",
-    html:`<div class="hero">
-        <div class="kicker">Bem-vindos · Capítulo 1</div>
-        <h1>Institucional Hapvida</h1>
-        <p>Conheça a empresa que você representa: a <b>maior operadora de saúde e odonto da América Latina</b> — e os números que dão orgulho de vender.</p>
-      </div>`,
+    html:`<div class="hero"><div class="kicker">Onboarding · Capítulo 1</div>
+      <h1>Institucional Hapvida</h1>
+      <p>Muito mais que apresentação: aqui você aprende a <b>usar a força da Hapvida como argumento de venda</b>. Cada número vira um motivo para o cliente escolher a gente.</p></div>`,
     narration:["Olá, time de vendas! Aqui é a EugenIA, e este é o Capítulo 1.",
-      "Vamos conhecer a fundo a Hapvida: quem somos, nossos números, nossa rede e o nosso jeito de cuidar. São argumentos institucionais poderosos para as suas vendas.",
-      "Vamos começar!"]
-  },
-  {
-    kicker:"Quem somos", title:"Sua vida pede Hapvida",
-    html:`<div class="kicker">Quem somos</div><h1>Sua vida pede Hapvida</h1>
-      <ul class="points" style="gap:10px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">★</span><div>Maior plano de <b>saúde e odonto</b> da América Latina</div></li>
-        <li style="animation-delay:.35s"><span class="ic">✓</span><div><b>80 anos</b> de história e experiência a favor da vida</div></li>
-        <li style="animation-delay:.6s"><span class="ic">✓</span><div><b>839 unidades</b> próprias e conectadas</div></li>
-        <li style="animation-delay:.85s"><span class="ic">✓</span><div>Presença nas <b>5 regiões</b> do país</div></li>
-      </ul>`,
-    narration:["Sua vida pede Hapvida. Somos o maior plano de saúde e odonto da América Latina,",
-      "com oitenta anos de história e experiência a favor da vida.",
-      "Já são oitocentas e trinta e nove unidades próprias e conectadas, presentes nas cinco regiões do país, levando saúde de qualidade e acessível a milhões de brasileiros."]
-  },
-  {
-    kicker:"Nosso jeito de ser", title:"Missão, Visão e Valores",
-    html:`<div class="kicker">Nosso jeito de ser</div><h1>Missão, Visão e Valores</h1>
-      <ul class="points" style="gap:9px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">M</span><div><b>Missão:</b> proporcionar saúde integrada de qualidade, acessível a gerações de brasileiros</div></li>
-        <li style="animation-delay:.35s"><span class="ic">V</span><div><b>Visão:</b> ser reconhecida pela qualidade assistencial e geração de valor para o ecossistema da saúde</div></li>
-        <li style="animation-delay:.6s"><span class="ic">✓</span><div><b>Valores:</b> acolhimento, comprometimento, ética, inovação, respeito, responsabilidade social, sustentabilidade e eficiência</div></li>
-      </ul>`,
-    narration:["Nosso jeito de ser começa pela missão: proporcionar saúde integrada de qualidade, acessível a gerações de brasileiros.",
-      "A visão é ser reconhecida pela qualidade assistencial e pela geração de valor para todo o ecossistema da saúde.",
-      "E os valores guiam o dia a dia: acolhimento, comprometimento, ética, inovação, respeito, responsabilidade social, sustentabilidade e eficiência em custo."]
-  },
-  {
-    kicker:"Hapvida em números", title:"Uma estrutura gigante",
-    html:`<div class="kicker">Hapvida em números</div><h1>Uma estrutura gigante</h1>
-      <ul class="points" style="gap:7px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">🏥</span><div><b>84</b> hospitais · <b>75</b> prontos atendimentos</div></li>
-        <li style="animation-delay:.25s"><span class="ic">🩺</span><div><b>367</b> clínicas · <b>313</b> centros de diagnóstico</div></li>
-        <li style="animation-delay:.4s"><span class="ic">🛏️</span><div><b>+6,3 mil</b> leitos de internação</div></li>
-        <li style="animation-delay:.55s"><span class="ic">👥</span><div><b>+75 mil</b> colaboradores · <b>+28 mil</b> médicos</div></li>
-        <li style="animation-delay:.7s"><span class="ic">👥</span><div><b>+20 mil</b> dentistas · <b>+24 mil</b> vendedores</div></li>
-      </ul>`,
-    narration:["A estrutura da Hapvida é gigante. São oitenta e quatro hospitais, setenta e cinco prontos atendimentos, trezentas e sessenta e sete clínicas e trezentos e treze centros de diagnóstico,",
-      "com mais de seis mil e trezentos leitos de internação.",
-      "E um time enorme: mais de setenta e cinco mil colaboradores, mais de vinte e oito mil médicos, mais de vinte mil dentistas e mais de vinte e quatro mil vendedores."]
-  },
-  {
-    kicker:"Nossa base", title:"Milhões de clientes",
-    html:`<div class="kicker">Nossa base de clientes</div><h1>A maior base do país</h1>
-      <div style="display:flex;align-items:baseline;margin:10px 0 6px"><span class="big-num">15,8<small>milhões</small></span></div>
+      "Este não é um capítulo só institucional. A ideia é você sair daqui sabendo usar a força da Hapvida no mercado como argumento de venda.",
+      "Cada dado que veremos é uma munição: um motivo concreto para o cliente escolher a gente. Vamos lá!"] },
+  { kicker:"Por que importa", title:"O institucional é sua munição",
+    html:`<div class="kicker">Por que isso importa na venda</div><h1>Vender solidez gera confiança</h1>
       <ul class="points" style="gap:9px">
-        <li class="good" style="animation-delay:.3s"><span class="ic">+</span><div><b>+8,6 milhões</b> de clientes de saúde</div></li>
-        <li class="good" style="animation-delay:.6s"><span class="ic">+</span><div><b>+7,1 milhões</b> de clientes de odontologia</div></li>
+        <li class="good" style="animation-delay:.1s"><span class="ic">💪</span><div>O cliente quer segurança: mostrar que ele entra na <b>maior e mais sólida</b> operadora reduz o medo de errar</div></li>
+        <li style="animation-delay:.4s"><span class="ic">🎯</span><div>Transforme cada número em <b>benefício</b>: “maior rede” = “atendimento perto de você”</div></li>
+        <li style="animation-delay:.7s"><span class="ic">🛡️</span><div>Solidez é um <b>antídoto contra o “está caro”</b>: valor percebido sobe</div></li>
       </ul>`,
-    narration:["E os clientes? São mais de quinze vírgula oito milhões de vidas confiando na Hapvida.",
-      "São mais de oito vírgula seis milhões de clientes de saúde, e mais de sete vírgula um milhões de clientes de odontologia.",
-      "É a maior base de clientes do setor no Brasil."]
-  },
-  {
-    kicker:"Cuidado em números", title:"O que fazemos por ano",
-    html:`<div class="kicker">Cuidado em números · 12 meses</div><h1>O que fazemos por ano</h1>
-      <ul class="points" style="gap:7px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">›</span><div><b>+3 milhões</b> de consultas</div></li>
-        <li style="animation-delay:.22s"><span class="ic">›</span><div><b>+622 mil</b> internações · <b>+344 mil</b> cirurgias</div></li>
-        <li style="animation-delay:.34s"><span class="ic">›</span><div><b>+166 milhões</b> de exames</div></li>
-        <li style="animation-delay:.46s"><span class="ic">›</span><div><b>+79 mil</b> partos · <b>+8 milhões</b> de atendimentos odontológicos</div></li>
-        <li style="animation-delay:.58s"><span class="ic">›</span><div><b>+178 mil</b> na medicina preventiva · <b>+24 mil</b> oncológicos</div></li>
-      </ul>`,
-    narration:["Em doze meses, o cuidado Hapvida em números impressiona: mais de três milhões de consultas, mais de seiscentas e vinte e duas mil internações e mais de trezentas e quarenta e quatro mil cirurgias.",
-      "Mais de cento e sessenta e seis milhões de exames, mais de setenta e nove mil partos e mais de oito milhões de atendimentos odontológicos.",
-      "Além de milhares de pacientes acompanhados na medicina preventiva e na oncologia."]
-  },
-  {
-    kicker:"Liderança", title:"Líder e cada vez melhor",
-    html:`<div class="kicker">Liderança e reputação</div><h1>Líder e cada vez melhor</h1>
-      <ul class="points" style="gap:10px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">★</span><div>A <b>maior empresa de saúde do país</b> e uma das maiores da odontologia</div></li>
-        <li style="animation-delay:.45s"><span class="ic">↑</span><div>Avanço de cerca de <b>20 posições</b> no ranking IGR da ANS <small>(quanto mais distante do topo, melhor)</small></div></li>
-        <li style="animation-delay:.8s"><span class="ic">✓</span><div>Compromisso com eficiência, qualidade e sustentabilidade</div></li>
-      </ul>`,
-    narration:["A Hapvida é a maior empresa de saúde do país e uma das maiores da odontologia.",
-      "E não paramos de melhorar: nos últimos anos avançamos cerca de vinte posições no ranking de reclamações da ANS. E nesse ranking, quanto mais distante da primeira posição, melhor o desempenho.",
-      "Isso reforça o nosso compromisso com eficiência, qualidade e sustentabilidade."]
-  },
-  {
-    kicker:"Nosso jeito de cuidar", title:"Saúde que te conhece",
-    html:`<div class="kicker">Nosso jeito de cuidar</div><h1>Saúde que te conhece de verdade</h1>
-      <ul class="points" style="gap:10px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">✓</span><div><b>Rede própria e conectada</b></div></li>
-        <li class="good" style="animation-delay:.4s"><span class="ic">✓</span><div><b>Prontuário único</b> — histórico, exames e tratamentos em qualquer unidade</div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">✓</span><div>Equipe conectada — o cuidado começa <b>antes da consulta</b></div></li>
-      </ul>`,
-    narration:["O grande diferencial é o nosso jeito de cuidar: uma saúde que te conhece de verdade.",
-      "Com a rede própria e o prontuário único, quando o cliente chega ao atendimento, a equipe já tem acesso ao histórico, aos exames anteriores e aos tratamentos que ele já fez.",
-      "E essas informações acompanham o cliente em cada unidade, trazendo mais precisão, segurança e continuidade no cuidado."]
-  },
-  {
-    kicker:"Rede própria", title:"Abrangência nacional",
-    html:`<div class="kicker">Rede própria</div><h1>84 hospitais em todo o país</h1>
-      <ul class="points" style="gap:8px">
-        <li style="animation-delay:.1s"><span class="ic">›</span><div><b>Sudeste 41</b> · <b>Nordeste 24</b></div></li>
-        <li style="animation-delay:.3s"><span class="ic">›</span><div><b>Sul 7</b> · <b>Norte 7</b> · <b>Centro-Oeste 5</b></div></li>
-        <li style="animation-delay:.5s"><span class="ic">+</span><div><b>75</b> prontos atendimentos e <b>367</b> clínicas</div></li>
-      </ul>
-      <div class="sub" style="margin-top:12px">Rede completa no site: <b>suavidapedehapvida.com.br</b></div>`,
-    narration:["A rede própria tem abrangência nacional: são oitenta e quatro hospitais espalhados pelo Brasil.",
-      "Quarenta e um no Sudeste, vinte e quatro no Nordeste, sete no Sul, sete no Norte e cinco no Centro-Oeste,",
-      "somados a setenta e cinco prontos atendimentos e trezentas e sessenta e sete clínicas. A rede completa está no nosso site, sua vida pede Hapvida."]
-  },
-  {
-    kicker:"Teleconsulta", title:"A maior telessaúde do país",
-    html:`<div class="kicker">Teleconsulta</div><h1>A maior telessaúde do país</h1>
-      <ul class="points" style="gap:8px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">✓</span><div><b>+6 milhões</b> de atendimentos por teleconsulta</div></li>
-        <li style="animation-delay:.3s"><span class="ic">✓</span><div><b>+1.200</b> médicos cadastrados · <b>+20</b> especialidades</div></li>
-        <li style="animation-delay:.5s"><span class="ic">✓</span><div><b>91%</b> de resolutividade · <b>4,6</b> de satisfação (5 estrelas)</div></li>
-      </ul>`,
-    narration:["A Hapvida tem a maior plataforma de telessaúde do país.",
-      "Já são mais de seis milhões de atendimentos por teleconsulta, com mais de mil e duzentos médicos cadastrados e mais de vinte especialidades.",
-      "A taxa de resolutividade chega a noventa e um por cento, com satisfação de quatro vírgula seis, cinco estrelas. Cuidado e acolhimento à distância, onde o cliente estiver."]
-  },
-  {
-    kicker:"Qualidade", title:"Qualidade e segurança",
-    html:`<div class="kicker">Qualidade e segurança</div><h1>Segurança comprovada</h1>
-      <ul class="points" style="gap:10px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">⏱</span><div><b>74,2%</b> atendidos em até <b>15 minutos</b> nas emergências</div></li>
-        <li style="animation-delay:.4s"><span class="ic">✓</span><div>Indicadores de segurança nas <b>UTIs</b> melhores que a referência nacional</div></li>
-        <li style="animation-delay:.7s"><span class="ic">✓</span><div>Incentivo ao <b>parto normal</b> · premiações, acreditações e selos de qualidade</div></li>
-      </ul>`,
-    narration:["Qualidade e segurança são levadas a sério. Em todo o país, setenta e quatro vírgula dois por cento dos clientes são atendidos em até quinze minutos nas nossas emergências.",
-      "Nossos indicadores de segurança nas UTIs são melhores que a referência nacional, e incentivamos o parto normal com segurança para mães e bebês.",
-      "Tudo isso reconhecido por premiações, acreditações e selos de gestão da qualidade, nacionais e internacionais."]
-  },
-  {
-    kicker:"Nossos programas", title:"Programas e linhas de cuidado",
-    html:`<div class="kicker">Nossos programas</div><h1>Priorizamos a vida</h1>
+    narration:["Antes dos números, entenda por que eles vendem.",
+      "O cliente tem medo de escolher errado. Quando você mostra que ele está entrando na maior e mais sólida operadora do país, esse medo diminui e a confiança cresce.",
+      "O truque é transformar cada dado em benefício. Maior rede vira atendimento perto de você. E lembre: solidez é um ótimo antídoto contra o está caro, porque aumenta o valor percebido."] },
+  { kicker:"1 · Liderança", title:"Líder de mercado",
+    html:`<div class="kicker">1 · Liderança de mercado</div><h1>A maior da América Latina</h1>
       <ul class="points" style="gap:8px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">✓</span><div>Programa Diabetes · Centro Integrado de Transplante</div></li>
-        <li style="animation-delay:.3s"><span class="ic">✓</span><div>Programa Coluna · cuidado cardíaco</div></li>
-        <li style="animation-delay:.5s"><span class="ic">✓</span><div>Nascer Bem e Gestação Segura</div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">♥</span><div><b>Apaixonados pela Vida</b> — 20 projetos de acolhimento <small>(Alta Feliz, Pet Terapia, Toque de Amor...)</small></div></li>
+        <li class="good" style="animation-delay:.1s"><span class="ic">🥇</span><div><b>Maior plano de saúde e odonto da América Latina</b> · <b>80 anos</b> de história</div></li>
+        <li style="animation-delay:.4s"><span class="ic">📊</span><div><b>1º lugar em saúde</b> (~8,6 mi clientes) e <b>2º em odontologia</b> (~7,1 mi) — dados ANS</div></li>
+        <li style="animation-delay:.7s"><span class="ic">🌎</span><div><b>+15,8 milhões de clientes</b> confiam na Hapvida</div></li>
       </ul>`,
-    narration:["Antes de pensar em doença, a Hapvida prioriza a vida. Por isso temos programas e linhas de cuidado para os grupos prioritários:",
-      "o Programa Diabetes, o Centro Integrado de Transplante, o Programa Coluna, o cuidado cardíaco, e o Nascer Bem e Gestação Segura para as gestantes.",
-      "E tem o Apaixonados pela Vida: vinte projetos de acolhimento nas unidades, como Alta Feliz, Pet Terapia e Toque de Amor. Um olhar atento e dedicado a cada cliente."]
-  },
-  {
-    kicker:"Odonto e Diagnóstico", title:"Odontologia e Diagnóstico",
-    html:`<div class="kicker">Odontologia e Diagnóstico</div><h1>Sorriso e precisão</h1>
+    narration:["Ponto um: liderança de mercado. Este é o seu argumento mais forte.",
+      "A Hapvida é o maior plano de saúde e odonto da América Latina, com oitenta anos de história. Pelos dados da A-N-S, somos o primeiro lugar em saúde, com cerca de oito milhões e meio de clientes, e o segundo em odontologia, com mais de sete milhões.",
+      "No total, são mais de quinze milhões e oitocentos mil clientes que confiam na gente. Diga isso ao cliente: ele está escolhendo o número um."] },
+  { kicker:"2 · Rede própria", title:"Rede própria ampla",
+    html:`<div class="kicker">2 · Rede própria ampla</div><h1>839 unidades, perto do cliente</h1>
       <ul class="points" style="gap:7px;font-size:14px">
-        <li style="animation-delay:.1s"><span class="ic">🦷</span><div><b>Odonto:</b> faixa única de preço · sem taxa de implantação</div></li>
-        <li style="animation-delay:.25s"><span class="ic">🦷</span><div>Agendamento por app, site, call center ou consultório · urgência 24h</div></li>
-        <li style="animation-delay:.4s"><span class="ic">🔬</span><div><b>Diagnóstico:</b> 313 unidades · <b>+166 milhões</b> de exames</div></li>
-        <li style="animation-delay:.55s"><span class="ic">🔬</span><div>NotreLabs com inteligência de dados — diagnóstico ágil e seguro</div></li>
+        <li class="good" style="animation-delay:.1s"><span class="ic">🏥</span><div><b>839 unidades próprias e conectadas</b> nas 5 regiões</div></li>
+        <li style="animation-delay:.35s"><span class="ic">🏨</span><div><b>84 hospitais · 75 prontos-atendimentos · 367 clínicas · 313 diagnósticos</b></div></li>
+        <li style="animation-delay:.6s"><span class="ic">🛏️</span><div><b>+6,3 mil leitos</b> de internação próprios</div></li>
+        <li style="animation-delay:.85s"><span class="ic">💡</span><div>Argumento: <b>não depende de credenciado</b> — atendimento no que é nosso</div></li>
       </ul>`,
-    narration:["Na odontologia, o sorriso é fonte de saúde completa: faixa única de preço, sem taxa de implantação, agendamento por aplicativo, site, call center ou no consultório, ações preventivas e urgência vinte e quatro horas.",
-      "E no diagnóstico, são trezentas e treze unidades de imagem e coleta, e mais de cento e sessenta e seis milhões de exames por ano,",
-      "com os laboratórios NotreLabs usando inteligência de dados para um diagnóstico ágil e seguro."]
-  },
-  {
-    kicker:"Sustentabilidade e inovação", title:"Responsabilidade e pesquisa",
-    html:`<div class="kicker">Responsabilidade e inovação</div><h1>Cuidando também do futuro</h1>
+    narration:["Ponto dois: rede própria ampla.",
+      "São oitocentas e trinta e nove unidades próprias e conectadas nas cinco regiões do país. São oitenta e quatro hospitais, setenta e cinco prontos-atendimentos, trezentas e sessenta e sete clínicas e trezentos e treze centros de diagnóstico, com mais de seis mil e trezentos leitos próprios.",
+      "O argumento de venda é forte: com rede própria, o cliente não fica na mão de um credenciado. Ele é atendido no que é nosso, com estrutura e padrão Hapvida."] },
+  { kicker:"3 · Investimento", title:"Investe e cresce",
+    html:`<div class="kicker">3 · Investimento no futuro</div><h1>E ainda vem mais por aí</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">🏗️</span><div>Novas unidades em construção: <b>Fortaleza, São Paulo, Rio e Parauapebas</b></div></li>
+        <li style="animation-delay:.45s"><span class="ic">📈</span><div>Ex.: novas torres <b>Antonio Prudente</b>, <b>Cruzeiro do Sul</b>, <b>Hospital Ibirapuera</b></div></li>
+        <li style="animation-delay:.8s"><span class="ic">💡</span><div>Argumento: <b>empresa que investe = plano que só melhora</b></div></li>
+      </ul>`,
+    narration:["Ponto três: investimento no futuro. E este é um argumento que poucos concorrentes têm.",
+      "A Hapvida segue expandindo a rede própria, com novas unidades em construção em Fortaleza, São Paulo, Rio de Janeiro e Parauapebas. São novas torres e hospitais chegando.",
+      "Use isso: quando o cliente escolhe a Hapvida, escolhe uma empresa que investe e cresce. Ou seja, um plano que só tende a melhorar com o tempo."] },
+  { kicker:"4 · Diferencial", title:"Modelo verticalizado",
+    html:`<div class="kicker">4 · O grande diferencial competitivo</div><h1>Verticalizado e integrado</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">🔗</span><div>Hospitais, clínicas, PA, diagnóstico e laboratórios <b>próprios</b> — tudo conectado</div></li>
+        <li style="animation-delay:.4s"><span class="ic">📋</span><div><b>Prontuário único</b>: sua história acompanha o cliente em cada unidade</div></li>
+        <li style="animation-delay:.7s"><span class="ic">💡</span><div>Argumento: controle da <b>ponta a ponta</b> = mais qualidade e melhor custo — o credenciado não entrega isso</div></li>
+      </ul>`,
+    narration:["Ponto quatro: o grande diferencial competitivo, o modelo verticalizado e integrado.",
+      "A Hapvida é dona da rede: hospitais, clínicas, prontos-atendimentos, diagnóstico e laboratórios próprios, todos conectados. E com o prontuário único, a história do paciente o acompanha em qualquer unidade.",
+      "Este é o argumento que derruba o concorrente: só quem tem a rede própria consegue controlar a qualidade e o custo da ponta a ponta. Uma operadora que só usa rede credenciada não entrega isso."] },
+  { kicker:"5 · Qualidade", title:"Qualidade no atendimento",
+    html:`<div class="kicker">5 · Qualidade no atendimento</div><h1>Rápido e seguro — com números</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">⏱️</span><div><b>74,2%</b> dos clientes atendidos em <b>até 15 min</b> nas emergências</div></li>
+        <li style="animation-delay:.4s"><span class="ic">⭐</span><div>Satisfação medida por <b>NPS e 5 estrelas</b></div></li>
+        <li style="animation-delay:.7s"><span class="ic">🫀</span><div><b>UTI mais segura</b>: índice de mortalidade 0,48 (melhor que a média nacional, 0,75)</div></li>
+      </ul>`,
+    narration:["Ponto cinco: qualidade no atendimento, e aqui temos números que impressionam.",
+      "Em todo o país, setenta e quatro por cento dos nossos clientes são atendidos em até quinze minutos nas emergências. A satisfação é medida e comprovada pelo N-P-S e pelas cinco estrelas.",
+      "E, nas UTIs, o nosso índice de mortalidade é de zero vírgula quarenta e oito, melhor que a média nacional, de zero vírgula setenta e cinco. Quanto menor, mais segura é a UTI. Ou seja: rapidez e segurança comprovadas."] },
+  { kicker:"5 · Qualidade", title:"Teleconsulta",
+    html:`<div class="kicker">5 · Qualidade · Teleconsulta</div><h1>A maior telessaúde do país</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">📱</span><div><b>+6 milhões</b> de atendimentos · <b>+1.200 médicos</b> · <b>+20 especialidades</b></div></li>
+        <li style="animation-delay:.4s"><span class="ic">✅</span><div><b>91% de resolutividade</b> · satisfação <b>4,6 / 5 estrelas</b></div></li>
+        <li style="animation-delay:.7s"><span class="ic">💡</span><div>Argumento: <b>conveniência</b> que o cliente usa no dia a dia, sem sair de casa</div></li>
+      </ul>`,
+    narration:["Ainda em qualidade, um destaque à parte: a teleconsulta.",
+      "É a maior plataforma de telessaúde do país: mais de seis milhões de atendimentos, mais de mil e duzentos médicos e mais de vinte especialidades. Com noventa e um por cento de resolutividade e satisfação de quatro vírgula seis, de cinco estrelas.",
+      "Para o cliente, isso é conveniência de verdade: atendimento de qualidade sem sair de casa. Um ótimo argumento, principalmente para famílias e para quem tem rotina corrida."] },
+  { kicker:"6 · Reputação", title:"Reputação e confiança",
+    html:`<div class="kicker">6 · Reputação e confiança</div><h1>Uma operadora que melhora</h1>
       <ul class="points" style="gap:9px">
-        <li style="animation-delay:.1s"><span class="ic">🌱</span><div><b>Estratégia ASG:</b> evolução pela saúde acessível, sustentável e responsável</div></li>
-        <li style="animation-delay:.35s"><span class="ic">✓</span><div>Diversidade, equidade e inclusão · ética e governança</div></li>
-        <li style="animation-delay:.6s"><span class="ic">🔬</span><div><b>Centro de Pesquisa Clínica</b> — oncologia, neurologia, cardiovasculares e crônicas</div></li>
+        <li class="good" style="animation-delay:.1s"><span class="ic">📈</span><div>Avanço de <b>~20 posições</b> no <b>ranking IGR da ANS</b> nos últimos anos</div></li>
+        <li style="animation-delay:.45s"><span class="ic">ℹ️</span><div>No IGR, <b>quanto mais longe do 1º, melhor</b> — menos reclamações relativas</div></li>
+        <li style="animation-delay:.8s"><span class="ic">💡</span><div>Argumento: evolução constante em <b>gestão e qualidade</b> — confiança que se conquista</div></li>
       </ul>`,
-    narration:["A Hapvida cuida também do futuro. A estratégia ambiental, social e de governança se resume em evolução pela saúde acessível, sustentável e responsável,",
-      "com diversidade, equidade, inclusão, ética e governança em toda a cadeia.",
-      "E investimos em inovação: o Centro de Pesquisa Clínica desenvolve ensaios e protocolos em áreas como oncologia, neurologia, doenças cardiovasculares e crônicas."]
-  },
-  {
-    kicker:"Resumo", title:"Por que isso importa na venda",
-    html:`<div class="kicker">Resumo</div><h1>Argumentos que dão orgulho</h1>
-      <ul class="points" style="gap:10px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">✓</span><div><b>Maior operadora</b> de saúde e odonto da América Latina · 80 anos</div></li>
-        <li class="good" style="animation-delay:.4s"><span class="ic">✓</span><div><b>Rede própria nacional</b> + prontuário único = cuidado conectado</div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">✓</span><div><b>+15,8 milhões</b> de clientes e liderança de mercado</div></li>
-        <li class="good" style="animation-delay:1s"><span class="ic">✓</span><div>Qualidade reconhecida · maior telessaúde · programas que priorizam a vida</div></li>
+    narration:["Ponto seis: reputação e confiança.",
+      "Nos últimos anos, a Hapvida avançou cerca de vinte posições no ranking de reclamações da A-N-S, o I-G-R. E atenção: nesse ranking, quanto mais distante da primeira posição, melhor, porque significa menos reclamações em relação ao porte da operadora.",
+      "Ou seja, é uma empresa que melhora de forma constante a sua gestão e a sua qualidade. Confiança não se promete, se conquista com dados como esse."] },
+  { kicker:"7 · Valor", title:"Diferenciais que agregam valor",
+    html:`<div class="kicker">7 · Diferenciais que agregam valor</div><h1>Benefícios que o cliente sente</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">🎁</span><div><b>Clube de Vantagens</b> — descontos em farmácias, compras e bem-estar</div></li>
+        <li style="animation-delay:.35s"><span class="ic">📱</span><div><b>Teleconsulta</b> e <b>Qualivida</b> (programas gratuitos de saúde)</div></li>
+        <li style="animation-delay:.6s"><span class="ic">🤝</span><div><b>Indique e Ganhe</b> — o cliente satisfeito ainda é recompensado</div></li>
+        <li style="animation-delay:.85s"><span class="ic">💡</span><div>Argumento: o plano <b>vale mais</b> do que a mensalidade — vende valor, não preço</div></li>
       </ul>`,
-    narration:["Para fechar: você representa a maior operadora de saúde e odonto da América Latina, com oitenta anos de história.",
-      "Uma rede própria nacional com prontuário único, que entrega cuidado conectado; mais de quinze milhões de clientes e liderança de mercado;",
-      "qualidade reconhecida, a maior telessaúde do país e programas que priorizam a vida. Use esses argumentos com orgulho! Esse foi o Capítulo um. Até o próximo!"]
-  }
+    narration:["Ponto sete: os diferenciais que agregam valor ao plano.",
+      "O cliente ganha o Clube de Vantagens, com descontos em farmácias, compras e bem-estar; a teleconsulta; e o Qualivida, com programas gratuitos de saúde. E ainda tem o Indique e Ganhe, em que o cliente satisfeito é recompensado por indicar.",
+      "Junte tudo isso na conversa: o plano vale muito mais do que a mensalidade. É assim que você vende valor, e não preço."] },
+  { kicker:"8 · Compromisso", title:"Compromisso com a saúde e o futuro",
+    html:`<div class="kicker">8 · Compromisso com a saúde e o futuro</div><h1>Cuidar de verdade</h1>
+      <ul class="points" style="gap:7px;font-size:13.5px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">🌱</span><div><b>Medicina preventiva</b>: +178 mil pacientes acompanhados</div></li>
+        <li style="animation-delay:.35s"><span class="ic">🤰</span><div><b>Incentivo ao parto normal</b>: 34% na rede própria (vs ~23% do mercado)</div></li>
+        <li style="animation-delay:.6s"><span class="ic">❤️</span><div>Programas: Diabetes, Cardio Vida, Oncologia, Longevidade, Nascer Bem…</div></li>
+        <li style="animation-delay:.85s"><span class="ic">🌍</span><div>Agenda <b>responsável</b>: impacto social e sustentabilidade ambiental</div></li>
+      </ul>`,
+    narration:["Ponto oito: o compromisso com a saúde e o futuro das pessoas.",
+      "A Hapvida investe em medicina preventiva, com mais de cento e setenta e oito mil pacientes acompanhados, e incentiva o parto normal, com trinta e quatro por cento na rede própria, acima da média de mercado, que fica em torno de vinte e três por cento.",
+      "São programas de cuidado como Diabetes, Cardio Vida, Oncologia, Longevidade e Nascer Bem, além de uma agenda responsável, de impacto social e sustentabilidade. Mostre ao cliente: aqui não é só plano, é cuidado de verdade."] },
+  { kicker:"9 · Eficiência", title:"Eficiência e competitividade",
+    html:`<div class="kicker">9 · Eficiência e competitividade</div><h1>Verticalizado = mais competitivo</h1>
+      <ul class="points" style="gap:9px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">⚙️</span><div>Rede própria e integrada gera <b>eficiência em custo</b></div></li>
+        <li style="animation-delay:.45s"><span class="ic">📉</span><div>Isso se traduz em <b>reajustes mais controlados</b> — histórico abaixo do mercado</div></li>
+        <li style="animation-delay:.8s"><span class="ic">💡</span><div>Argumento: <b>previsibilidade</b> e economia no longo prazo para o cliente</div></li>
+      </ul>`,
+    narration:["Ponto nove: eficiência e competitividade.",
+      "Porque a Hapvida é dona da rede e controla o custo da ponta a ponta, ela é mais eficiente. E essa eficiência se traduz em reajustes mais controlados, com histórico abaixo da média do mercado.",
+      "Para o cliente, principalmente o empresarial, isso significa previsibilidade e economia ao longo dos anos. É um dos argumentos mais fortes contra a objeção de preço."] },
+  { kicker:"Na venda", title:"Como usar tudo isso",
+    html:`<div class="kicker">Juntando tudo</div><h1>Do dado ao argumento</h1>
+      <ul class="points" style="gap:9px">
+        <li style="animation-delay:.1s"><span class="ic">🎯</span><div>Ligue cada número à <b>dor do cliente</b> (lembra do SPIN?)</div></li>
+        <li style="animation-delay:.4s"><span class="ic">🗣️</span><div>“Você reclamou de demora? <b>74% são atendidos em 15 min</b>.”</div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">🛡️</span><div>Solidez + rede + eficiência = <b>o preço deixa de ser o centro</b></div></li>
+      </ul>`,
+    narration:["Agora, o mais importante: como usar tudo isso na venda.",
+      "Ligue cada número à dor que o cliente revelou — exatamente como no SPIN Selling. Se ele reclamou de demora, responda: setenta e quatro por cento dos nossos clientes são atendidos em até quinze minutos.",
+      "Quando você combina solidez, rede própria e eficiência, o preço deixa de ser o centro da conversa. O cliente passa a comparar valor, e aí a Hapvida ganha."] },
+  { kind:"hero", kicker:"Encerramento",
+    html:`<div class="hero"><div class="kicker">Fim do Capítulo 1</div>
+      <h1>Você vende a número 1</h1>
+      <p>Liderança, rede própria, verticalização, qualidade, reputação, benefícios, cuidado e eficiência. Você não vende só um plano — vende a <b>maior e mais sólida operadora do país</b>.</p></div>`,
+    narration:["Chegamos ao fim do capítulo.",
+      "Guarde os nove pontos: liderança, rede própria, investimento, verticalização, qualidade, reputação, benefícios que agregam valor, compromisso com o futuro e eficiência.",
+      "Você não vende apenas um plano de saúde. Você vende a maior e mais sólida operadora do país. Use isso com orgulho e segurança. Agora, vamos ao quiz!"] }
 ];
 
 /* ---------- Estado / elementos ---------- */
@@ -625,30 +574,22 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que é a Hapvida no cenário da América Latina?",
-    opts:["Uma operadora regional do Nordeste","O maior plano de saúde e odonto da América Latina","Uma rede só de diagnósticos","Uma seguradora internacional"],
-    a:1, why:"A Hapvida é o maior plano de saúde e odonto da América Latina, com 80 anos de história." },
-  { q:"Quantas unidades próprias e conectadas a Hapvida tem, e em quantas regiões?",
-    opts:["300 unidades em 3 regiões","500 unidades no Sudeste","839 unidades nas 5 regiões do país","84 unidades em 2 regiões"],
-    a:2, why:"São 839 unidades próprias e conectadas, presentes nas 5 regiões brasileiras." },
-  { q:"Qual é o tamanho aproximado da base de clientes?",
-    opts:["+1,5 milhão","+5 milhões","+15,8 milhões (8,6 mi saúde + 7,1 mi odonto)","+50 milhões"],
-    a:2, why:"São mais de 15,8 milhões de clientes: 8,6 milhões de saúde e 7,1 milhões de odonto." },
-  { q:"Qual é o grande diferencial do jeito de cuidar da Hapvida?",
-    opts:["Rede toda terceirizada","Rede própria e conectada, com prontuário único","Atendimento apenas por telefone","Foco só em urgências"],
-    a:1, why:"Rede própria e conectada + prontuário único: o histórico do paciente acompanha em qualquer unidade." },
-  { q:"A teleconsulta da Hapvida é:",
-    opts:["Um piloto em teste","A maior plataforma de telessaúde do país","Exclusiva para médicos","Disponível só em SP"],
-    a:1, why:"É a maior plataforma de telessaúde do país: +6 milhões de atendimentos, +1.200 médicos, 91% de resolutividade." },
-  { q:"Qual percentual de clientes é atendido em até 15 minutos nas emergências?",
-    opts:["25%","50%","74,2%","100%"],
-    a:2, why:"74,2% dos clientes são atendidos em até 15 minutos nas emergências, em todo o país." },
-  { q:"Quantos hospitais próprios a Hapvida possui?",
-    opts:["24 hospitais","41 hospitais","84 hospitais","839 hospitais"],
-    a:2, why:"São 84 hospitais próprios: 41 no Sudeste, 24 no Nordeste, 7 no Sul, 7 no Norte e 5 no Centro-Oeste." },
-  { q:"Qual é a Missão da Hapvida?",
-    opts:["Vender o maior número de planos","Proporcionar saúde integrada de qualidade, acessível a gerações de brasileiros","Ser a maior seguradora do mundo","Focar apenas em odontologia"],
-    a:1, why:"A missão é proporcionar saúde integrada de qualidade, acessível a gerações de brasileiros." }
+  { q:"Na venda, para que serve a informação institucional?", opts:["Só para preencher a conversa","Para transformar a força da Hapvida em argumento e gerar confiança","Para falar de preço","Não tem uso comercial"],
+    a:1, why:"O institucional é munição: mostra que o cliente entra na maior e mais sólida operadora, aumentando o valor percebido." },
+  { q:"Qual a posição da Hapvida no mercado?", opts:["2ª em saúde e 1ª em odonto","Maior de saúde e odonto da América Latina; 1ª em saúde e 2ª em odonto no Brasil","5ª no ranking geral","Regional, só no Nordeste"],
+    a:1, why:"Maior plano de saúde e odonto da América Latina; pela ANS, 1º lugar em saúde e 2º em odontologia no Brasil." },
+  { q:"Por que a rede própria é um argumento forte?", opts:["Porque é menor","Porque o cliente não depende de credenciado — é atendido na estrutura da própria Hapvida","Porque é mais cara","Porque só existe em SP"],
+    a:1, why:"São 839 unidades próprias (84 hospitais, 75 PA, 367 clínicas, 313 diagnósticos): atendimento no que é nosso, sem depender de credenciado." },
+  { q:"O que é o modelo verticalizado e integrado?", opts:["Terceirizar toda a rede","Ter hospitais, clínicas, PA, diagnóstico e labs próprios e conectados, com prontuário único","Vender só odonto","Atender apenas por telemedicina"],
+    a:1, why:"A Hapvida é dona da rede e a conecta com prontuário único — controla qualidade e custo da ponta a ponta, o que o credenciado não faz." },
+  { q:"Qual dado mostra qualidade no atendimento de emergência?", opts:["100% em 1 hora","74,2% atendidos em até 15 minutos","Sem fila em todo o país","Atendimento só com hora marcada"],
+    a:1, why:"74,2% dos clientes são atendidos em até 15 min nas emergências; a UTI tem índice de mortalidade 0,48 (melhor que a média 0,75)." },
+  { q:"Sobre a teleconsulta da Hapvida:", opts:["É terceirizada","Maior do país: +6 mi atendimentos, 91% de resolutividade e 4,6/5","Só para empresas","Custa à parte sempre"],
+    a:1, why:"Maior plataforma de telessaúde do país: +6 mi atendimentos, +1.200 médicos, +20 especialidades, 91% de resolutividade e 4,6 estrelas." },
+  { q:"Por que a verticalização ajuda no preço?", opts:["Não ajuda","Gera eficiência em custo, levando a reajustes mais controlados (abaixo do mercado)","Aumenta o reajuste","Só afeta o odonto"],
+    a:1, why:"Controlando o custo da ponta a ponta, a operadora é mais eficiente — o que se traduz em reajustes mais controlados e previsibilidade." },
+  { q:"Como transformar um dado institucional em venda?", opts:["Listar todos os números de uma vez","Ligar cada número à dor que o cliente revelou (como no SPIN)","Falar só de preço","Guardar a informação para você"],
+    a:1, why:"Conecte o dado à dor: “reclamou de demora? 74% são atendidos em 15 min”. Assim o preço deixa de ser o centro da conversa." }
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");
