@@ -261,7 +261,7 @@
 
 <div class="overlay" id="overlay">
   <h2>🎬 SPIN Selling — Capítulo 19</h2>
-  <p>A EugenIA vai apresentar o SPIN Selling, a técnica de venda consultiva de Neil Rackham: as perguntas de Situação, Problema, Implicação e Necessidade de solução, com exemplos aplicados à venda de planos de saúde. Ao final, um quiz.</p>
+  <p>A EugenIA vai apresentar o SPIN Selling, a técnica de venda consultiva de Neil Rackham: as perguntas de Situação, Problema, Implicação e Necessidade de solução — com exemplos para plano empresarial e individual/família — e como trabalhar a objeção “está caro”. Ao final, um quiz.</p>
   <button class="start-btn" id="startBtn">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     Iniciar apresentação
@@ -286,98 +286,142 @@ const scenes = [
   { kind:"hero", kicker:"Bem-vindos",
     html:`<div class="hero"><div class="kicker">Técnica de Vendas · Capítulo 19</div>
       <h1>SPIN Selling</h1>
-      <p>A técnica de <b>venda consultiva</b> baseada em fazer as <b>perguntas certas</b>. Em vez de empurrar o produto, você conduz o cliente a perceber o valor — ideal para vender planos de saúde.</p></div>`,
+      <p>A técnica de <b>venda consultiva</b> baseada em fazer as <b>perguntas certas</b>. Serve tanto para o <b>plano empresarial</b> quanto para o <b>individual/família</b> — e é a melhor arma contra o “está caro”.</p></div>`,
     narration:["Olá, time de vendas! Aqui é a EugenIA, e este é o Capítulo 19, o primeiro da trilha de Técnica de Vendas.",
-      "Vamos aprender o SPIN Selling, uma das técnicas de venda consultiva mais respeitadas do mundo.",
-      "A ideia é simples e poderosa: em vez de empurrar o produto, você faz as perguntas certas e conduz o cliente a perceber o valor da solução. Perfeito para vender planos de saúde. Vamos lá!"] },
+      "Vamos aprender o SPIN Selling, uma das técnicas de venda consultiva mais respeitadas do mundo. Ela funciona tanto na venda para empresas quanto na venda de planos individuais e familiares.",
+      "E, de quebra, é a melhor forma de lidar com a objeção mais comum de todas: o cliente dizer que está caro. Vamos lá!"] },
   { kicker:"O que é", title:"O que é o SPIN Selling",
-    html:`<div class="kicker">O que é</div><h1>Vender perguntando</h1>
-      <ul class="points" style="gap:9px">
-        <li class="good" style="animation-delay:.1s"><span class="ic">📘</span><div>Criado por <b>Neil Rackham</b>, a partir de uma pesquisa com milhares de visitas de vendas</div></li>
-        <li style="animation-delay:.4s"><span class="ic">🗣️</span><div>Foca em <b>fazer perguntas</b>, não em falar sem parar sobre o produto</div></li>
-        <li style="animation-delay:.7s"><span class="ic">🤝</span><div>Ideal para <b>vendas de maior valor</b> e mais consultivas — como planos PME e empresariais</div></li>
+    html:`<div class="kicker">O que é</div><h1>Vender perguntando, não empurrando</h1>
+      <ul class="points" style="gap:8px;font-size:14.5px">
+        <li class="good" style="animation-delay:.1s"><span class="ic">📘</span><div>Criado por <b>Neil Rackham</b>, após analisar milhares de visitas de vendas reais</div></li>
+        <li style="animation-delay:.35s"><span class="ic">🔬</span><div>Descoberta: nas vendas de valor, quem <b>vende mais</b> é quem faz <b>melhores perguntas</b> — não quem mais fala</div></li>
+        <li style="animation-delay:.6s"><span class="ic">🧭</span><div>Em vez de despejar características, você <b>diagnostica</b> como um consultor e conduz o cliente</div></li>
+        <li style="animation-delay:.85s"><span class="ic">🤝</span><div>Funciona para <b>empresarial</b> (PME/CORP) e para <b>individual/família</b></div></li>
       </ul>`,
     narration:["O SPIN Selling foi criado por Neil Rackham, a partir de uma pesquisa gigante com milhares de visitas de vendas reais.",
-      "A grande descoberta foi que, nas vendas de maior valor, os melhores vendedores não são os que mais falam do produto — são os que fazem as melhores perguntas.",
-      "Por isso, é uma técnica ideal para vendas consultivas, como as de planos de saúde para empresas."] },
+      "A grande descoberta foi que, nas vendas de valor, quem vende mais não é quem mais fala do produto — é quem faz as melhores perguntas.",
+      "Ou seja: em vez de despejar características, você age como um consultor, diagnostica a real necessidade e conduz o cliente. E isso vale tanto para a venda empresarial quanto para a venda individual e familiar."] },
   { kicker:"A lógica", title:"Da dor à solução",
     html:`<div class="kicker">A lógica</div><h1>Necessidade implícita → explícita</h1>
-      <ul class="points" style="gap:9px">
-        <li style="animation-delay:.1s"><span class="ic">🌱</span><div><b>Necessidade implícita</b>: uma insatisfação que o cliente ainda vê como pequena</div></li>
-        <li style="animation-delay:.4s"><span class="ic">🌳</span><div><b>Necessidade explícita</b>: um desejo claro de resolver — “eu preciso disso”</div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">🎯</span><div>O SPIN usa 4 tipos de pergunta para levar o cliente <b>da dor à solução</b></div></li>
+      <ul class="points" style="gap:8px;font-size:14.5px">
+        <li style="animation-delay:.1s"><span class="ic">🌱</span><div><b>Implícita</b>: uma insatisfação que o cliente ainda acha pequena — <i>“meu plano é meio caro”</i></div></li>
+        <li style="animation-delay:.4s"><span class="ic">🌳</span><div><b>Explícita</b>: um desejo claro de resolver — <i>“preciso de um plano com boa rede e reajuste que caiba no bolso”</i></div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">🎯</span><div>O SPIN usa <b>4 tipos de pergunta</b> para levar o cliente da dor à solução — e a construir <b>valor</b> antes do preço</div></li>
       </ul>`,
     narration:["A lógica do SPIN é transformar uma necessidade implícita em uma necessidade explícita.",
-      "A necessidade implícita é uma insatisfação que o cliente ainda acha pequena, do tipo o plano atual é meio caro. A explícita é quando ele fala eu preciso resolver isso.",
-      "Para fazer o cliente caminhar da dor até a solução, o SPIN usa quatro tipos de pergunta. Cada letra da palavra SPIN é um tipo. Vamos ver uma por uma."] },
-  { kicker:"S — Situação", title:"S de Situação",
-    html:`<div class="kicker">S · Perguntas de Situação</div><h1>Entenda o contexto</h1>
+      "A implícita é uma insatisfação que o cliente ainda acha pequena, do tipo meu plano é meio caro. A explícita é um desejo claro de resolver: preciso de um plano com boa rede e um reajuste que caiba no bolso.",
+      "Para fazer o cliente caminhar da dor até a solução, e para construir valor antes de falar de preço, o SPIN usa quatro tipos de pergunta, uma para cada letra."] },
+  { kicker:"Visão geral", title:"As 4 perguntas do SPIN",
+    html:`<div class="kicker">Visão geral</div><h1>S · P · I · N</h1>
       <ul class="points" style="gap:8px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">🔎</span><div>Perguntas de <b>fatos e contexto</b> do cliente</div></li>
-        <li style="animation-delay:.4s"><span class="ic">💬</span><div><i>“Quantos colaboradores a empresa tem? Já possui plano? Qual operadora e há quanto tempo?”</i></div></li>
-        <li class="warn" style="animation-delay:.7s"><span class="ic">!</span><div>Faça <b>poucas e bem escolhidas</b> — perguntar demais cansa o cliente</div></li>
+        <li style="animation-delay:.1s"><span class="ic">S</span><div><b>Situação</b> — entende o contexto (fatos)</div></li>
+        <li style="animation-delay:.3s"><span class="ic">P</span><div><b>Problema</b> — revela as dores</div></li>
+        <li style="animation-delay:.5s"><span class="ic">I</span><div><b>Implicação</b> — amplia o impacto da dor (cria urgência)</div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">N</span><div><b>Necessidade de solução</b> — o cliente verbaliza o valor</div></li>
       </ul>`,
-    narration:["A primeira letra é o S, de Situação.",
-      "São perguntas de fatos, para entender o contexto do cliente. Por exemplo: quantos colaboradores a empresa tem? Já possui plano de saúde? Qual operadora, e há quanto tempo?",
-      "Um cuidado importante: faça poucas perguntas de situação e bem escolhidas. Perguntar demais sobre coisas que você poderia ter pesquisado antes cansa o cliente."] },
+    narration:["Antes de detalhar, guarde a sequência: Situação, Problema, Implicação e Necessidade de solução.",
+      "A Situação entende o contexto. O Problema revela as dores. A Implicação amplia o impacto dessas dores e cria urgência.",
+      "E a Necessidade de solução faz o próprio cliente verbalizar o valor. Vamos ver uma por uma, com exemplos para empresa e para pessoa física."] },
+  { kicker:"S — Situação", title:"S de Situação",
+    html:`<div class="kicker">S · Perguntas de Situação</div><h1>Entenda o contexto (com poucas perguntas)</h1>
+      <ul class="points" style="gap:7px;font-size:13.5px">
+        <li style="animation-delay:.1s"><span class="ic">🏢</span><div><b>Empresarial:</b> <i>“Quantas vidas? Qual operadora e há quanto tempo? Qual a faixa etária do time?”</i></div></li>
+        <li style="animation-delay:.4s"><span class="ic">👨‍👩‍👧</span><div><b>Individual/família:</b> <i>“Quantas pessoas na família? Já têm plano? Tem crianças ou idosos? Usam com que frequência?”</i></div></li>
+        <li class="warn" style="animation-delay:.7s"><span class="ic">!</span><div>Poucas e bem escolhidas — pesquise antes; perguntar o óbvio cansa o cliente</div></li>
+      </ul>`,
+    narration:["A primeira letra é o S, de Situação. São perguntas de fatos, para entender o contexto.",
+      "Na venda empresarial: quantas vidas a empresa tem? Qual operadora, e há quanto tempo? Qual a faixa etária do time? Na venda individual ou familiar: quantas pessoas na família? Já têm plano? Tem crianças ou idosos? Usam com que frequência?",
+      "O cuidado é o mesmo nos dois casos: faça poucas perguntas de situação e bem escolhidas. Perguntar o óbvio, que você poderia ter pesquisado antes, cansa o cliente."] },
   { kicker:"P — Problema", title:"P de Problema",
     html:`<div class="kicker">P · Perguntas de Problema</div><h1>Descubra as dores</h1>
-      <ul class="points" style="gap:8px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">🩹</span><div>Perguntas que revelam <b>dificuldades e insatisfações</b></div></li>
-        <li style="animation-delay:.4s"><span class="ic">💬</span><div><i>“Está satisfeito com a rede atual? Tem tido reajustes altos? Os colaboradores reclamam da demora no atendimento?”</i></div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">✓</span><div>Aqui nascem as <b>necessidades implícitas</b> — as dores do cliente</div></li>
-      </ul>`,
-    narration:["A segunda letra é o P, de Problema.",
-      "Agora você faz perguntas que revelam as dores do cliente. Por exemplo: está satisfeito com a rede atual? Tem tido reajustes altos? Os colaboradores reclamam da demora no atendimento?",
-      "É aqui que aparecem as necessidades implícitas, ou seja, as insatisfações. Anote cada dor que o cliente revelar, porque você vai usá-las a seguir."] },
-  { kicker:"I — Implicação", title:"I de Implicação",
-    html:`<div class="kicker">I · Perguntas de Implicação</div><h1>Amplie o impacto</h1>
-      <ul class="points" style="gap:8px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">📈</span><div>Perguntas que mostram as <b>consequências</b> do problema</div></li>
-        <li style="animation-delay:.4s"><span class="ic">💬</span><div><i>“Se os reajustes continuarem subindo, como fica o orçamento? Quando um colaborador falta o dia todo para ser atendido, qual o impacto na produtividade?”</i></div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">⭐</span><div>É o <b>pulo do gato</b>: faz o cliente sentir que a dor é grande e cara</div></li>
-      </ul>`,
-    narration:["A terceira letra é o I, de Implicação. E este é o pulo do gato do SPIN.",
-      "Aqui você faz perguntas sobre as consequências do problema. Por exemplo: se os reajustes continuarem subindo, como fica o orçamento da empresa? Quando um colaborador falta o dia todo para conseguir atendimento, qual o impacto na produtividade?",
-      "As perguntas de implicação fazem o cliente perceber que a dor é maior e mais cara do que ele imaginava. É isso que cria urgência."] },
-  { kicker:"N — Necessidade", title:"N de Necessidade de solução",
-    html:`<div class="kicker">N · Perguntas de Necessidade de solução</div><h1>O cliente vê o valor</h1>
-      <ul class="points" style="gap:8px;font-size:14.5px">
-        <li style="animation-delay:.1s"><span class="ic">💡</span><div>Perguntas que levam o cliente a <b>verbalizar o valor</b> da solução</div></li>
-        <li style="animation-delay:.4s"><span class="ic">💬</span><div><i>“Se você tivesse uma rede própria com atendimento rápido, o que mudaria? Um reajuste abaixo do mercado ajudaria no seu planejamento?”</i></div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">🙌</span><div>O próprio cliente conclui que <b>precisa</b> — vira necessidade explícita</div></li>
-      </ul>`,
-    narration:["A quarta letra é o N, de Necessidade de solução.",
-      "Agora você faz perguntas que levam o próprio cliente a verbalizar o valor da solução. Por exemplo: se você tivesse uma rede própria com atendimento rápido, o que isso mudaria? Um histórico de reajuste abaixo do mercado ajudaria no seu planejamento?",
-      "A mágica é que o cliente responde falando dos benefícios. Ele mesmo se convence, e a necessidade implícita vira explícita: eu preciso disso."] },
-  { kicker:"Na prática", title:"SPIN em uma venda de plano",
-    html:`<div class="kicker">Exemplo prático · plano PME</div><h1>A sequência completa</h1>
       <ul class="points" style="gap:7px;font-size:13.5px">
+        <li style="animation-delay:.1s"><span class="ic">🏢</span><div><b>Empresarial:</b> <i>“Os reajustes têm pesado? Os colaboradores reclamam da rede ou da demora? Já teve negativa de cobertura?”</i></div></li>
+        <li style="animation-delay:.4s"><span class="ic">👨‍👩‍👧</span><div><b>Individual/família:</b> <i>“Espera muito por consulta? A rede é longe de casa? Ficou na mão numa urgência? Preocupa com o atendimento dos filhos ou dos pais?”</i></div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">✓</span><div>Anote cada dor — você vai usá-las nas próximas perguntas</div></li>
+      </ul>`,
+    narration:["A segunda letra é o P, de Problema: perguntas que revelam as dores.",
+      "Na empresa: os reajustes têm pesado no orçamento? Os colaboradores reclamam da rede ou da demora? Já teve negativa de cobertura? Para a pessoa física: espera muito por uma consulta? A rede é longe de casa? Já ficou na mão numa urgência? Se preocupa com o atendimento dos filhos ou dos pais?",
+      "Anote cada dor que aparecer, porque você vai usar todas elas nas próximas perguntas."] },
+  { kicker:"I — Implicação", title:"I de Implicação",
+    html:`<div class="kicker">I · Perguntas de Implicação — o pulo do gato</div><h1>Amplie o impacto da dor</h1>
+      <ul class="points" style="gap:7px;font-size:13.5px">
+        <li style="animation-delay:.1s"><span class="ic">🏢</span><div><b>Empresarial:</b> <i>“Se o reajuste vier alto de novo, o que corta no orçamento? Quanto custa perder um bom funcionário por causa do benefício?”</i></div></li>
+        <li style="animation-delay:.4s"><span class="ic">👨‍👩‍👧</span><div><b>Individual/família:</b> <i>“Se seu filho tiver uma urgência e a rede for ruim, o que você faz? Quanto custaria pagar um particular? E se adiar um exame por falta de cobertura?”</i></div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">⭐</span><div>Faz o cliente sentir que a dor é <b>grande e cara</b> — é isso que cria urgência</div></li>
+      </ul>`,
+    narration:["A terceira letra é o I, de Implicação — e este é o pulo do gato do SPIN. Aqui você pergunta sobre as consequências do problema.",
+      "Na empresa: se o reajuste vier alto de novo, o que precisa cortar? Quanto custa perder um bom funcionário por causa de um benefício ruim? Na família: se o seu filho tiver uma urgência e a rede for ruim, o que você faz? Quanto custaria pagar um particular? E se você adiar um exame importante por falta de cobertura?",
+      "As perguntas de implicação fazem o cliente perceber que a dor é maior e mais cara do que ele imaginava. É isso que cria urgência — e, veja bem, é isso que faz o preço parecer pequeno perto do problema."] },
+  { kicker:"N — Necessidade", title:"N de Necessidade de solução",
+    html:`<div class="kicker">N · Perguntas de Necessidade de solução</div><h1>O cliente verbaliza o valor</h1>
+      <ul class="points" style="gap:7px;font-size:13.5px">
+        <li style="animation-delay:.1s"><span class="ic">🏢</span><div><b>Empresarial:</b> <i>“Se você tivesse reajuste abaixo do mercado e rede própria com atendimento rápido, ajudaria a segurar o time?”</i></div></li>
+        <li style="animation-delay:.4s"><span class="ic">👨‍👩‍👧</span><div><b>Individual/família:</b> <i>“Ter um pronto-socorro próprio perto de casa e odonto incluso pra família traria mais tranquilidade?”</i></div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">🙌</span><div>O próprio cliente conclui que <b>precisa</b> — a necessidade vira explícita</div></li>
+      </ul>`,
+    narration:["A quarta letra é o N, de Necessidade de solução. Agora você faz perguntas que levam o próprio cliente a verbalizar o valor.",
+      "Na empresa: se você tivesse reajuste abaixo do mercado e uma rede própria com atendimento rápido, isso ajudaria a segurar o seu time? Na família: ter um pronto-socorro próprio perto de casa e odontologia inclusa traria mais tranquilidade pra vocês?",
+      "A mágica é que o cliente responde falando dos benefícios. Ele mesmo se convence, e a necessidade implícita vira explícita: eu preciso disso."] },
+  { kicker:"Na prática", title:"Exemplo — plano empresarial",
+    html:`<div class="kicker">Exemplo · plano PME</div><h1>A sequência completa</h1>
+      <ul class="points" style="gap:6px;font-size:13px">
         <li style="animation-delay:.1s"><span class="ic">S</span><div>“Quantas vidas tem hoje e com qual operadora?”</div></li>
         <li style="animation-delay:.3s"><span class="ic">P</span><div>“Os reajustes dos últimos anos incomodaram?”</div></li>
-        <li style="animation-delay:.5s"><span class="ic">I</span><div>“Se o próximo reajuste vier alto de novo, como isso afeta o caixa da empresa?”</div></li>
-        <li class="good" style="animation-delay:.7s"><span class="ic">N</span><div>“Se você tivesse reajustes previsíveis e abaixo do mercado, resolveria esse problema?”</div></li>
+        <li style="animation-delay:.5s"><span class="ic">I</span><div>“Se vier alto de novo, o que a empresa precisa cortar?”</div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">N</span><div>“Se o reajuste fosse previsível e abaixo do mercado, resolveria?”</div></li>
       </ul>`,
-    narration:["Vamos juntar tudo em um exemplo de venda de plano PME.",
-      "Situação: quantas vidas a empresa tem hoje, e com qual operadora? Problema: os reajustes dos últimos anos incomodaram? Implicação: se o próximo reajuste vier alto de novo, como isso afeta o caixa da empresa?",
-      "E, por fim, a necessidade de solução: se você tivesse reajustes previsíveis e abaixo do mercado, isso resolveria o seu problema? Percebe como, no fim, é o cliente quem pede a solução?"] },
+    narration:["Vamos juntar tudo num exemplo empresarial.",
+      "Situação: quantas vidas tem hoje e com qual operadora? Problema: os reajustes dos últimos anos incomodaram? Implicação: se vier alto de novo, o que a empresa precisa cortar?",
+      "E a necessidade de solução: se o reajuste fosse previsível e abaixo do mercado, isso resolveria o seu problema? Percebe como, no fim, é o cliente quem pede a solução?"] },
+  { kicker:"Na prática", title:"Exemplo — individual / família",
+    html:`<div class="kicker">Exemplo · plano individual/família</div><h1>A sequência completa</h1>
+      <ul class="points" style="gap:6px;font-size:13px">
+        <li style="animation-delay:.1s"><span class="ic">S</span><div>“Quem usaria o plano? Tem crianças ou idosos em casa?”</div></li>
+        <li style="animation-delay:.3s"><span class="ic">P</span><div>“Hoje, o que mais incomoda: demora, rede longe, ou custo do particular?”</div></li>
+        <li style="animation-delay:.5s"><span class="ic">I</span><div>“Se faltar atendimento rápido numa urgência do seu filho, qual o risco?”</div></li>
+        <li class="good" style="animation-delay:.7s"><span class="ic">N</span><div>“Um pronto-socorro próprio perto de casa daria mais segurança pra família?”</div></li>
+      </ul>`,
+    narration:["Agora o mesmo, para um plano individual ou familiar.",
+      "Situação: quem usaria o plano, e tem crianças ou idosos em casa? Problema: hoje, o que mais incomoda — a demora, a rede longe, ou o custo de pagar particular? Implicação: se faltar atendimento rápido numa urgência do seu filho, qual é o risco?",
+      "E a necessidade de solução: um pronto-socorro próprio perto de casa daria mais segurança pra sua família? De novo, é o cliente quem conclui o valor."] },
+  { kicker:"“Está caro”", title:"A objeção “está caro”",
+    html:`<div class="kicker">A objeção mais comum</div><h1>“Está caro” quase nunca é só preço</h1>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li style="animation-delay:.1s"><span class="ic">💭</span><div>Na maioria das vezes significa <b>“ainda não enxerguei valor suficiente”</b> — não “não tenho o dinheiro”</div></li>
+        <li class="good" style="animation-delay:.4s"><span class="ic">🛡️</span><div>Regra de ouro: <b>construa valor ANTES do preço</b>. Um bom SPIN quase elimina essa objeção</div></li>
+        <li style="animation-delay:.7s"><span class="ic">❓</span><div>Se vier, não baixe o preço na hora — pergunte: <b>“Caro em relação a quê?”</b></div></li>
+      </ul>`,
+    narration:["Agora, o tema mais importante: quando o cliente diz que está caro.",
+      "A primeira coisa a entender é que está caro quase nunca é só sobre preço. Na maioria das vezes significa: eu ainda não enxerguei valor suficiente. Não é falta de dinheiro, é falta de valor percebido.",
+      "Por isso, a regra de ouro é construir valor antes de falar de preço — e um bom SPIN quase elimina essa objeção. E, se ela vier mesmo assim, não baixe o preço na hora. Pergunte: caro em relação a quê? Isso revela com o que ele está comparando."] },
+  { kicker:"“Está caro”", title:"Como trabalhar o “está caro”",
+    html:`<div class="kicker">Como responder</div><h1>4 formas de trabalhar o preço</h1>
+      <ul class="points" style="gap:7px;font-size:13.5px">
+        <li style="animation-delay:.1s"><span class="ic">🔁</span><div><b>Volte ao valor:</b> retome as dores que ELE citou e o custo de <b>não</b> resolver (uma urgência particular, um exame adiado)</div></li>
+        <li style="animation-delay:.35s"><span class="ic">➗</span><div><b>Decomponha:</b> “dá X reais por dia, por pessoa” — muitas vezes menos que um delivery por semana</div></li>
+        <li style="animation-delay:.6s"><span class="ic">🎚️</span><div><b>Ofereça opção, não desconto:</b> ajuste o produto (Nosso Médico → Smart, coparticipação, acomodação) mantendo o essencial</div></li>
+        <li class="good" style="animation-delay:.85s"><span class="ic">📉</span><div><b>Pense no futuro:</b> reajuste abaixo do mercado = economia real ao longo dos anos</div></li>
+      </ul>`,
+    narration:["Entendida a objeção, veja quatro formas práticas de trabalhá-la.",
+      "Primeira: volte ao valor. Retome as dores que o próprio cliente citou e o custo de não resolver — uma emergência paga do bolso, um exame adiado. Segunda: decomponha o preço. Mostre que dá um valor por dia, por pessoa, muitas vezes menos que um delivery por semana.",
+      "Terceira: ofereça uma opção, não um desconto. Ajuste o produto — do Nosso Médico para um Smart, com coparticipação ou mudando a acomodação — mantendo o que ele disse que é essencial. E quarta: pense no futuro. Nosso reajuste abaixo do mercado significa economia real ao longo dos anos. Desconto resolve hoje; valor resolve sempre."] },
   { kicker:"Fechando", title:"Venda benefícios, não características",
     html:`<div class="kicker">Do SPIN ao fechamento</div><h1>Benefício &gt; característica</h1>
-      <ul class="points" style="gap:9px">
-        <li class="warn" style="animation-delay:.1s"><span class="ic">✕</span><div><b>Característica</b>: “temos rede própria em 45 municípios”</div></li>
-        <li class="good" style="animation-delay:.45s"><span class="ic">✓</span><div><b>Benefício</b>: “seu time é atendido rápido, sem faltar o dia todo” — resolve a dor que ELE revelou</div></li>
-        <li style="animation-delay:.8s"><span class="ic">🤝</span><div>Ligue cada benefício às <b>necessidades explícitas</b> que o cliente verbalizou</div></li>
+      <ul class="points" style="gap:8px;font-size:14px">
+        <li class="warn" style="animation-delay:.1s"><span class="ic">✕</span><div><b>Característica:</b> “temos rede própria em 45 municípios”</div></li>
+        <li class="good" style="animation-delay:.45s"><span class="ic">✓</span><div><b>Benefício:</b> “sua família é atendida rápido, perto de casa” — resolve a dor que ELE revelou</div></li>
+        <li style="animation-delay:.8s"><span class="ic">🤝</span><div>Ligue cada benefício às <b>necessidades explícitas</b> que o cliente verbalizou no SPIN</div></li>
       </ul>`,
-    narration:["Depois de investigar com o SPIN, chega a hora de apresentar a solução. E aqui vai a regra de ouro: venda benefícios, não características.",
-      "Característica é dizer que temos rede própria em quarenta e cinco municípios. Benefício é dizer que o time do cliente é atendido rápido, sem precisar faltar o dia todo — resolvendo a dor que ele mesmo revelou.",
-      "Ligue cada benefício às necessidades explícitas que o cliente verbalizou no SPIN. Aí o fechamento vem natural."] },
+    narration:["Depois de investigar com o SPIN e trabalhar o preço, chega a hora de apresentar a solução. E a regra de ouro é: venda benefícios, não características.",
+      "Característica é dizer que temos rede própria em quarenta e cinco municípios. Benefício é dizer que a família dele é atendida rápido, perto de casa — resolvendo a dor que ele mesmo revelou.",
+      "Ligue cada benefício às necessidades explícitas que o cliente verbalizou. Aí o fechamento vem natural, e o preço deixa de ser o centro da conversa."] },
   { kind:"hero", kicker:"Encerramento",
     html:`<div class="hero"><div class="kicker">Fim do Capítulo 19</div>
       <h1>Pergunte, escute, conduza</h1>
-      <p><b>S</b>ituação · <b>P</b>roblema · <b>I</b>mplicação · <b>N</b>ecessidade de solução. Fale menos, pergunte melhor e deixe o cliente perceber o valor. É assim que se vende com consultoria.</p></div>`,
+      <p><b>S</b>ituação · <b>P</b>roblema · <b>I</b>mplicação · <b>N</b>ecessidade de solução. Construa valor antes do preço e o “está caro” perde a força. É assim que se vende com consultoria — na empresa e na família.</p></div>`,
     narration:["Chegamos ao fim do capítulo.",
-      "Lembre da sequência: Situação, Problema, Implicação e Necessidade de solução. Fale menos, pergunte melhor e escute com atenção.",
-      "Quando você conduz o cliente a perceber o valor, ele compra com convicção. Pratique o SPIN na sua próxima visita. Agora, vamos ao quiz!"] }
+      "Lembre da sequência: Situação, Problema, Implicação e Necessidade de solução. Fale menos, pergunte melhor e escute com atenção — funciona tanto na venda empresarial quanto na individual.",
+      "E o mais importante: construa valor antes de falar de preço. Quando o cliente enxerga o valor, o está caro perde a força. Pratique o SPIN na sua próxima venda. Agora, vamos ao quiz!"] }
 ];
 /* ---------- Estado / elementos ---------- */
 const slideEl=document.getElementById("slide"),capEl=document.getElementById("cap"),
@@ -544,17 +588,19 @@ document.addEventListener("keydown",e=>{
 /* ================= QUIZ ================= */
 const quizData=[
   { q:"O que significa a sigla SPIN?", opts:["Situação, Problema, Implicação e Necessidade de solução","Serviço, Preço, Inovação e Negociação","Solução, Proposta, Interesse e Notícia","Situação, Preço, Investimento e Novidade"],
-    a:0, why:"SPIN = perguntas de Situação, Problema, Implicação e Necessidade de solução (Need-payoff)." },
-  { q:"Qual é a ideia central do SPIN Selling?", opts:["Falar o máximo possível sobre o produto","Fazer as perguntas certas e conduzir o cliente a perceber o valor","Dar sempre o menor preço","Fechar na primeira visita a qualquer custo"],
-    a:1, why:"O SPIN é venda consultiva: o vendedor faz boas perguntas e escuta, em vez de empurrar o produto." },
-  { q:"As perguntas de Situação devem ser:", opts:["Muitas e detalhadas","Poucas e bem escolhidas, para não cansar o cliente","Sobre preço","Evitadas totalmente"],
-    a:1, why:"Perguntas de Situação levantam o contexto — use poucas e bem escolhidas; perguntar demais cansa o cliente." },
-  { q:"Para que servem as perguntas de Implicação?", opts:["Para apresentar o preço","Para mostrar as consequências do problema e criar urgência","Para agendar a próxima visita","Para pedir indicações"],
-    a:1, why:"A Implicação amplia o problema: faz o cliente perceber que a dor é maior e mais cara — cria urgência." },
-  { q:"O que acontece nas perguntas de Necessidade de solução (N)?", opts:["O vendedor lista características","O próprio cliente verbaliza o valor/benefício da solução","Encerra-se a conversa","Fala-se só de carência"],
-    a:1, why:"Nas perguntas de Necessidade de solução, o cliente verbaliza os benefícios — a necessidade implícita vira explícita." },
-  { q:"Na hora de apresentar a solução, o ideal é:", opts:["Focar só nas características técnicas","Vender benefícios ligados às necessidades que o cliente revelou","Falar apenas do preço","Não mencionar as dores do cliente"],
-    a:1, why:"Venda benefícios (não só características), conectando-os às necessidades explícitas que o cliente verbalizou." }
+    a:0, why:"SPIN = perguntas de Situação, Problema, Implicação e Necessidade de solução." },
+  { q:"Para que servem as perguntas de Implicação?", opts:["Apresentar o preço","Mostrar as consequências do problema e criar urgência","Agendar a próxima visita","Pedir indicações"],
+    a:1, why:"A Implicação amplia a dor — faz o cliente sentir que o problema é grande e caro, criando urgência (e fazendo o preço parecer pequeno)." },
+  { q:"Quando o cliente diz “está caro”, quase sempre significa:", opts:["Que ele não tem dinheiro","Que ainda não enxergou valor suficiente","Que quer um concorrente","Que a conversa acabou"],
+    a:1, why:"“Está caro” costuma ser falta de valor percebido, não falta de dinheiro. Por isso: construa valor antes do preço." },
+  { q:"Qual é a melhor primeira reação ao “está caro”?", opts:["Dar desconto imediato","Encerrar a venda","Perguntar “caro em relação a quê?” e voltar ao valor","Ignorar e insistir no produto"],
+    a:2, why:"Não baixe o preço na hora. Pergunte “caro em relação a quê?” para entender a comparação e retome o valor/as dores do cliente." },
+  { q:"Uma boa forma de trabalhar o preço é:", opts:["Sempre dar o menor preço","Decompor (valor por dia/por pessoa) e oferecer opção, não desconto","Falar só de características técnicas","Comparar só com o plano mais caro"],
+    a:1, why:"Decomponha o preço, mostre o custo de NÃO ter, ofereça uma opção de produto que caiba no bolso e lembre do reajuste abaixo do mercado — em vez de simplesmente descontar." },
+  { q:"O SPIN Selling funciona para:", opts:["Só planos empresariais","Só planos individuais","Tanto empresarial quanto individual/família","Apenas grandes contas"],
+    a:2, why:"A técnica é consultiva e vale para os dois: muda apenas o tipo de pergunta e os exemplos (empresa x família)." },
+  { q:"Ao apresentar a solução, o ideal é:", opts:["Listar todas as características","Vender benefícios ligados às necessidades que o cliente revelou","Falar só de preço","Não mencionar as dores do cliente"],
+    a:1, why:"Venda benefícios (não só características), conectando-os às necessidades explícitas que o cliente verbalizou no SPIN." }
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");
