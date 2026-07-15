@@ -98,7 +98,9 @@
     </div>
 
     <div class="card" id="cardInc" style="display:none">
-      <h2>⚠️ Cadastros incompletos <span class="cnt" id="incCnt">0</span></h2>
+      <h2>⚠️ Cadastros incompletos <span class="cnt" id="incCnt">0</span>
+        <span class="sp"><button class="btn ghost sm" id="csvInc">⬇ Baixar CSV</button></span>
+      </h2>
       <div id="incHint" style="font-size:13px;color:#5b6b82;margin:-4px 0 10px">Criaram login, mas <b>não concluíram o cadastro</b> (faltou o código da equipe ou a confirmação de e-mail). Não entram no ranking. Oriente a concluir com o código do time.</div>
       <div class="scroll"><table id="tblInc"><tbody></tbody></table></div>
     </div>
@@ -169,6 +171,13 @@ function statusOf(v){
 function nomeEquipe(id){ return (EQUIPES[id]&&EQUIPES[id].nome)||"—"; }
 function esc(s){ return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function fmtDataHora(s){ try{ var d=new Date(s); if(isNaN(d)) return "—"; return d.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}); }catch(e){ return "—"; } }
+function csvEsc(s){ s=(s==null?"":String(s)); return /[";\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; }
+function baixarCSV(nome, cabec, linhas){
+  var txt=cabec.join(";")+"\n"+linhas.map(function(r){return r.map(csvEsc).join(";");}).join("\n");
+  var blob=new Blob([String.fromCharCode(0xFEFF)+txt],{type:"text/csv;charset=utf-8"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=nome; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500);
+}
 
 async function init(){
   const p=HL.perfil;
@@ -236,6 +245,10 @@ function render(){
       var badge=u.confirmado?'<span class="nota" style="background:#e6f6ee;color:#0f6e56">e-mail confirmado</span>':'<span class="nota" style="background:#fdecea;color:#b42318">e-mail não confirmado</span>';
       return `<tr><td class="nome"><b>${esc(u.email)||"—"}</b><small>login criado em ${d}</small></td><td class="c">${badge}</td></tr>`;
     }).join("");
+    document.getElementById("csvInc").onclick=function(){
+      baixarCSV("cadastros-incompletos.csv",["E-mail","Login criado em","E-mail confirmado"],
+        INCOMPLETOS.map(function(u){ return [u.email||"", u.criado_em?fmtDataHora(u.criado_em):"", u.confirmado?"Sim":"Não"]; }));
+    };
   } else { cardInc.style.display="none"; }
 
   // ---- Aprovações ----
@@ -253,17 +266,20 @@ function render(){
 
   // ---- Filtro por equipe (gerente/diretor) ----
   const rkFilter=document.getElementById("rkFilter");
-  if(gestor){
-    const opts=['<option value="">Todas as equipes</option>']
-      .concat(Object.values(EQUIPES).map(e=>`<option value="${e.id}" ${FILTRO===e.id?"selected":""}>${esc(e.nome)}</option>`));
-    rkFilter.innerHTML=`<select class="sel" id="selEq">${opts.join("")}</select>`;
-    document.getElementById("selEq").onchange=(ev)=>{ FILTRO=ev.target.value; render(); };
-  } else rkFilter.innerHTML="";
+  const selHtml = gestor ? `<select class="sel" id="selEq">`+
+      ['<option value="">Todas as equipes</option>'].concat(Object.values(EQUIPES).map(e=>`<option value="${e.id}" ${FILTRO===e.id?"selected":""}>${esc(e.nome)}</option>`)).join("")+`</select>` : "";
+  rkFilter.innerHTML=selHtml+`<button class="btn ghost sm" id="csvRank">⬇ Baixar CSV</button>`;
+  if(gestor) document.getElementById("selEq").onchange=(ev)=>{ FILTRO=ev.target.value; render(); };
 
   // ---- Ranking (todos os papéis, para ver todos os nomes) ----
   function papelTag(pp){ if(!pp||pp==="vendedor") return ""; var l=(PAPEL[pp]?PAPEL[pp][1]:pp); return ` <span class="nota" style="background:#eef3fb;color:#0a3d8f">${l}</span>`; }
   const rank=colabs.map(v=>({v,...scoreOf(v.id)})).sort((a,b)=>b.score-a.score);
   document.getElementById("rkCnt").textContent=colabs.length+" participantes";
+  document.getElementById("csvRank").onclick=function(){
+    baixarCSV("participantes.csv",["Nome","E-mail","Papel","Equipe","Status","Capitulos concluidos","Total capitulos","Score"],
+      rank.map(function(x){ var st=statusOf(x.v); var pp=PAPEL[x.v.papel]?PAPEL[x.v.papel][1]:(x.v.papel||"");
+        return [x.v.nome||"", x.v.email||"", pp, nomeEquipe(x.v.equipe_id), st[1], x.feitos, CAPS.length, x.score]; }));
+  };
   document.getElementById("tblRank").innerHTML=
     `<thead><tr><th class="c">#</th><th>Participante</th>${gestor?"<th>Equipe</th>":""}<th>Status</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
     (rank.length?rank.map((x,i)=>{
