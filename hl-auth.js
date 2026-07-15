@@ -53,6 +53,18 @@
       <label>E-mail corporativo</label><input type="email" id="hlLE" placeholder="nome@hapvida.com.br" autocomplete="email">\
       <label>Senha</label><input type="password" id="hlLP" placeholder="sua senha" autocomplete="current-password">\
       <button class="go" id="hlLbtn">Entrar</button>\
+      <div style="text-align:right;margin-top:9px"><a href="#" id="hlForgot" style="font-size:12px;color:#0956c6;text-decoration:none">Esqueci a senha</a></div>\
+    </div>\
+    <div data-panel="forgot">\
+      <div class="sub" style="margin-bottom:0">Recuperar acesso</div>\
+      <label>E-mail corporativo</label><input type="email" id="hlFE" placeholder="nome@hapvida.com.br" autocomplete="email">\
+      <button class="go" id="hlFbtn">Enviar link de recuperação</button>\
+      <div style="text-align:center;margin-top:10px"><a href="#" id="hlFback" style="font-size:12px;color:#5b6b82;text-decoration:none">← Voltar para Entrar</a></div>\
+    </div>\
+    <div data-panel="reset">\
+      <div class="sub" style="margin-bottom:0">Defina uma nova senha</div>\
+      <label>Nova senha (mín. 6)</label><input type="password" id="hlRP" placeholder="nova senha" autocomplete="new-password">\
+      <button class="go" id="hlRbtn">Salvar nova senha</button>\
     </div>\
     <div data-panel="signup">\
       <label>Nome completo</label><input type="text" id="hlSN" placeholder="Seu nome">\
@@ -85,8 +97,13 @@
     gate=document.createElement("div"); gate.id="hlGate"; gate.innerHTML=HTML; document.body.appendChild(gate);
     gate.querySelectorAll(".tabs button").forEach(function(b){ b.onclick=function(){ showPanel(b.getAttribute("data-tab")); }; });
     q("hlLbtn").onclick=doLogin; q("hlSbtn").onclick=doSignup; q("hlCbtn").onclick=doCode;
+    q("hlForgot").onclick=function(e){ e.preventDefault(); showPanel("forgot"); };
+    q("hlFback").onclick=function(e){ e.preventDefault(); showPanel("login"); };
+    q("hlFbtn").onclick=doForgot; q("hlRbtn").onclick=doReset;
     q("hlLP").addEventListener("keydown",function(e){ if(e.key==="Enter") doLogin(); });
     q("hlSC").addEventListener("keydown",function(e){ if(e.key==="Enter") doSignup(); });
+    q("hlFE").addEventListener("keydown",function(e){ if(e.key==="Enter") doForgot(); });
+    q("hlRP").addEventListener("keydown",function(e){ if(e.key==="Enter") doReset(); });
   }
   function hideGate(){ if(gate) gate.classList.add("hlHidden"); }
 
@@ -149,6 +166,26 @@
     catch(e){ q("hlCbtn").disabled=false; msg("Código de equipe inválido.","err"); return; }
     await ensurePerfil(); if(perfil){ finish(); } else { q("hlCbtn").disabled=false; msg("Não foi possível vincular. Tente de novo.","err"); }
   }
+  async function doForgot(){
+    var email=q("hlFE").value.trim();
+    if(!email){ msg("Informe o seu e-mail.","err"); return; }
+    q("hlFbtn").disabled=true; msg("Enviando…");
+    var r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+    q("hlFbtn").disabled=false;
+    if(r.error){ msg("Não foi possível enviar. Confira o e-mail e tente de novo.","err"); return; }
+    msg("Enviamos um link de recuperação para o seu e-mail. Abra o link para definir uma nova senha.","ok");
+  }
+  async function doReset(){
+    var pw=q("hlRP").value;
+    if(!pw||pw.length<6){ msg("A nova senha deve ter ao menos 6 caracteres.","err"); return; }
+    q("hlRbtn").disabled=true; msg("Salvando…");
+    var r=await sb.auth.updateUser({password:pw});
+    if(r.error){ q("hlRbtn").disabled=false; msg("Não foi possível salvar — o link pode ter expirado. Solicite a recuperação de novo.","err"); return; }
+    try{ history.replaceState(null,"",location.pathname); }catch(e){}
+    try{ user=(await sb.auth.getSession()).data.session.user; }catch(e){}
+    await tryPending(); await ensurePerfil();
+    if(perfil){ finish(); } else { q("hlRbtn").disabled=false; showPanel("code"); msg("Senha alterada! Agora informe o código da equipe para concluir o cadastro.","ok"); }
+  }
 
   HL.logout=async function(){ try{ await sb.auth.signOut(); }catch(e){} location.reload(); };
   HL.recordAssistido=async function(){
@@ -163,8 +200,12 @@
   async function boot(){
     try{ await load("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"); }
     catch(e){ console.error("Falha ao carregar Supabase",e); return; }
+    var isRecovery=/type=recovery/.test(location.hash)||/type=recovery/.test(location.search);
     sb=window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"hl_auth"}});
     HL.sb=sb;
+    // recuperação de senha: quando o usuário chega pelo link do e-mail, mostra o painel de nova senha
+    sb.auth.onAuthStateChange(function(ev,sess){ if(ev==="PASSWORD_RECOVERY"){ user=sess&&sess.user; injectGate(); showPanel("reset"); } });
+    if(isRecovery){ injectGate(); showPanel("reset"); return; }
     var s=(await sb.auth.getSession()).data.session;
     if(s){ user=s.user; await tryPending(); await ensurePerfil(); if(perfil){ finish(); return; } }
     injectGate();
