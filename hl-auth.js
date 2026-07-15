@@ -58,7 +58,7 @@
       <label>Nome completo</label><input type="text" id="hlSN" placeholder="Seu nome">\
       <label>E-mail corporativo</label><input type="email" id="hlSE" placeholder="nome@hapvida.com.br">\
       <label>Senha (mín. 6)</label><input type="password" id="hlSP" placeholder="crie uma senha">\
-      <label>Código da equipe</label><input type="text" id="hlSC" placeholder="ex.: VEND2026" style="text-transform:uppercase">\
+      <label>Código da equipe <small style="font-weight:400;color:#9aa7ba">(peça ao seu gestor)</small></label><input type="text" id="hlSC" placeholder="ex.: VEND2026" style="text-transform:uppercase">\
       <button class="go" id="hlSbtn">Criar conta</button>\
     </div>\
     <div data-panel="code">\
@@ -123,14 +123,21 @@
     var r=await sb.auth.signUp({email:email,password:pw});
     if(r.error){ q("hlSbtn").disabled=false; msg(r.error.message.indexOf("registered")>-1?"E-mail já cadastrado — use Entrar.":r.error.message,"err"); return; }
     if(r.data.session){
-      user=r.data.session.user;
+      user=r.data.session.user; HL.user=user;
       try{ await sb.rpc("registrar_perfil",{p_nome:nome,p_codigo:code}); }
-      catch(e){ q("hlSbtn").disabled=false; msg("Código de equipe inválido.","err"); await sb.auth.signOut(); user=null; return; }
+      catch(e){
+        // NÃO desloga: mantém a conta criada e deixa tentar o código de novo (evita cadastro incompleto/travado)
+        q("hlSbtn").disabled=false;
+        localStorage.setItem("hl_pnome",nome);
+        q("hlCC").value=code; showPanel("code");
+        msg("Sua conta foi criada, mas o código da equipe não foi reconhecido. Confira com o seu gestor e tente novamente.","err");
+        return;
+      }
       await ensurePerfil(); finish();
     } else {
       localStorage.setItem("hl_pcode",code); localStorage.setItem("hl_pnome",nome);
       q("hlSbtn").disabled=false;
-      msg("Conta criada! Confirme o e-mail que enviamos e depois faça login.","ok");
+      msg("Conta criada! Confirme o e-mail que enviamos e depois faça login para concluir o cadastro.","ok");
       showPanel("login");
     }
   }
