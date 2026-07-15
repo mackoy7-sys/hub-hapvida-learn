@@ -260,35 +260,36 @@ function render(){
     document.getElementById("selEq").onchange=(ev)=>{ FILTRO=ev.target.value; render(); };
   } else rkFilter.innerHTML="";
 
-  // ---- Ranking ----
-  const rank=vends.map(v=>({v,...scoreOf(v.id)})).sort((a,b)=>b.score-a.score);
-  document.getElementById("rkCnt").textContent=vends.length+" vendedores";
+  // ---- Ranking (todos os papéis, para ver todos os nomes) ----
+  function papelTag(pp){ if(!pp||pp==="vendedor") return ""; var l=(PAPEL[pp]?PAPEL[pp][1]:pp); return ` <span class="nota" style="background:#eef3fb;color:#0a3d8f">${l}</span>`; }
+  const rank=colabs.map(v=>({v,...scoreOf(v.id)})).sort((a,b)=>b.score-a.score);
+  document.getElementById("rkCnt").textContent=colabs.length+" participantes";
   document.getElementById("tblRank").innerHTML=
-    `<thead><tr><th class="c">#</th><th>Vendedor</th>${gestor?"<th>Equipe</th>":""}<th>Status</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
+    `<thead><tr><th class="c">#</th><th>Participante</th>${gestor?"<th>Equipe</th>":""}<th>Status</th><th class="c">Capítulos</th><th>Progresso</th><th class="c">Score</th></tr></thead><tbody>`+
     (rank.length?rank.map((x,i)=>{
       const pct=Math.round(x.feitos/CAPS.length*100), st=statusOf(x.v);
       return `<tr><td class="rk">${i+1}</td>
-        <td class="nome"><b>${esc(x.v.nome)||"—"}</b><small>${esc(x.v.email)||""}</small></td>
+        <td class="nome"><b>${esc(x.v.nome)||"—"}</b>${papelTag(x.v.papel)}<small>${esc(x.v.email)||""}</small></td>
         ${gestor?`<td>${esc(nomeEquipe(x.v.equipe_id))}</td>`:""}
         <td><span class="st ${st[0]}">${st[1]}</span></td>
         <td class="c">${x.feitos}/${CAPS.length}</td>
         <td><div class="bar"><i style="width:${pct}%"></i></div></td>
         <td class="c"><span class="score">${x.score}</span></td></tr>`;
-    }).join(""):`<tr><td colspan="${gestor?7:6}" class="empty">Nenhum vendedor ${FILTRO?"nesta equipe":"cadastrado ainda"}.</td></tr>`)+`</tbody>`;
+    }).join(""):`<tr><td colspan="${gestor?7:6}" class="empty">Ninguém ${FILTRO?"nesta equipe":"cadastrado ainda"}.</td></tr>`)+`</tbody>`;
 
   // ---- Matriz ----
   document.getElementById("tblMatriz").innerHTML=
-    `<thead><tr><th>Vendedor</th>${CAPS.map(c=>`<th class="c" title="${c.n}">${c.cap}</th>`).join("")}<th class="c">Score</th></tr></thead><tbody>`+
-    (vends.length?vends.map(v=>{
+    `<thead><tr><th>Participante</th>${CAPS.map(c=>`<th class="c" title="${c.n}">${c.cap}</th>`).join("")}<th class="c">Score</th></tr></thead><tbody>`+
+    (colabs.length?colabs.map(v=>{
       const sc=scoreOf(v.id);
-      return `<tr><td class="nome"><b>${esc(v.nome)||"—"}</b></td>`+
+      return `<tr><td class="nome"><b>${esc(v.nome)||"—"}</b>${papelTag(v.papel)}</td>`+
         CAPS.map(c=>{const r=PROG[v.id]&&PROG[v.id][c.id];
           let cell='<span class="cel-no">—</span>';
           if(r&&r.quiz_feito) cell=`<span class="nota">${r.quiz_acertos}/${r.quiz_total}</span>`;
           else if(r&&r.assistido) cell='<span class="cel-ok">✓</span>';
           return `<td class="c">${cell}</td>`;}).join("")+
         `<td class="c"><span class="score">${sc.score}</span></td></tr>`;
-    }).join(""):`<tr><td colspan="${CAPS.length+2}" class="empty">Sem vendedores para exibir.</td></tr>`)+`</tbody>`;
+    }).join(""):`<tr><td colspan="${CAPS.length+2}" class="empty">Ninguém para exibir.</td></tr>`)+`</tbody>`;
 }
 
 function renderTimes(gestor){
