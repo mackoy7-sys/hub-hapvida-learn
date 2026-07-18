@@ -541,18 +541,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que o responsável por uma criança/adolescente mais busca?", opts:["O menor preço","Segurança, prevenção e tranquilidade para cuidar do filho","Somente odontologia","Rede em outro estado"],
-    a:1, why:"O foco é a tranquilidade: acesso a atendimento ágil e seguro sempre que o filho precisar — não comece pelo preço." },
-  { q:"Como definir a modalidade (com/sem coparticipação)?", opts:["Sempre a mais barata","Pela idade da criança","Pela frequência de uso: usa pouco→com copart; usa muito→sem copart","Pelo nome do plano"],
-    a:2, why:"Usa pouco → com coparticipação (mensalidade menor); vai muito ao pediatra/exames → sem coparticipação. Terapias sempre têm coparticipação." },
-  { q:"Ao identificar terapia/acompanhamento contínuo, o promotor deve:", opts:["Ignorar a informação","Registrar e explicar (sem alarmar) que pode haver CPT, conforme a ANS","Prometer cobertura imediata","Sugerir omitir"],
-    a:1, why:"Registre e explique com naturalidade a possibilidade de CPT (Cobertura Parcial Temporária), conforme a ANS — sem induzir omissão." },
-  { q:"Na objeção “ele quase não fica doente”, o melhor argumento é:", opts:["Concordar e encerrar","Mostrar que é o melhor momento para prevenção — ter antes de precisar","Baixar o preço","Dizer que a criança vai adoecer"],
-    a:1, why:"Justamente por estar bem, é o momento de pensar na prevenção e no acompanhamento do desenvolvimento — segurança antes de precisar." },
-  { q:"Sobre presumir o plano pela idade da criança:", opts:["Deve-se recomendar sempre pela idade","Não presuma — considere motivo, frequência, orçamento e prioridades","Idade define o preço final","Idade define a rede"],
-    a:1, why:"Não presuma pela idade: a recomendação considera o motivo, a frequência de uso, o orçamento e as prioridades da família." },
-  { q:"Qual benefício incluso vale destacar para famílias?", opts:["Reembolso internacional","Clube de Vantagens (ex.: descontos em farmácia)","Academia grátis","Seguro de automóvel"],
-    a:1, why:"O Clube de Vantagens já vem incluso; descontos em farmácia, por exemplo, ajudam bastante no orçamento de famílias com crianças." }
+  { q:"O que o responsável por uma criança/adolescente mais busca?", opts:["O menor preço", "Somente odontologia", "Segurança, prevenção e tranquilidade para cuidar do filho", "Rede em outro estado"], a:2, why:"O foco é a tranquilidade: acesso a atendimento ágil e seguro sempre que o filho precisar — não comece pelo preço." },
+  { q:"Como definir a modalidade (com/sem coparticipação)?", opts:["Pela frequência de uso: usa pouco→com copart; usa muito→sem copart", "Pela idade da criança", "Sempre a mais barata", "Pelo nome do plano"], a:0, why:"Usa pouco → com coparticipação (mensalidade menor); vai muito ao pediatra/exames → sem coparticipação. Terapias sempre têm coparticipação." },
+  { q:"Ao identificar terapia/acompanhamento contínuo, o promotor deve:", opts:["Ignorar a informação", "Registrar e explicar (sem alarmar) que pode haver CPT, conforme a ANS", "Prometer cobertura imediata", "Sugerir omitir"], a:1, why:"Registre e explique com naturalidade a possibilidade de CPT (Cobertura Parcial Temporária), conforme a ANS — sem induzir omissão." },
+  { q:"Na objeção “ele quase não fica doente”, o melhor argumento é:", opts:["Concordar e encerrar", "Baixar o preço", "Mostrar que é o melhor momento para prevenção — ter antes de precisar", "Dizer que a criança vai adoecer"], a:2, why:"Justamente por estar bem, é o momento de pensar na prevenção e no acompanhamento do desenvolvimento — segurança antes de precisar." },
+  { q:"Sobre presumir o plano pela idade da criança:", opts:["Deve-se recomendar sempre pela idade", "Não presuma — considere motivo, frequência, orçamento e prioridades", "Idade define o preço final", "Idade define a rede"], a:1, why:"Não presuma pela idade: a recomendação considera o motivo, a frequência de uso, o orçamento e as prioridades da família." },
+  { q:"Qual benefício incluso vale destacar para famílias?", opts:["Reembolso internacional", "Seguro de automóvel", "Academia grátis", "Clube de Vantagens (ex.: descontos em farmácia)"], a:3, why:"O Clube de Vantagens já vem incluso; descontos em farmácia, por exemplo, ajudam bastante no orçamento de famílias com crianças." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

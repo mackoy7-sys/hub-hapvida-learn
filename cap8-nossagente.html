@@ -570,36 +570,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que é o Nossa Gente?", opts:[
-      "Um sistema de folha de pagamento",
-      "O canal oficial de comunicação interna da empresa",
-      "Um aplicativo de agendamento de consultas",
-      "A rede de hospitais da Hapvida"],
-    a:1, why:"O Nossa Gente é o canal oficial de comunicação interna, com mais de 71 mil colaboradores conectados." },
-  { q:"Qual aplicativo você baixa para acessar o Nossa Gente pelo celular?", opts:[
-      "Beehome","Hapvida Cliente","SISQUAL","Portal LG"],
-    a:0, why:"O app é o Beehome, disponível na App Store e no Google Play." },
-  { q:"No app, o que se digita no primeiro campo antes do login?", opts:[
-      "O e-mail corporativo","A palavra “nossagente”","O nome do gestor","O número da matrícula"],
-    a:1, why:"No primeiro campo digite “nossagente” e toque em próximo; depois use o seu CPF." },
-  { q:"Qual é a senha de primeiro acesso?", opts:[
-      "hapvida mais o ano de admissão",
-      "Os 6 primeiros dígitos do CPF",
-      "Hn@ + os 5 primeiros dígitos do CPF",
-      "1234 mais o sobrenome"],
-    a:2, why:"A senha inicial é Hn@ seguido dos 5 primeiros dígitos do CPF. Ex.: Hn@12345." },
-  { q:"Sobre o feed, o que é correto?", opts:[
-      "É um espaço pessoal, sem regras da empresa",
-      "É uma extensão do ambiente de trabalho, um espaço corporativo",
-      "Só gestores podem publicar",
-      "As publicações somem em 24 horas"],
-    a:1, why:"O feed é colaborativo, mas é uma extensão do ambiente de trabalho — valem as regras da empresa." },
-  { q:"Qual conduta está de acordo com as boas práticas?", opts:[
-      "Publicar dados pessoais de colegas",
-      "Compartilhar conteúdo político-partidário",
-      "Checar a veracidade antes de publicar e postar conteúdo corporativo",
-      "Divulgar informações sem confirmar a fonte"],
-    a:2, why:"Poste conteúdo corporativo, cheque a veracidade e evite dados sensíveis e temas político-partidários." }
+  { q:"O que é o Nossa Gente?", opts:["Um sistema de folha de pagamento", "A rede de hospitais da Hapvida", "Um aplicativo de agendamento de consultas", "O canal oficial de comunicação interna da empresa"], a:3, why:"O Nossa Gente é o canal oficial de comunicação interna, com mais de 71 mil colaboradores conectados." },
+  { q:"Qual aplicativo você baixa para acessar o Nossa Gente pelo celular?", opts:["Beehome", "Hapvida Cliente", "SISQUAL", "Portal LG"], a:0, why:"O app é o Beehome, disponível na App Store e no Google Play." },
+  { q:"No app, o que se digita no primeiro campo antes do login?", opts:["A palavra “nossagente”", "O e-mail corporativo", "O nome do gestor", "O número da matrícula"], a:0, why:"No primeiro campo digite “nossagente” e toque em próximo; depois use o seu CPF." },
+  { q:"Qual é a senha de primeiro acesso?", opts:["hapvida mais o ano de admissão", "Os 6 primeiros dígitos do CPF", "Hn@ + os 5 primeiros dígitos do CPF", "1234 mais o sobrenome"], a:2, why:"A senha inicial é Hn@ seguido dos 5 primeiros dígitos do CPF. Ex.: Hn@12345." },
+  { q:"Sobre o feed, o que é correto?", opts:["É um espaço pessoal, sem regras da empresa", "É uma extensão do ambiente de trabalho, um espaço corporativo", "Só gestores podem publicar", "As publicações somem em 24 horas"], a:1, why:"O feed é colaborativo, mas é uma extensão do ambiente de trabalho — valem as regras da empresa." },
+  { q:"Qual conduta está de acordo com as boas práticas?", opts:["Publicar dados pessoais de colegas", "Checar a veracidade antes de publicar e postar conteúdo corporativo", "Compartilhar conteúdo político-partidário", "Divulgar informações sem confirmar a fonte"], a:1, why:"Poste conteúdo corporativo, cheque a veracidade e evite dados sensíveis e temas político-partidários." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

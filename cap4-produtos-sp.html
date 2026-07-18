@@ -637,30 +637,14 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Qual o desconto máximo nas mensalidades do portfólio das principais regiões do interior?",
-    opts:["Até 10%","Até 25%","Até 40%","Até 60%"],
-    a:2, why:"O portfólio das principais regiões (Campinas, Americana, Sorocaba, Jundiaí) tem descontos de até 40%." },
-  { q:"Quais são os 3 níveis do portfólio?",
-    opts:["Básico, Intermediário e Master","Rede própria, Maior abrangência e Livre escolha","Bronze, Prata e Ouro","Individual, PME e Corporativo"],
-    a:1, why:"Os níveis são: Rede própria, Maior abrangência e Livre escolha — do mais acessível ao mais completo." },
-  { q:"Qual é o produto de entrada, mais acessível do portfólio?",
-    opts:["Infinity 1000","Smart Prime","Nosso Médico (a partir de R$ 79,35)","Premium 900"],
-    a:2, why:"O Nosso Médico é o mais acessível, a partir de R$ 79,35, na rede própria." },
-  { q:"Qual produto Smart oferece cobertura NACIONAL na rede própria?",
-    opts:["Smart 300","Smart 500","Smart Prime","Smart Up"],
-    a:2, why:"O Smart Prime tem cobertura nacional, atendendo na rede própria em todas as regiões do país." },
-  { q:"O que a linha Livre escolha (Advance/Premium/Infinity) recebeu de melhoria?",
-    opts:["Apenas mudança de nome","Redução de preço, coparticipação revisada e reembolso reajustado","Fim da coparticipação","Cobertura apenas regional"],
-    a:1, why:"Toda a linha Livre escolha teve redução de preço, revisão da coparticipação e reajuste no reembolso." },
-  { q:"O plano odontológico completo (Rol da ANS) é incluído em novas vendas de saúde até quantas vidas?",
-    opts:["Até 10 vidas","Até 30 vidas","Até 99 vidas","Sem limite"],
-    a:2, why:"O odonto completo (Rol da ANS) vem incluído nas novas vendas de plano de saúde até 99 vidas." },
-  { q:"Como é o portfólio de Ribeirão Preto?",
-    opts:["Igual ao das demais regiões","Próprio da região: Pleno, Nosso Plano e Nosso Médico (até 25%)","Somente Nosso Médico","Não há produtos em Ribeirão Preto"],
-    a:1, why:"Ribeirão Preto tem portfólio próprio: Pleno, Nosso Plano e Nosso Médico, com descontos de até 25%." },
-  { q:"Em quais canais o portfólio pode ser vendido?",
-    opts:["Somente Individual","Somente PME e Corporativo","Individual, Super Simples, PME, Corporativo, Adesão e Licitação","Somente Adesão"],
-    a:2, why:"Os canais são: Individual, Super Simples, PME, Corporativo, Adesão e Licitação." }
+  { q:"Qual o desconto máximo nas mensalidades do portfólio das principais regiões do interior?", opts:["Até 40%", "Até 25%", "Até 10%", "Até 60%"], a:0, why:"O portfólio das principais regiões (Campinas, Americana, Sorocaba, Jundiaí) tem descontos de até 40%." },
+  { q:"Quais são os 3 níveis do portfólio?", opts:["Básico, Intermediário e Master", "Rede própria, Maior abrangência e Livre escolha", "Bronze, Prata e Ouro", "Individual, PME e Corporativo"], a:1, why:"Os níveis são: Rede própria, Maior abrangência e Livre escolha — do mais acessível ao mais completo." },
+  { q:"Qual é o produto de entrada, mais acessível do portfólio?", opts:["Infinity 1000", "Smart Prime", "Nosso Médico (a partir de R$ 79,35)", "Premium 900"], a:2, why:"O Nosso Médico é o mais acessível, a partir de R$ 79,35, na rede própria." },
+  { q:"Qual produto Smart oferece cobertura NACIONAL na rede própria?", opts:["Smart 300", "Smart 500", "Smart Up", "Smart Prime"], a:3, why:"O Smart Prime tem cobertura nacional, atendendo na rede própria em todas as regiões do país." },
+  { q:"O que a linha Livre escolha (Advance/Premium/Infinity) recebeu de melhoria?", opts:["Apenas mudança de nome", "Cobertura apenas regional", "Fim da coparticipação", "Redução de preço, coparticipação revisada e reembolso reajustado"], a:3, why:"Toda a linha Livre escolha teve redução de preço, revisão da coparticipação e reajuste no reembolso." },
+  { q:"O plano odontológico completo (Rol da ANS) é incluído em novas vendas de saúde até quantas vidas?", opts:["Até 10 vidas", "Até 99 vidas", "Até 30 vidas", "Sem limite"], a:1, why:"O odonto completo (Rol da ANS) vem incluído nas novas vendas de plano de saúde até 99 vidas." },
+  { q:"Como é o portfólio de Ribeirão Preto?", opts:["Próprio da região: Pleno, Nosso Plano e Nosso Médico (até 25%)", "Igual ao das demais regiões", "Somente Nosso Médico", "Não há produtos em Ribeirão Preto"], a:0, why:"Ribeirão Preto tem portfólio próprio: Pleno, Nosso Plano e Nosso Médico, com descontos de até 25%." },
+  { q:"Em quais canais o portfólio pode ser vendido?", opts:["Somente Individual", "Somente PME e Corporativo", "Individual, Super Simples, PME, Corporativo, Adesão e Licitação", "Somente Adesão"], a:2, why:"Os canais são: Individual, Super Simples, PME, Corporativo, Adesão e Licitação." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

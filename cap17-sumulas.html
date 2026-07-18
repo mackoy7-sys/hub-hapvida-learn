@@ -511,18 +511,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Qual a carência máxima para parto a termo (Súmula 25)?", opts:["180 dias","300 dias","24 horas","60 dias"],
-    a:1, why:"Parto a termo: até 300 dias de carência. Em urgência, é garantido após a carência mínima de 180 dias para internações." },
-  { q:"Em plano individual/familiar, incluir o recém-nascido em até 30 dias:", opts:["Não muda nada","Evita a aplicação de carência e CPT","Gera cobrança extra","Só vale para o 1º filho"],
-    a:1, why:"Incluir o recém-nascido em até 30 dias do nascimento evita carência e cobertura parcial temporária (CPT)." },
-  { q:"O que diz a Súmula 29 sobre o filho sob guarda?", opts:["Não pode ser dependente","A guarda provisória tem os mesmos efeitos da definitiva; mesmos direitos dos demais dependentes","Precisa pagar taxa extra","Só guarda definitiva vale"],
-    a:1, why:"A guarda judicial provisória equivale à definitiva; a criança sob guarda tem os mesmos direitos dos demais dependentes." },
-  { q:"Ao subir de plano na mesma operadora (Súmula 21), as carências já cumpridas:", opts:["São recontadas do zero","Não podem ser recontadas","Dobram","São ignoradas para sempre"],
-    a:1, why:"As carências já cumpridas não podem ser recontadas; nova carência só para coberturas/serviços que não existiam antes." },
-  { q:"Quando pode ser exigida nova carência na troca de plano (Súmula 21)?", opts:["Sempre","Nunca","Só para coberturas novas, nova rede ou acomodação diferente","Só para quem tem mais de 60 anos"],
-    a:2, why:"Só para coberturas e serviços não previstos antes, incluindo nova rede credenciada e padrão de acomodação diferente." },
-  { q:"O que são as Súmulas Normativas da ANS?", opts:["Sugestões opcionais","Entendimentos vinculativos que as operadoras devem seguir","Contratos de venda","Tabelas de preço"],
-    a:1, why:"São entendimentos vinculativos da ANS — orientações de cumprimento obrigatório pelas operadoras." }
+  { q:"Qual a carência máxima para parto a termo (Súmula 25)?", opts:["300 dias", "180 dias", "24 horas", "60 dias"], a:0, why:"Parto a termo: até 300 dias de carência. Em urgência, é garantido após a carência mínima de 180 dias para internações." },
+  { q:"Em plano individual/familiar, incluir o recém-nascido em até 30 dias:", opts:["Não muda nada", "Evita a aplicação de carência e CPT", "Gera cobrança extra", "Só vale para o 1º filho"], a:1, why:"Incluir o recém-nascido em até 30 dias do nascimento evita carência e cobertura parcial temporária (CPT)." },
+  { q:"O que diz a Súmula 29 sobre o filho sob guarda?", opts:["Não pode ser dependente", "Só guarda definitiva vale", "Precisa pagar taxa extra", "A guarda provisória tem os mesmos efeitos da definitiva; mesmos direitos dos demais dependentes"], a:3, why:"A guarda judicial provisória equivale à definitiva; a criança sob guarda tem os mesmos direitos dos demais dependentes." },
+  { q:"Ao subir de plano na mesma operadora (Súmula 21), as carências já cumpridas:", opts:["Não podem ser recontadas", "São recontadas do zero", "Dobram", "São ignoradas para sempre"], a:0, why:"As carências já cumpridas não podem ser recontadas; nova carência só para coberturas/serviços que não existiam antes." },
+  { q:"Quando pode ser exigida nova carência na troca de plano (Súmula 21)?", opts:["Sempre", "Nunca", "Só para coberturas novas, nova rede ou acomodação diferente", "Só para quem tem mais de 60 anos"], a:2, why:"Só para coberturas e serviços não previstos antes, incluindo nova rede credenciada e padrão de acomodação diferente." },
+  { q:"O que são as Súmulas Normativas da ANS?", opts:["Sugestões opcionais", "Entendimentos vinculativos que as operadoras devem seguir", "Contratos de venda", "Tabelas de preço"], a:1, why:"São entendimentos vinculativos da ANS — orientações de cumprimento obrigatório pelas operadoras." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

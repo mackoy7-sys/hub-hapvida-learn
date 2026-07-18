@@ -307,13 +307,13 @@ const scenes = [
       <ul class="points" style="gap:7px;font-size:14px">
         <li class="good" style="animation-delay:.1s"><span class="ic">🏥</span><div><b>839 unidades próprias e conectadas</b> nas 5 regiões · <b>+6,3 mil leitos</b></div></li>
         <li style="animation-delay:.35s"><span class="ic">🏨</span><div><b>84 hospitais · 75 prontos-atendimentos · 367 clínicas · 313 diagnósticos</b> próprios</div></li>
-        <li style="animation-delay:.6s"><span class="ic">🤝</span><div>E, em <b>diversos produtos</b>, somamos a <b>rede credenciada</b> — ainda mais acesso e abrangência</div></li>
-        <li style="animation-delay:.85s"><span class="ic">💡</span><div>Argumento: <b>não dependemos de credenciado</b> como os concorrentes (a rede é nossa) — e ainda oferecemos a credenciada onde amplia o acesso</div></li>
+        <li style="animation-delay:.6s"><span class="ic">🤝</span><div>Somada a uma <b>ampla rede credenciada</b> em diversos produtos — ainda mais acesso e abrangência</div></li>
+        <li style="animation-delay:.85s"><span class="ic">💡</span><div>Argumento: <b>a maior rede própria do país + uma ampla rede credenciada</b> = qualidade e acesso onde o cliente estiver</div></li>
       </ul>`,
     narration:["Ponto dois: rede própria ampla.",
-      "São oitocentas e trinta e nove unidades próprias e conectadas nas cinco regiões do país: oitenta e quatro hospitais, setenta e cinco prontos-atendimentos, trezentas e sessenta e sete clínicas e trezentos e treze centros de diagnóstico, com mais de seis mil e trezentos leitos próprios. E, em diversos produtos, somamos a rede credenciada, ampliando ainda mais o acesso.",
-      "Aqui está o diferencial: diferente de concorrentes que dependem da rede credenciada, a Hapvida não depende — porque a rede é nossa, própria e ampla, com prontuário único.",
-      "E, mesmo tendo a nossa rede, ainda oferecemos a credenciada onde ela amplia o acesso do cliente. É o melhor dos dois mundos: a força da rede própria com a abrangência da credenciada."] },
+      "São oitocentas e trinta e nove unidades próprias e conectadas nas cinco regiões do país: oitenta e quatro hospitais, setenta e cinco prontos-atendimentos, trezentas e sessenta e sete clínicas e trezentos e treze centros de diagnóstico, com mais de seis mil e trezentos leitos próprios.",
+      "Essa é a nossa grande força: a maior rede própria do país, toda conectada e com prontuário único. Isso garante padrão de qualidade e cuidado integrado em cada unidade.",
+      "E, somada a ela, temos uma ampla rede credenciada em diversos produtos, que leva o atendimento ainda mais perto do cliente. É o melhor dos dois mundos: a força da rede própria com a abrangência da rede credenciada."] },
   { kicker:"3 · Investimento", title:"Investe e cresce",
     html:`<div class="kicker">3 · Investimento no futuro</div><h1>E ainda vem mais por aí</h1>
       <ul class="points" style="gap:8px;font-size:14px">
@@ -329,11 +329,11 @@ const scenes = [
       <ul class="points" style="gap:8px;font-size:14px">
         <li class="good" style="animation-delay:.1s"><span class="ic">🔗</span><div>Hospitais, clínicas, PA, diagnóstico e laboratórios <b>próprios</b> — tudo conectado</div></li>
         <li style="animation-delay:.4s"><span class="ic">📋</span><div><b>Prontuário único</b>: sua história acompanha o cliente em cada unidade</div></li>
-        <li style="animation-delay:.7s"><span class="ic">💡</span><div>Argumento: controle da <b>ponta a ponta</b> = mais qualidade e melhor custo — o credenciado não entrega isso</div></li>
+        <li style="animation-delay:.7s"><span class="ic">💡</span><div>Argumento: controle da <b>ponta a ponta</b> = mais qualidade, cuidado integrado e melhor custo</div></li>
       </ul>`,
     narration:["Ponto quatro: o grande diferencial competitivo, o modelo verticalizado e integrado.",
       "A Hapvida é dona da rede: hospitais, clínicas, prontos-atendimentos, diagnóstico e laboratórios próprios, todos conectados. E com o prontuário único, a história do paciente o acompanha em qualquer unidade.",
-      "Este é o argumento que derruba o concorrente: só quem tem a rede própria consegue controlar a qualidade e o custo da ponta a ponta. Uma operadora que só usa rede credenciada não entrega isso."] },
+      "Por ser dona da rede, a Hapvida controla a qualidade e o custo da ponta a ponta, com um cuidado realmente integrado. Isso torna a experiência do cliente mais fluida, segura e eficiente."] },
   { kicker:"5 · Qualidade", title:"Qualidade no atendimento",
     html:`<div class="kicker">5 · Qualidade no atendimento</div><h1>Rápido e seguro — com números</h1>
       <ul class="points" style="gap:8px;font-size:14px">
@@ -577,22 +577,14 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Na venda, para que serve a informação institucional?", opts:["Só para preencher a conversa","Para transformar a força da Hapvida em argumento e gerar confiança","Para falar de preço","Não tem uso comercial"],
-    a:1, why:"O institucional é munição: mostra que o cliente entra na maior e mais sólida operadora, aumentando o valor percebido." },
-  { q:"Qual a posição da Hapvida no mercado?", opts:["2ª em saúde e 1ª em odonto","Maior de saúde e odonto da América Latina; 1ª em saúde e 2ª em odonto no Brasil","5ª no ranking geral","Regional, só no Nordeste"],
-    a:1, why:"Maior plano de saúde e odonto da América Latina; pela ANS, 1º lugar em saúde e 2º em odontologia no Brasil." },
-  { q:"Qual é o diferencial da rede da Hapvida?", opts:["Depende totalmente de credenciados","Tem ampla rede própria — não depende de credenciado como os concorrentes — e ainda oferece credenciada em diversos produtos","Só atende em São Paulo","Não possui hospitais próprios"],
-    a:1, why:"Com 839 unidades próprias, a Hapvida NÃO depende de credenciado como concorrentes que dependem — e ainda soma a rede credenciada em diversos produtos, ampliando o acesso." },
-  { q:"O que é o modelo verticalizado e integrado?", opts:["Terceirizar toda a rede","Ter hospitais, clínicas, PA, diagnóstico e labs próprios e conectados, com prontuário único","Vender só odonto","Atender apenas por telemedicina"],
-    a:1, why:"A Hapvida é dona da rede e a conecta com prontuário único — controla qualidade e custo da ponta a ponta, o que o credenciado não faz." },
-  { q:"Qual dado mostra qualidade no atendimento de emergência?", opts:["100% em 1 hora","74,2% atendidos em até 15 minutos","Sem fila em todo o país","Atendimento só com hora marcada"],
-    a:1, why:"74,2% dos clientes são atendidos em até 15 min nas emergências; a UTI tem índice de mortalidade 0,48 (melhor que a média 0,75)." },
-  { q:"Sobre a teleconsulta da Hapvida:", opts:["É terceirizada","Maior do país: +6 mi atendimentos, 91% de resolutividade e 4,6/5","Só para empresas","Custa à parte sempre"],
-    a:1, why:"Maior plataforma de telessaúde do país: +6 mi atendimentos, +1.200 médicos, +20 especialidades, 91% de resolutividade e 4,6 estrelas." },
-  { q:"O que a eficiência da verticalização gera para o cliente?", opts:["Preços mais altos","O melhor custo-benefício do mercado — menor preço médio do país e reajustes controlados","Só afeta o odonto","Nenhuma vantagem"],
-    a:1, why:"Controlando o custo da ponta a ponta, a Hapvida entrega o melhor custo-benefício do mercado, com o menor preço médio do país e reajustes mais controlados (abaixo do mercado)." },
-  { q:"Como transformar um dado institucional em venda?", opts:["Listar todos os números de uma vez","Ligar cada número à dor que o cliente revelou (como no SPIN)","Falar só de preço","Guardar a informação para você"],
-    a:1, why:"Conecte o dado à dor: “reclamou de demora? 74% são atendidos em 15 min”. Assim o preço deixa de ser o centro da conversa." }
+  { q:"Na venda, para que serve a informação institucional?", opts:["Só para preencher a conversa", "Para transformar a força da Hapvida em argumento e gerar confiança", "Para falar de preço", "Não tem uso comercial"], a:1, why:"O institucional é munição: mostra que o cliente entra na maior e mais sólida operadora, aumentando o valor percebido." },
+  { q:"Qual a posição da Hapvida no mercado?", opts:["Maior de saúde e odonto da América Latina; 1ª em saúde e 2ª em odonto no Brasil", "2ª em saúde e 1ª em odonto", "5ª no ranking geral", "Regional, só no Nordeste"], a:0, why:"Maior plano de saúde e odonto da América Latina; pela ANS, 1º lugar em saúde e 2º em odontologia no Brasil." },
+  { q:"Como é a rede da Hapvida?", opts:["Pequena e regional", "Só teleatendimento", "A maior rede própria do país, conectada e com prontuário único — somada a uma ampla rede credenciada em diversos produtos", "Sem hospitais próprios"], a:2, why:"São 839 unidades próprias (84 hospitais, 75 PA, 367 clínicas, 313 diagnósticos), conectadas e com prontuário único, somadas a uma ampla rede credenciada em diversos produtos — mais acesso e qualidade." },
+  { q:"O que é o modelo verticalizado e integrado?", opts:["Terceirizar toda a rede", "Atender apenas por telemedicina", "Vender só odonto", "Ter hospitais, clínicas, PA, diagnóstico e labs próprios e conectados, com prontuário único"], a:3, why:"A Hapvida é dona da rede e a conecta com prontuário único — controlando qualidade e custo da ponta a ponta, com cuidado realmente integrado." },
+  { q:"Qual dado mostra qualidade no atendimento de emergência?", opts:["100% em 1 hora", "Atendimento só com hora marcada", "Sem fila em todo o país", "74,2% atendidos em até 15 minutos"], a:3, why:"74,2% dos clientes são atendidos em até 15 min nas emergências; a UTI tem índice de mortalidade 0,48 (melhor que a média 0,75)." },
+  { q:"Sobre a teleconsulta da Hapvida:", opts:["É terceirizada", "Só para empresas", "Maior do país: +6 mi atendimentos, 91% de resolutividade e 4,6/5", "Custa à parte sempre"], a:2, why:"Maior plataforma de telessaúde do país: +6 mi atendimentos, +1.200 médicos, +20 especialidades, 91% de resolutividade e 4,6 estrelas." },
+  { q:"O que a eficiência da verticalização gera para o cliente?", opts:["Preços mais altos", "O melhor custo-benefício do mercado — menor preço médio do país e reajustes controlados", "Só afeta o odonto", "Nenhuma vantagem"], a:1, why:"Controlando o custo da ponta a ponta, a Hapvida entrega o melhor custo-benefício do mercado, com o menor preço médio do país e reajustes mais controlados (abaixo do mercado)." },
+  { q:"Como transformar um dado institucional em venda?", opts:["Ligar cada número à dor que o cliente revelou (como no SPIN)", "Listar todos os números de uma vez", "Falar só de preço", "Guardar a informação para você"], a:0, why:"Conecte o dado à dor: “reclamou de demora? 74% são atendidos em 15 min”. Assim o preço deixa de ser o centro da conversa." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

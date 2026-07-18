@@ -617,30 +617,14 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Em qual especialidade o produto Nosso Médico é baseado?",
-    opts:["Clínica Geral hospitalar","Medicina da Família e Comunidade","Medicina de urgência","Medicina do trabalho"],
-    a:1, why:"O Nosso Médico é baseado na Medicina da Família e Comunidade, para adultos e crianças." },
-  { q:"Qual é o prazo para consulta com a equipe de referência?",
-    opts:["No mesmo dia","Até 3 dias úteis","Até 15 dias","Até 30 dias"],
-    a:1, why:"Um dos grandes diferenciais: acesso à consulta em até 3 dias úteis." },
-  { q:"Quem forma a equipe de referência exclusiva do cliente?",
-    opts:["Apenas um clínico geral","Médico de família e enfermeira exclusivos","Um pronto-socorrista","Uma central de teleatendimento"],
-    a:1, why:"A equipe é formada por um médico especialista em saúde da família e uma enfermeira, exclusivos." },
-  { q:"Qual destas especialidades tem LIVRE ACESSO (sem encaminhamento)?",
-    opts:["Cardiologia","Ortopedia","Pediatria","Dermatologia"],
-    a:2, why:"Livre acesso: Ginecologia/Obstetrícia, Pediatria, Oftalmologia, Urgência/Emergência e Terapias de apoio." },
-  { q:"Após o encaminhamento, quanto tempo o cliente tem para agendar a consulta com o especialista?",
-    opts:["15 dias","30 dias","60 dias (e mais 60 para a 2ª)","Sem prazo definido"],
-    a:2, why:"São 60 dias para agendar e, após o atendimento, mais 60 dias para a segunda consulta." },
-  { q:"Em quais modalidades o Nosso Médico é vendido?",
-    opts:["Somente individual","Somente empresarial","Empresarial, Varejo (Super Simples e PME) e Individual","Somente para servidores públicos"],
-    a:2, why:"A venda ocorre nos canais Empresarial, Varejo (Super Simples e PME) e Individual." },
-  { q:"Qual programa de cuidado é voltado ao Diabetes?",
-    opts:["Sinta-se Bem","Nascer Bem","Viver Bem","Gestação Segura"],
-    a:2, why:"Viver Bem é o programa para Diabetes. Sinta-se Bem é para doença renal; Nascer Bem para pré-natal, parto e pós-parto." },
-  { q:"Como é a rede de atendimento do Nosso Médico?",
-    opts:["Terceirizada e nacional","Própria e organizada por região (urgência/emergência, núcleo da família, laboratório e centro clínico)","Apenas hospitais parceiros","Somente teleatendimento"],
-    a:1, why:"A rede é própria e organizada por região; a lista atualizada fica sempre no app e no site." }
+  { q:"Em qual especialidade o produto Nosso Médico é baseado?", opts:["Clínica Geral hospitalar", "Medicina da Família e Comunidade", "Medicina de urgência", "Medicina do trabalho"], a:1, why:"O Nosso Médico é baseado na Medicina da Família e Comunidade, para adultos e crianças." },
+  { q:"Qual é o prazo para consulta com a equipe de referência?", opts:["No mesmo dia", "Até 30 dias", "Até 15 dias", "Até 3 dias úteis"], a:3, why:"Um dos grandes diferenciais: acesso à consulta em até 3 dias úteis." },
+  { q:"Quem forma a equipe de referência exclusiva do cliente?", opts:["Apenas um clínico geral", "Uma central de teleatendimento", "Um pronto-socorrista", "Médico de família e enfermeira exclusivos"], a:3, why:"A equipe é formada por um médico especialista em saúde da família e uma enfermeira, exclusivos." },
+  { q:"Qual destas especialidades tem LIVRE ACESSO (sem encaminhamento)?", opts:["Cardiologia", "Ortopedia", "Pediatria", "Dermatologia"], a:2, why:"Livre acesso: Ginecologia/Obstetrícia, Pediatria, Oftalmologia, Urgência/Emergência e Terapias de apoio." },
+  { q:"Após o encaminhamento, quanto tempo o cliente tem para agendar a consulta com o especialista?", opts:["15 dias", "60 dias (e mais 60 para a 2ª)", "30 dias", "Sem prazo definido"], a:1, why:"São 60 dias para agendar e, após o atendimento, mais 60 dias para a segunda consulta." },
+  { q:"Em quais modalidades o Nosso Médico é vendido?", opts:["Empresarial, Varejo (Super Simples e PME) e Individual", "Somente empresarial", "Somente individual", "Somente para servidores públicos"], a:0, why:"A venda ocorre nos canais Empresarial, Varejo (Super Simples e PME) e Individual." },
+  { q:"Qual programa de cuidado é voltado ao Diabetes?", opts:["Sinta-se Bem", "Nascer Bem", "Viver Bem", "Gestação Segura"], a:2, why:"Viver Bem é o programa para Diabetes. Sinta-se Bem é para doença renal; Nascer Bem para pré-natal, parto e pós-parto." },
+  { q:"Como é a rede de atendimento do Nosso Médico?", opts:["Própria e organizada por região (urgência/emergência, núcleo da família, laboratório e centro clínico)", "Terceirizada e nacional", "Apenas hospitais parceiros", "Somente teleatendimento"], a:0, why:"A rede é própria e organizada por região; a lista atualizada fica sempre no app e no site." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

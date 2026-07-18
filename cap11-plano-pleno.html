@@ -553,18 +553,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O Plano Pleno é um plano de que tipo?", opts:["Individual nacional","Regional, em rede própria e credenciada","Exclusivo para servidores públicos","Somente odontológico"],
-    a:1, why:"O Pleno é um plano regional, com rede própria e credenciada, em contratação coletiva empresarial." },
-  { q:"Quais são as faixas de aceitação do Pleno?", opts:["Apenas acima de 100 vidas","Super Simples (1–29), PME (30–99) e Empresarial (100+)","Somente individual","1 a 5 vidas apenas"],
-    a:1, why:"Super Simples 1–29 (Vale do Paraíba a partir de 2), PME 30–99 e Empresarial acima de 100 vidas." },
-  { q:"Sobre reembolso no Plano Pleno:", opts:["Reembolso integral","Reembolso em 7 dias","Não disponível","Somente para apartamento"],
-    a:2, why:"O Plano Pleno NÃO oferece reembolso. Tem acomodação enfermaria ou apartamento, com ou sem coparticipação." },
-  { q:"Em quantas regiões o Pleno está disponível?", opts:["Duas","Três","Quatro (Campinas, Sorocaba, Jundiaí e Vale do Paraíba)","Cinco"],
-    a:2, why:"São quatro regiões: Campinas, Sorocaba, Jundiaí e Vale do Paraíba — cada uma com rede e abrangência próprias." },
-  { q:"Qual hospital é referência do Pleno em São José dos Campos?", opts:["Hospital Renascença","Hospital São José","Hospital Modelo","Hospital Paulo Sacramento"],
-    a:1, why:"No Vale do Paraíba, o Hospital São José (São José dos Campos) é a referência. Renascença=Campinas, Modelo=Sorocaba, Paulo Sacramento=Jundiaí." },
-  { q:"Quais benefícios acompanham o Pleno?", opts:["Apenas teleconsulta","Qualivida, Teleconsulta e Clube de Vantagens","Somente Clube de Vantagens","Nenhum benefício adicional"],
-    a:1, why:"Qualivida (programas gratuitos), Teleconsulta (+20 especialidades e PA 24h) e Clube de Vantagens." }
+  { q:"O Plano Pleno é um plano de que tipo?", opts:["Individual nacional", "Somente odontológico", "Exclusivo para servidores públicos", "Regional, em rede própria e credenciada"], a:3, why:"O Pleno é um plano regional, com rede própria e credenciada, em contratação coletiva empresarial." },
+  { q:"Quais são as faixas de aceitação do Pleno?", opts:["Super Simples (1–29), PME (30–99) e Empresarial (100+)", "Apenas acima de 100 vidas", "Somente individual", "1 a 5 vidas apenas"], a:0, why:"Super Simples 1–29 (Vale do Paraíba a partir de 2), PME 30–99 e Empresarial acima de 100 vidas." },
+  { q:"Sobre reembolso no Plano Pleno:", opts:["Reembolso integral", "Não disponível", "Reembolso em 7 dias", "Somente para apartamento"], a:1, why:"O Plano Pleno NÃO oferece reembolso. Tem acomodação enfermaria ou apartamento, com ou sem coparticipação." },
+  { q:"Em quantas regiões o Pleno está disponível?", opts:["Duas", "Três", "Quatro (Campinas, Sorocaba, Jundiaí e Vale do Paraíba)", "Cinco"], a:2, why:"São quatro regiões: Campinas, Sorocaba, Jundiaí e Vale do Paraíba — cada uma com rede e abrangência próprias." },
+  { q:"Qual hospital é referência do Pleno em São José dos Campos?", opts:["Hospital Renascença", "Hospital São José", "Hospital Modelo", "Hospital Paulo Sacramento"], a:1, why:"No Vale do Paraíba, o Hospital São José (São José dos Campos) é a referência. Renascença=Campinas, Modelo=Sorocaba, Paulo Sacramento=Jundiaí." },
+  { q:"Quais benefícios acompanham o Pleno?", opts:["Qualivida, Teleconsulta e Clube de Vantagens", "Apenas teleconsulta", "Somente Clube de Vantagens", "Nenhum benefício adicional"], a:0, why:"Qualivida (programas gratuitos), Teleconsulta (+20 especialidades e PA 24h) e Clube de Vantagens." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

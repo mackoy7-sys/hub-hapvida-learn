@@ -521,18 +521,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"A partir de quando o acidente pessoal tem cobertura?", opts:["Imediatamente na assinatura","Após 24 horas da vigência do contrato","Após 30 dias","Após 180 dias"],
-    a:1, why:"Acidentes pessoais têm cobertura sem restrições após 24 horas da vigência do contrato." },
-  { q:"O que caracteriza uma emergência?", opts:["Qualquer dor","Risco imediato de vida ou de lesões irreparáveis","Consulta de rotina","Exame agendado"],
-    a:1, why:"Emergência = risco imediato de vida ou de lesões irreparáveis, sempre caracterizada pelo médico assistente." },
-  { q:"Em carência, a cobertura de urgência/emergência é limitada a:", opts:["48 horas","Até 12 horas ou até a necessidade de internação","7 dias","Não há cobertura"],
-    a:1, why:"Em carência, a cobertura fica limitada a até 12 horas de atendimento OU até o momento da internação." },
-  { q:"O que é considerado urgência pelo contrato?", opts:["Só doenças crônicas","Acidentes pessoais e complicações do processo gestacional","Cirurgias eletivas","Exames de rotina"],
-    a:1, why:"O contrato considera urgência os acidentes pessoais e as complicações no processo gestacional." },
-  { q:"Sobre a remoção em urgência/emergência:", opts:["Nunca é coberta","É garantida conforme o contrato, podendo ir para unidade do SUS","Só em plano nacional","Custa sempre à parte"],
-    a:1, why:"A remoção é garantida conforme as regras do contrato, podendo ocorrer para unidade do SUS quando a cobertura estiver limitada." },
-  { q:"Após a internação de um beneficiário em carência sem cobertura:", opts:["A operadora cobre tudo","A responsabilidade financeira da operadora se encerra (salvo previsão contratual)","O plano é cancelado","A carência zera"],
-    a:1, why:"A partir da internação, a responsabilidade financeira da operadora encerra-se, salvo previsão contratual." }
+  { q:"A partir de quando o acidente pessoal tem cobertura?", opts:["Após 24 horas da vigência do contrato", "Imediatamente na assinatura", "Após 30 dias", "Após 180 dias"], a:0, why:"Acidentes pessoais têm cobertura sem restrições após 24 horas da vigência do contrato." },
+  { q:"O que caracteriza uma emergência?", opts:["Qualquer dor", "Consulta de rotina", "Risco imediato de vida ou de lesões irreparáveis", "Exame agendado"], a:2, why:"Emergência = risco imediato de vida ou de lesões irreparáveis, sempre caracterizada pelo médico assistente." },
+  { q:"Em carência, a cobertura de urgência/emergência é limitada a:", opts:["48 horas", "Até 12 horas ou até a necessidade de internação", "7 dias", "Não há cobertura"], a:1, why:"Em carência, a cobertura fica limitada a até 12 horas de atendimento OU até o momento da internação." },
+  { q:"O que é considerado urgência pelo contrato?", opts:["Só doenças crônicas", "Exames de rotina", "Cirurgias eletivas", "Acidentes pessoais e complicações do processo gestacional"], a:3, why:"O contrato considera urgência os acidentes pessoais e as complicações no processo gestacional." },
+  { q:"Sobre a remoção em urgência/emergência:", opts:["É garantida conforme o contrato, podendo ir para unidade do SUS", "Nunca é coberta", "Só em plano nacional", "Custa sempre à parte"], a:0, why:"A remoção é garantida conforme as regras do contrato, podendo ocorrer para unidade do SUS quando a cobertura estiver limitada." },
+  { q:"Após a internação de um beneficiário em carência sem cobertura:", opts:["A operadora cobre tudo", "A responsabilidade financeira da operadora se encerra (salvo previsão contratual)", "O plano é cancelado", "A carência zera"], a:1, why:"A partir da internação, a responsabilidade financeira da operadora encerra-se, salvo previsão contratual." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

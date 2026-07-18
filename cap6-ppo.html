@@ -614,30 +614,14 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que caracteriza a linha PPO da Hapvida?",
-    opts:["Somente rede própria regional","Livre escolha de médicos e hospitais, com reembolso","Plano exclusivamente odontológico","Atendimento apenas em um estado"],
-    a:1, why:"O PPO é a linha de Livre Escolha: o cliente escolhe médicos e hospitais, dentro ou fora da rede, com reembolso e abrangência nacional." },
-  { q:"Qual produto é o topo do portfólio PPO?",
-    opts:["Advance 600","Premium 900","Infinity 1.000","Advance 700"],
-    a:2, why:"O Infinity 1.000 é o topo: a partir de 5 vidas, maior reembolso (R$ 400) e mais benefícios." },
-  { q:"A partir de quantas vidas é vendido o Advance 600?",
-    opts:["1 vida","2 vidas","3 vidas","5 vidas"],
-    a:0, why:"O Advance 600 (e o 700) são vendidos a partir de 1 vida. Premium Care a partir de 2, Premium 900 a partir de 3 e Infinity a partir de 5." },
-  { q:"O reembolso de consulta do Infinity 1.000 é de:",
-    opts:["R$ 75,00","R$ 96,00","R$ 240,00","R$ 400,00"],
-    a:3, why:"O reembolso de consulta sobe conforme a linha: R$ 75 (Advance 600), R$ 96 (Advance 700), R$ 240 (Premium) e R$ 400 (Infinity)." },
-  { q:"A retaguarda no Albert Einstein e Sírio-Libanês é cobertura de qual plano?",
-    opts:["Advance 600","Todos os planos PPO","Somente o Infinity","Somente o Premium 900"],
-    a:2, why:"A retaguarda de Pronto-Socorro e honorários de internação no Einstein e no Sírio-Libanês é cobertura exclusiva do plano Infinity." },
-  { q:"Sobre a odontologia no PPO, é correto afirmar:",
-    opts:["É um custo adicional obrigatório","Vem inclusa sem custo adicional, com cobertura nacional","Só cobre urgência","Não existe no PPO"],
-    a:1, why:"O plano odontológico completo vem incluso, sem custo adicional: cobertura nacional, +20 mil dentistas, urgência 24h. Válido para Individual, Super Simples e PME (até 99 vidas)." },
-  { q:"Quais produtos NÃO aceitam agregados nem prestador de serviço?",
-    opts:["Advance 600 e 700","Premium 900 e Infinity","Todos aceitam","Nenhum aceita"],
-    a:1, why:"Premium 900 e Infinity não aceitam agregados nem prestador de serviço; nas demais linhas os agregados entram até 53 anos." },
-  { q:"Como funciona a coparticipação do PPO?",
-    opts:["Valor livre, sem limite","30% com teto (limitador) que cresce conforme a linha","Sempre isenta","100% do valor do procedimento"],
-    a:1, why:"Em consultas e exames é 30% com um teto por procedimento, que cresce conforme a linha; terapias e internações têm valor fixo por linha." }
+  { q:"O que caracteriza a linha PPO da Hapvida?", opts:["Somente rede própria regional", "Livre escolha de médicos e hospitais, com reembolso", "Plano exclusivamente odontológico", "Atendimento apenas em um estado"], a:1, why:"O PPO é a linha de Livre Escolha: o cliente escolhe médicos e hospitais, dentro ou fora da rede, com reembolso e abrangência nacional." },
+  { q:"Qual produto é o topo do portfólio PPO?", opts:["Infinity 1.000", "Premium 900", "Advance 600", "Advance 700"], a:0, why:"O Infinity 1.000 é o topo: a partir de 5 vidas, maior reembolso (R$ 400) e mais benefícios." },
+  { q:"A partir de quantas vidas é vendido o Advance 600?", opts:["5 vidas", "2 vidas", "3 vidas", "1 vida"], a:3, why:"O Advance 600 (e o 700) são vendidos a partir de 1 vida. Premium Care a partir de 2, Premium 900 a partir de 3 e Infinity a partir de 5." },
+  { q:"O reembolso de consulta do Infinity 1.000 é de:", opts:["R$ 400,00", "R$ 96,00", "R$ 240,00", "R$ 75,00"], a:0, why:"O reembolso de consulta sobe conforme a linha: R$ 75 (Advance 600), R$ 96 (Advance 700), R$ 240 (Premium) e R$ 400 (Infinity)." },
+  { q:"A retaguarda no Albert Einstein e Sírio-Libanês é cobertura de qual plano?", opts:["Advance 600", "Todos os planos PPO", "Somente o Infinity", "Somente o Premium 900"], a:2, why:"A retaguarda de Pronto-Socorro e honorários de internação no Einstein e no Sírio-Libanês é cobertura exclusiva do plano Infinity." },
+  { q:"Sobre a odontologia no PPO, é correto afirmar:", opts:["É um custo adicional obrigatório", "Só cobre urgência", "Vem inclusa sem custo adicional, com cobertura nacional", "Não existe no PPO"], a:2, why:"O plano odontológico completo vem incluso, sem custo adicional: cobertura nacional, +20 mil dentistas, urgência 24h. Válido para Individual, Super Simples e PME (até 99 vidas)." },
+  { q:"Quais produtos NÃO aceitam agregados nem prestador de serviço?", opts:["Advance 600 e 700", "Premium 900 e Infinity", "Todos aceitam", "Nenhum aceita"], a:1, why:"Premium 900 e Infinity não aceitam agregados nem prestador de serviço; nas demais linhas os agregados entram até 53 anos." },
+  { q:"Como funciona a coparticipação do PPO?", opts:["Valor livre, sem limite", "100% do valor do procedimento", "Sempre isenta", "30% com teto (limitador) que cresce conforme a linha"], a:3, why:"Em consultas e exames é 30% com um teto por procedimento, que cresce conforme a linha; terapias e internações têm valor fixo por linha." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

@@ -565,18 +565,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que é a Governança Comercial (Área de Comercialização)?", opts:["A tabela de preços","A estrutura que organiza onde e como vendemos no Brasil","Um plano de saúde","O canal de reclamações"],
-    a:1, why:"É a estrutura que organiza as vendas no país — por regionais, filiais, abrangência e tipos de contratação." },
-  { q:"Em quantas Regionais o país é dividido?", opts:["Uma","Duas (Regional 1 e Regional 2)","Cinco","Vinte e sete"],
-    a:1, why:"São duas: Regional 1 (Minas, Centro-Oeste, Nordeste, Norte e Interior de SP) e Regional 2 (SP capital/metrô, Sul e Rio)." },
-  { q:"O Interior de São Paulo faz parte de qual Regional?", opts:["Regional 1","Regional 2","Nenhuma","Ambas"],
-    a:0, why:"O Interior de SP está na Regional 1; já São Paulo capital e região metropolitana estão na Regional 2." },
-  { q:"Pelo que uma Filial de Vendas é responsável?", opts:["Só pela cobrança","Por um conjunto de municípios (praça) e os tipos de contratação comercializados ali","Pela rede hospitalar","Pelo reajuste"],
-    a:1, why:"A filial responde por uma praça (conjunto de municípios) e define quais contratações são vendidas naquela praça." },
-  { q:"Quais tipos de contratação podem ser comercializados?", opts:["Apenas Individual","Individual, Super Simples, PME, Administradora e Coletivos Empresariais","Somente PME","Somente Empresarial"],
-    a:1, why:"Individual, Super Simples, PME, Administradora e Coletivos Empresariais — mas nem toda praça vende todos." },
-  { q:"O que fazer antes de vender numa praça?", opts:["Nada, pode vender em qualquer lugar","Confirmar se o município está na abrangência e qual contratação é comercializada","Ligar para a ANS","Esperar o reajuste"],
-    a:1, why:"Sempre identifique a regional/filial e confirme a abrangência do município e o tipo de contratação disponível." }
+  { q:"O que é a Governança Comercial (Área de Comercialização)?", opts:["A tabela de preços", "Um plano de saúde", "A estrutura que organiza onde e como vendemos no Brasil", "O canal de reclamações"], a:2, why:"É a estrutura que organiza as vendas no país — por regionais, filiais, abrangência e tipos de contratação." },
+  { q:"Em quantas Regionais o país é dividido?", opts:["Uma", "Cinco", "Duas (Regional 1 e Regional 2)", "Vinte e sete"], a:2, why:"São duas: Regional 1 (Minas, Centro-Oeste, Nordeste, Norte e Interior de SP) e Regional 2 (SP capital/metrô, Sul e Rio)." },
+  { q:"O Interior de São Paulo faz parte de qual Regional?", opts:["Ambas", "Regional 2", "Nenhuma", "Regional 1"], a:3, why:"O Interior de SP está na Regional 1; já São Paulo capital e região metropolitana estão na Regional 2." },
+  { q:"Pelo que uma Filial de Vendas é responsável?", opts:["Só pela cobrança", "Pelo reajuste", "Pela rede hospitalar", "Por um conjunto de municípios (praça) e os tipos de contratação comercializados ali"], a:3, why:"A filial responde por uma praça (conjunto de municípios) e define quais contratações são vendidas naquela praça." },
+  { q:"Quais tipos de contratação podem ser comercializados?", opts:["Apenas Individual", "Individual, Super Simples, PME, Administradora e Coletivos Empresariais", "Somente PME", "Somente Empresarial"], a:1, why:"Individual, Super Simples, PME, Administradora e Coletivos Empresariais — mas nem toda praça vende todos." },
+  { q:"O que fazer antes de vender numa praça?", opts:["Confirmar se o município está na abrangência e qual contratação é comercializada", "Nada, pode vender em qualquer lugar", "Ligar para a ANS", "Esperar o reajuste"], a:0, why:"Sempre identifique a regional/filial e confirme a abrangência do município e o tipo de contratação disponível." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

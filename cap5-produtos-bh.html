@@ -586,30 +586,14 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Como é organizado o portfólio de Belo Horizonte?",
-    opts:["10 produtos em 3 níveis","4 produtos em 2 níveis (rede própria e maior abrangência)","2 produtos apenas","Somente planos individuais"],
-    a:1, why:"São 4 produtos: Nosso Médico e Nosso Plano (rede própria) e Adapt 300 e Adapt 500 (maior abrangência)." },
-  { q:"Qual é o produto de entrada, mais acessível, em BH?",
-    opts:["Adapt 500","Adapt 300","Nosso Médico (a partir de R$ 101,73)","Nosso Plano"],
-    a:2, why:"O Nosso Médico é o mais acessível, a partir de R$ 101,73, na rede própria." },
-  { q:"Quais produtos têm abrangência estadual (todo o Minas Gerais)?",
-    opts:["Nosso Médico e Nosso Plano","Adapt 300 e Adapt 500","Somente o Adapt 500","Nenhum"],
-    a:1, why:"Os Adapt 300 e 500 têm abrangência estadual, unindo rede própria e credenciada em todo MG." },
-  { q:"Qual o desconto novidade do Adapt 500?",
-    opts:["Até 5%","Até 25%","Até 40%","Sem desconto"],
-    a:2, why:"O Adapt 500 tem reajuste com até 40% de desconto; o Adapt 300 até 25% e o Nosso Plano até 5%." },
-  { q:"Quais são os 3 tipos de rede de atendimento?",
-    opts:["Municipal, Estadual e Nacional","Rede Própria, Pronto-Socorro Credenciado e Rede Credenciada","Bronze, Prata e Ouro","Só rede própria"],
-    a:1, why:"A rede tem 3 tipos: Rede Própria, Pronto-Socorro Credenciado e Rede Credenciada." },
-  { q:"Como funciona a rede entre os produtos?",
-    opts:["Cada produto tem uma rede totalmente separada","É cumulativa: cada produto soma à rede do anterior","Todos têm exatamente a mesma rede","Só o Adapt tem rede"],
-    a:1, why:"A rede é cumulativa: rede própria (Nosso Médico/Plano) → Adapt 300 → Adapt 500, sempre somando." },
-  { q:"Quais produtos NÃO são vendidos no canal Individual?",
-    opts:["Nosso Médico e Nosso Plano","Adapt 300 e Adapt 500","Todos vendem individual","Nenhum vende individual"],
-    a:1, why:"Os Adapt 300 e 500 não vendem no individual — só a partir de 2 vidas, corporativo e adesão. Nosso Médico/Plano vendem em todos os canais." },
-  { q:"O plano odontológico completo (Rol da ANS) é incluído em vendas de saúde até quantas vidas?",
-    opts:["Até 30 vidas","Até 50 vidas","Até 99 vidas","Sem limite"],
-    a:2, why:"O odonto completo (Rol da ANS) vem incluído nas novas vendas de plano de saúde até 99 vidas." }
+  { q:"Como é organizado o portfólio de Belo Horizonte?", opts:["4 produtos em 2 níveis (rede própria e maior abrangência)", "10 produtos em 3 níveis", "2 produtos apenas", "Somente planos individuais"], a:0, why:"São 4 produtos: Nosso Médico e Nosso Plano (rede própria) e Adapt 300 e Adapt 500 (maior abrangência)." },
+  { q:"Qual é o produto de entrada, mais acessível, em BH?", opts:["Adapt 500", "Adapt 300", "Nosso Médico (a partir de R$ 101,73)", "Nosso Plano"], a:2, why:"O Nosso Médico é o mais acessível, a partir de R$ 101,73, na rede própria." },
+  { q:"Quais produtos têm abrangência estadual (todo o Minas Gerais)?", opts:["Nosso Médico e Nosso Plano", "Adapt 300 e Adapt 500", "Somente o Adapt 500", "Nenhum"], a:1, why:"Os Adapt 300 e 500 têm abrangência estadual, unindo rede própria e credenciada em todo MG." },
+  { q:"Qual o desconto novidade do Adapt 500?", opts:["Até 5%", "Até 40%", "Até 25%", "Sem desconto"], a:1, why:"O Adapt 500 tem reajuste com até 40% de desconto; o Adapt 300 até 25% e o Nosso Plano até 5%." },
+  { q:"Quais são os 3 tipos de rede de atendimento?", opts:["Municipal, Estadual e Nacional", "Bronze, Prata e Ouro", "Rede Própria, Pronto-Socorro Credenciado e Rede Credenciada", "Só rede própria"], a:2, why:"A rede tem 3 tipos: Rede Própria, Pronto-Socorro Credenciado e Rede Credenciada." },
+  { q:"Como funciona a rede entre os produtos?", opts:["Cada produto tem uma rede totalmente separada", "Só o Adapt tem rede", "Todos têm exatamente a mesma rede", "É cumulativa: cada produto soma à rede do anterior"], a:3, why:"A rede é cumulativa: rede própria (Nosso Médico/Plano) → Adapt 300 → Adapt 500, sempre somando." },
+  { q:"Quais produtos NÃO são vendidos no canal Individual?", opts:["Adapt 300 e Adapt 500", "Nosso Médico e Nosso Plano", "Todos vendem individual", "Nenhum vende individual"], a:0, why:"Os Adapt 300 e 500 não vendem no individual — só a partir de 2 vidas, corporativo e adesão. Nosso Médico/Plano vendem em todos os canais." },
+  { q:"O plano odontológico completo (Rol da ANS) é incluído em vendas de saúde até quantas vidas?", opts:["Até 30 vidas", "Até 50 vidas", "Sem limite", "Até 99 vidas"], a:3, why:"O odonto completo (Rol da ANS) vem incluído nas novas vendas de plano de saúde até 99 vidas." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

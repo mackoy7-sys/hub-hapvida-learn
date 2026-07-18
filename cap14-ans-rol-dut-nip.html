@@ -532,18 +532,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que é a ANS?", opts:["Um plano de saúde","A Agência Nacional de Saúde Suplementar, que regula o setor","Um hospital público","Um sindicato de médicos"],
-    a:1, why:"A ANS (criada em 2000, vinculada ao Ministério da Saúde) regula e fiscaliza os planos de saúde no Brasil." },
-  { q:"O que define o ROL de Procedimentos da ANS?", opts:["O preço dos planos","A cobertura mínima obrigatória dos planos","A rede de hospitais","O reajuste anual"],
-    a:1, why:"O ROL define a cobertura mínima obrigatória. A operadora pode cobrir mais, mas nunca menos." },
-  { q:"Sobre a atualização do ROL hoje:", opts:["A cada 5 anos","A cada 2 anos","De forma contínua","Nunca é atualizado"],
-    a:2, why:"Com as mudanças na Lei 9.656/98, o ROL passou a ser atualizado de forma contínua." },
-  { q:"O que são as DUT?", opts:["Diretrizes de Utilização — regras de elegibilidade clínica","Descontos em farmácia","Um tipo de carência","Documentos de identidade"],
-    a:0, why:"As DUT são regras clínicas de elegibilidade para alguns procedimentos do ROL; valem para contratos regulamentados e passam por auditoria médica." },
-  { q:"Qual o prazo de resposta de uma NIP assistencial?", opts:["24 horas","5 dias úteis","10 dias úteis","30 dias"],
-    a:1, why:"NIP assistencial (acesso à cobertura): 5 dias úteis. Não assistencial (boletos, reajustes): 10 dias úteis." },
-  { q:"A NIP é aberta por quem?", opts:["Pela operadora","Pelo médico","Pelo beneficiário, na ANS","Pelo hospital"],
-    a:2, why:"A NIP é a queixa aberta pelo beneficiário diretamente na ANS, como instrumento de mediação (RN 343)." }
+  { q:"O que é a ANS?", opts:["Um plano de saúde", "Um hospital público", "A Agência Nacional de Saúde Suplementar, que regula o setor", "Um sindicato de médicos"], a:2, why:"A ANS (criada em 2000, vinculada ao Ministério da Saúde) regula e fiscaliza os planos de saúde no Brasil." },
+  { q:"O que define o ROL de Procedimentos da ANS?", opts:["A cobertura mínima obrigatória dos planos", "O preço dos planos", "A rede de hospitais", "O reajuste anual"], a:0, why:"O ROL define a cobertura mínima obrigatória. A operadora pode cobrir mais, mas nunca menos." },
+  { q:"Sobre a atualização do ROL hoje:", opts:["A cada 5 anos", "De forma contínua", "A cada 2 anos", "Nunca é atualizado"], a:1, why:"Com as mudanças na Lei 9.656/98, o ROL passou a ser atualizado de forma contínua." },
+  { q:"O que são as DUT?", opts:["Documentos de identidade", "Descontos em farmácia", "Um tipo de carência", "Diretrizes de Utilização — regras de elegibilidade clínica"], a:3, why:"As DUT são regras clínicas de elegibilidade para alguns procedimentos do ROL; valem para contratos regulamentados e passam por auditoria médica." },
+  { q:"Qual o prazo de resposta de uma NIP assistencial?", opts:["24 horas", "10 dias úteis", "5 dias úteis", "30 dias"], a:2, why:"NIP assistencial (acesso à cobertura): 5 dias úteis. Não assistencial (boletos, reajustes): 10 dias úteis." },
+  { q:"A NIP é aberta por quem?", opts:["Pela operadora", "Pelo médico", "Pelo hospital", "Pelo beneficiário, na ANS"], a:3, why:"A NIP é a queixa aberta pelo beneficiário diretamente na ANS, como instrumento de mediação (RN 343)." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

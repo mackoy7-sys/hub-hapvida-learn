@@ -540,18 +540,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Qual o grande diferencial exclusivo para o público 59+?", opts:["Reembolso internacional","A partir dos 59 anos não há mais reajuste por faixa etária","Rede só em SP","Plano gratuito"],
-    a:1, why:"Aos 59 anos o cliente entra na última faixa etária da ANS — não há novos aumentos de mensalidade motivados pela idade. É previsibilidade e segurança financeira." },
-  { q:"O que valorizar na abordagem ao público 59+?", opts:["Só o preço","Prevenção, acompanhamento contínuo e o Nosso Médico","Apenas odonto","Velocidade da internet"],
-    a:1, why:"Valorize prevenção, acompanhamento contínuo, acesso facilitado e o Nosso Médico (médico de referência que conhece o histórico)." },
-  { q:"No 59+, quem USA MUITO os serviços se beneficia mais de:", opts:["Plano com coparticipação","Plano sem coparticipação (a copart encarece quem usa muito)","Não ter plano","Só teleconsulta"],
-    a:1, why:"Uso frequente → sem coparticipação (previsibilidade). A coparticipação encarece o mês de quem usa muito. Terapias sempre têm coparticipação." },
-  { q:"Ao identificar uma condição de saúde em tratamento (DLP):", opts:["Prometer cobertura imediata","Registrar e explicar a possível CPT (conforme ANS), sem alarmar nem induzir omissão","Recusar o cliente","Ignorar"],
-    a:1, why:"Registre e explique com naturalidade a possibilidade de CPT; nunca induza omissão nem prometa cobertura imediata — segue a análise da ANS. O cliente fica coberto para o resto desde o início." },
-  { q:"Na objeção “vivo de aposentadoria, achei caro”, um bom argumento é:", opts:["Só baixar o preço","Comparar com o custo do particular + lembrar que não há reajuste por faixa etária + oferecer opção com copart","Encerrar","Dizer que vai encarecer"],
-    a:1, why:"Compare com o custo alto do particular, reforce o “sem reajuste por faixa etária” e, se o valor pesa, ofereça a opção com coparticipação mantendo a rede Hapvida." },
-  { q:"Como iniciar a abordagem com esse público?", opts:["Falando rápido e indo direto ao preço","Com calma e boa dicção, avisando da gravação (LGPD) e entendendo a motivação","Só por mensagem","Presumindo o plano pela idade"],
-    a:1, why:"Fale com calma e boa dicção, avise sobre a gravação (LGPD) e entenda a motivação antes de recomendar — sem presumir pela idade nem começar pelo preço." }
+  { q:"Qual o grande diferencial exclusivo para o público 59+?", opts:["A partir dos 59 anos não há mais reajuste por faixa etária", "Reembolso internacional", "Rede só em SP", "Plano gratuito"], a:0, why:"Aos 59 anos o cliente entra na última faixa etária da ANS — não há novos aumentos de mensalidade motivados pela idade. É previsibilidade e segurança financeira." },
+  { q:"O que valorizar na abordagem ao público 59+?", opts:["Só o preço", "Velocidade da internet", "Apenas odonto", "Prevenção, acompanhamento contínuo e o Nosso Médico"], a:3, why:"Valorize prevenção, acompanhamento contínuo, acesso facilitado e o Nosso Médico (médico de referência que conhece o histórico)." },
+  { q:"No 59+, quem USA MUITO os serviços se beneficia mais de:", opts:["Plano com coparticipação", "Só teleconsulta", "Não ter plano", "Plano sem coparticipação (a copart encarece quem usa muito)"], a:3, why:"Uso frequente → sem coparticipação (previsibilidade). A coparticipação encarece o mês de quem usa muito. Terapias sempre têm coparticipação." },
+  { q:"Ao identificar uma condição de saúde em tratamento (DLP):", opts:["Prometer cobertura imediata", "Registrar e explicar a possível CPT (conforme ANS), sem alarmar nem induzir omissão", "Recusar o cliente", "Ignorar"], a:1, why:"Registre e explique com naturalidade a possibilidade de CPT; nunca induza omissão nem prometa cobertura imediata — segue a análise da ANS. O cliente fica coberto para o resto desde o início." },
+  { q:"Na objeção “vivo de aposentadoria, achei caro”, um bom argumento é:", opts:["Comparar com o custo do particular + lembrar que não há reajuste por faixa etária + oferecer opção com copart", "Só baixar o preço", "Encerrar", "Dizer que vai encarecer"], a:0, why:"Compare com o custo alto do particular, reforce o “sem reajuste por faixa etária” e, se o valor pesa, ofereça a opção com coparticipação mantendo a rede Hapvida." },
+  { q:"Como iniciar a abordagem com esse público?", opts:["Falando rápido e indo direto ao preço", "Só por mensagem", "Com calma e boa dicção, avisando da gravação (LGPD) e entendendo a motivação", "Presumindo o plano pela idade"], a:2, why:"Fale com calma e boa dicção, avise sobre a gravação (LGPD) e entenda a motivação antes de recomendar — sem presumir pela idade nem começar pelo preço." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

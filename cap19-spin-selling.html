@@ -589,20 +589,13 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que significa a sigla SPIN?", opts:["Situação, Problema, Implicação e Necessidade de solução","Serviço, Preço, Inovação e Negociação","Solução, Proposta, Interesse e Notícia","Situação, Preço, Investimento e Novidade"],
-    a:0, why:"SPIN = perguntas de Situação, Problema, Implicação e Necessidade de solução." },
-  { q:"Para que servem as perguntas de Implicação?", opts:["Apresentar o preço","Mostrar as consequências do problema e criar urgência","Agendar a próxima visita","Pedir indicações"],
-    a:1, why:"A Implicação amplia a dor — faz o cliente sentir que o problema é grande e caro, criando urgência (e fazendo o preço parecer pequeno)." },
-  { q:"Quando o cliente diz “está caro”, quase sempre significa:", opts:["Que ele não tem dinheiro","Que ainda não enxergou valor suficiente","Que quer um concorrente","Que a conversa acabou"],
-    a:1, why:"“Está caro” costuma ser falta de valor percebido, não falta de dinheiro. Por isso: construa valor antes do preço." },
-  { q:"Qual é a melhor primeira reação ao “está caro”?", opts:["Dar desconto imediato","Encerrar a venda","Perguntar “caro em relação a quê?” e voltar ao valor","Ignorar e insistir no produto"],
-    a:2, why:"Não baixe o preço na hora. Pergunte “caro em relação a quê?” para entender a comparação e retome o valor/as dores do cliente." },
-  { q:"Uma boa forma de trabalhar o preço é:", opts:["Sempre dar o menor preço","Decompor (valor por dia/por pessoa) e oferecer opção, não desconto","Falar só de características técnicas","Comparar só com o plano mais caro"],
-    a:1, why:"Decomponha o preço, mostre o custo de NÃO ter, ofereça uma opção de produto que caiba no bolso e lembre do reajuste abaixo do mercado — em vez de simplesmente descontar." },
-  { q:"O SPIN Selling funciona para:", opts:["Só planos empresariais","Só planos individuais","Tanto empresarial quanto individual/familiar","Apenas grandes contas"],
-    a:2, why:"A técnica é consultiva e vale para os dois: muda apenas o tipo de pergunta e os exemplos (empresa x família)." },
-  { q:"Ao apresentar a solução, o ideal é:", opts:["Listar todas as características","Vender benefícios ligados às necessidades que o cliente revelou","Falar só de preço","Não mencionar as dores do cliente"],
-    a:1, why:"Venda benefícios (não só características), conectando-os às necessidades explícitas que o cliente verbalizou no SPIN." }
+  { q:"O que significa a sigla SPIN?", opts:["Situação, Problema, Implicação e Necessidade de solução", "Serviço, Preço, Inovação e Negociação", "Solução, Proposta, Interesse e Notícia", "Situação, Preço, Investimento e Novidade"], a:0, why:"SPIN = perguntas de Situação, Problema, Implicação e Necessidade de solução." },
+  { q:"Para que servem as perguntas de Implicação?", opts:["Apresentar o preço", "Pedir indicações", "Agendar a próxima visita", "Mostrar as consequências do problema e criar urgência"], a:3, why:"A Implicação amplia a dor — faz o cliente sentir que o problema é grande e caro, criando urgência (e fazendo o preço parecer pequeno)." },
+  { q:"Quando o cliente diz “está caro”, quase sempre significa:", opts:["Que ele não tem dinheiro", "Que ainda não enxergou valor suficiente", "Que quer um concorrente", "Que a conversa acabou"], a:1, why:"“Está caro” costuma ser falta de valor percebido, não falta de dinheiro. Por isso: construa valor antes do preço." },
+  { q:"Qual é a melhor primeira reação ao “está caro”?", opts:["Dar desconto imediato", "Perguntar “caro em relação a quê?” e voltar ao valor", "Encerrar a venda", "Ignorar e insistir no produto"], a:1, why:"Não baixe o preço na hora. Pergunte “caro em relação a quê?” para entender a comparação e retome o valor/as dores do cliente." },
+  { q:"Uma boa forma de trabalhar o preço é:", opts:["Sempre dar o menor preço", "Falar só de características técnicas", "Decompor (valor por dia/por pessoa) e oferecer opção, não desconto", "Comparar só com o plano mais caro"], a:2, why:"Decomponha o preço, mostre o custo de NÃO ter, ofereça uma opção de produto que caiba no bolso e lembre do reajuste abaixo do mercado — em vez de simplesmente descontar." },
+  { q:"O SPIN Selling funciona para:", opts:["Tanto empresarial quanto individual/familiar", "Só planos individuais", "Só planos empresariais", "Apenas grandes contas"], a:0, why:"A técnica é consultiva e vale para os dois: muda apenas o tipo de pergunta e os exemplos (empresa x família)." },
+  { q:"Ao apresentar a solução, o ideal é:", opts:["Listar todas as características", "Falar só de preço", "Vender benefícios ligados às necessidades que o cliente revelou", "Não mencionar as dores do cliente"], a:2, why:"Venda benefícios (não só características), conectando-os às necessidades explícitas que o cliente verbalizou no SPIN." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

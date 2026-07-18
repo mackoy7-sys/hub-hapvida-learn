@@ -534,18 +534,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"O que garante a RN 488 (PAD)?", opts:["Desconto na mensalidade","Que o demitido/aposentado mantenha o plano empresarial pagando as mensalidades","Portabilidade automática para plano individual","Isenção de carência"],
-    a:1, why:"A RN 488 permite ao ex-empregado/aposentado que contribuiu manter o plano empresarial, assumindo o pagamento." },
-  { q:"Qual o prazo para solicitar adesão ao PAD após a demissão?", opts:["7 dias","15 dias","30 dias","90 dias"],
-    a:2, why:"São 30 dias a contar da comunicação da demissão para solicitar a adesão ao PAD." },
-  { q:"Sobre o cancelamento pela RN 561:", opts:["Pode ser desfeito em 7 dias","É imediato e irrevogável, processado só pela Central de Retenção","Qualquer canal processa","Só o médico pode pedir"],
-    a:1, why:"O cancelamento é imediato e irrevogável; só a Central de Retenção processa, e só o titular/responsável legal pode solicitar." },
-  { q:"Os prazos da RN 566 são contados em:", opts:["Dias corridos","Dias úteis, a partir do dia da solicitação","Horas","Meses"],
-    a:1, why:"Os prazos da RN 566 são em dias úteis, contados a partir do dia da solicitação (que já é o 1º dia)." },
-  { q:"Qual o prazo máximo para uma consulta básica (RN 566)?", opts:["3 dias úteis","7 dias úteis","14 dias úteis","21 dias úteis"],
-    a:1, why:"Consulta básica: 7 dias úteis. Demais especialidades: 14. Laboratório: 3. Alta complexidade/internação eletiva: 21." },
-  { q:"Se não houver prestador na região, a operadora deve:", opts:["Cancelar o pedido","Garantir transporte ou reembolso integral em até 30 dias","Cobrar taxa extra","Encaminhar só para o SUS"],
-    a:1, why:"Sem prestador disponível, a operadora garante transporte (com aviso prévio) ou reembolso integral em até 30 dias." }
+  { q:"O que garante a RN 488 (PAD)?", opts:["Desconto na mensalidade", "Isenção de carência", "Portabilidade automática para plano individual", "Que o demitido/aposentado mantenha o plano empresarial pagando as mensalidades"], a:3, why:"A RN 488 permite ao ex-empregado/aposentado que contribuiu manter o plano empresarial, assumindo o pagamento." },
+  { q:"Qual o prazo para solicitar adesão ao PAD após a demissão?", opts:["7 dias", "15 dias", "30 dias", "90 dias"], a:2, why:"São 30 dias a contar da comunicação da demissão para solicitar a adesão ao PAD." },
+  { q:"Sobre o cancelamento pela RN 561:", opts:["Pode ser desfeito em 7 dias", "É imediato e irrevogável, processado só pela Central de Retenção", "Qualquer canal processa", "Só o médico pode pedir"], a:1, why:"O cancelamento é imediato e irrevogável; só a Central de Retenção processa, e só o titular/responsável legal pode solicitar." },
+  { q:"Os prazos da RN 566 são contados em:", opts:["Dias corridos", "Meses", "Horas", "Dias úteis, a partir do dia da solicitação"], a:3, why:"Os prazos da RN 566 são em dias úteis, contados a partir do dia da solicitação (que já é o 1º dia)." },
+  { q:"Qual o prazo máximo para uma consulta básica (RN 566)?", opts:["3 dias úteis", "14 dias úteis", "7 dias úteis", "21 dias úteis"], a:2, why:"Consulta básica: 7 dias úteis. Demais especialidades: 14. Laboratório: 3. Alta complexidade/internação eletiva: 21." },
+  { q:"Se não houver prestador na região, a operadora deve:", opts:["Garantir transporte ou reembolso integral em até 30 dias", "Cancelar o pedido", "Cobrar taxa extra", "Encaminhar só para o SUS"], a:0, why:"Sem prestador disponível, a operadora garante transporte (com aviso prévio) ou reembolso integral em até 30 dias." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");

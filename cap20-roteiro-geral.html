@@ -552,18 +552,12 @@ document.addEventListener("keydown",e=>{
 });
 /* ================= QUIZ ================= */
 const quizData=[
-  { q:"Qual a regra de ouro sobre o preço no atendimento?", opts:["Falar o preço logo no início","Gerar valor antes — nunca começar pelo preço","Dar sempre o menor preço","Só falar preço por e-mail"],
-    a:1, why:"Nunca comece pelo preço: gere valor primeiro, conectando benefícios à dor do cliente." },
-  { q:"Na frequência de uso, o cliente que USA POUCO combina mais com:", opts:["Plano sem coparticipação","Plano com coparticipação (mensalidade menor)","Não contratar","Só odonto"],
-    a:1, why:"Usa pouco → coparticipação (mensalidade menor). Usa muito → sem coparticipação p/ consultas e exames (previsibilidade). Terapias sempre têm coparticipação." },
-  { q:"Ao citar a RN 566 na negociação, você deve:", opts:["Prometer atendimento imediato","Apresentar como prazos máximos regulamentares, sem prometer prazos menores","Garantir a menor espera do mercado","Não mencionar prazos"],
-    a:1, why:"Compliance ANS: a RN 566 define prazos MÁXIMOS. Não prometa atendimento imediato nem prazos menores — use só dados oficiais." },
-  { q:"Diante do “achei caro”, a melhor primeira reação é:", opts:["Baixar o preço na hora","Perguntar “comparado com o quê?” e, se preciso, oferecer a opção com coparticipação/econômica","Encerrar o atendimento","Insistir no plano mais caro"],
-    a:1, why:"Descubra o parâmetro (“comparado com o quê?”) e ofereça a alternativa que cabe no bolso mantendo a segurança da rede Hapvida." },
-  { q:"Sobre a Declaração de Saúde no fechamento:", opts:["Sugerir que o cliente omita condições","Coletar com naturalidade, sem induzir omissão nem prometer cobertura/CPT","Prometer que não haverá CPT","Ignorar doenças preexistentes"],
-    a:1, why:"Colete com naturalidade; nunca induza omissão nem prometa cobertura imediata ou ausência de CPT — a proposta segue a análise da ANS." },
-  { q:"O que caracteriza a etapa de Implantação?", opts:["Encerrar o contato após a venda","Acompanhar o cliente: análise, implantação, primeiro acesso e boas-vindas","Renegociar o preço","Cancelar a proposta"],
-    a:1, why:"Na implantação o cliente segue acompanhado: confirmação, análise, primeiro acesso, pagamento e boas-vindas com orientação do app/site." }
+  { q:"Qual a regra de ouro sobre o preço no atendimento?", opts:["Falar o preço logo no início", "Gerar valor antes — nunca começar pelo preço", "Dar sempre o menor preço", "Só falar preço por e-mail"], a:1, why:"Nunca comece pelo preço: gere valor primeiro, conectando benefícios à dor do cliente." },
+  { q:"Na frequência de uso, o cliente que USA POUCO combina mais com:", opts:["Plano sem coparticipação", "Não contratar", "Plano com coparticipação (mensalidade menor)", "Só odonto"], a:2, why:"Usa pouco → coparticipação (mensalidade menor). Usa muito → sem coparticipação p/ consultas e exames (previsibilidade). Terapias sempre têm coparticipação." },
+  { q:"Ao citar a RN 566 na negociação, você deve:", opts:["Apresentar como prazos máximos regulamentares, sem prometer prazos menores", "Prometer atendimento imediato", "Garantir a menor espera do mercado", "Não mencionar prazos"], a:0, why:"Compliance ANS: a RN 566 define prazos MÁXIMOS. Não prometa atendimento imediato nem prazos menores — use só dados oficiais." },
+  { q:"Diante do “achei caro”, a melhor primeira reação é:", opts:["Perguntar “comparado com o quê?” e, se preciso, oferecer a opção com coparticipação/econômica", "Baixar o preço na hora", "Encerrar o atendimento", "Insistir no plano mais caro"], a:0, why:"Descubra o parâmetro (“comparado com o quê?”) e ofereça a alternativa que cabe no bolso mantendo a segurança da rede Hapvida." },
+  { q:"Sobre a Declaração de Saúde no fechamento:", opts:["Sugerir que o cliente omita condições", "Ignorar doenças preexistentes", "Prometer que não haverá CPT", "Coletar com naturalidade, sem induzir omissão nem prometer cobertura/CPT"], a:3, why:"Colete com naturalidade; nunca induza omissão nem prometa cobertura imediata ou ausência de CPT — a proposta segue a análise da ANS." },
+  { q:"O que caracteriza a etapa de Implantação?", opts:["Encerrar o contato após a venda", "Cancelar a proposta", "Renegociar o preço", "Acompanhar o cliente: análise, implantação, primeiro acesso e boas-vindas"], a:3, why:"Na implantação o cliente segue acompanhado: confirmação, análise, primeiro acesso, pagamento e boas-vindas com orientação do app/site." },
 ];
 const quizEl=document.getElementById("quiz"),quizBody=document.getElementById("quizBody"),
   quizProg=document.getElementById("quizProgress");
