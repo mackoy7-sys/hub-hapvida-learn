@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador de Conversa · EugenIA Learn</title>
+<script src="hl-auth.js"></script>
+<style>
+:root{
+  --wa-teal:#00584f; --wa-teal2:#00776b; --wa-bg:#e4dcd4; --wa-out:#d9fdd3;
+  --wa-in:#ffffff; --hap:#013BA6; --good:#1b8a4c; --mid:#b26a00; --bad:#c62828;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#0f172a;display:flex;justify-content:center;align-items:stretch;min-height:100vh}
+#phone{width:100%;max-width:460px;background:var(--wa-bg);display:flex;flex-direction:column;
+  height:100vh;height:100dvh;position:relative;box-shadow:0 0 60px rgba(0,0,0,.5)}
+@media(min-width:520px){#phone{margin:14px 0;height:calc(100vh - 28px);border-radius:22px;overflow:hidden}}
+
+/* ---------- header ---------- */
+header{background:var(--wa-teal);color:#fff;padding:10px 12px;display:flex;align-items:center;gap:10px;
+  min-height:60px;flex:0 0 auto;z-index:5}
+header .back{font-size:22px;cursor:pointer;padding:4px 6px;border-radius:50%;user-select:none;display:none}
+header .back:active{background:rgba(255,255,255,.15)}
+.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:15px;flex:0 0 40px}
+header .hinfo{flex:1;min-width:0}
+header .hname{font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .hstatus{font-size:12px;opacity:.85;height:15px}
+header .brand{font-size:10px;text-align:right;opacity:.9;line-height:1.25}
+
+/* ---------- home (lista de conversas) ---------- */
+#home{flex:1;overflow-y:auto;background:#fff;display:flex;flex-direction:column}
+.intro{background:linear-gradient(135deg,var(--hap),#0653d3);color:#fff;padding:18px 16px 16px}
+.intro h1{font-size:19px;margin-bottom:4px}
+.intro p{font-size:12.5px;opacity:.92;line-height:1.45}
+.chat-item{display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:center;background:#fff}
+.chat-item:hover{background:#f6f6f6}
+.chat-item .av{width:49px;height:49px;flex:0 0 49px;font-size:17px}
+.ci-body{flex:1;min-width:0}
+.ci-top{display:flex;justify-content:space-between;align-items:baseline}
+.ci-name{font-weight:600;font-size:15.5px;color:#111}
+.ci-cap{font-size:10.5px;color:var(--hap);font-weight:700;background:#eaf0ff;border-radius:8px;padding:2px 7px;white-space:nowrap}
+.ci-prev{font-size:13px;color:#667;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.ci-sub{font-size:11px;color:#99a;margin-top:2px}
+.ci-best{font-size:11px;margin-top:3px;color:#b26a00}
+.homefoot{padding:14px 16px;font-size:11px;color:#889;text-align:center;margin-top:auto}
+
+/* ---------- chat ---------- */
+#chat{flex:1;overflow-y:auto;padding:14px 10px 8px;display:none;
+  background:var(--wa-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" opacity="0.05"><circle cx="12" cy="14" r="4" fill="%23000"/><rect x="52" y="8" width="9" height="9" rx="2" fill="%23000"/><path d="M20 60 l8 -10 8 10z" fill="%23000"/><circle cx="70" cy="66" r="5" fill="none" stroke="%23000" stroke-width="2"/></svg>')}
+.chip{align-self:center;background:#dff3fb;color:#111;font-size:11.5px;padding:5px 12px;border-radius:8px;
+  margin:6px auto 10px;max-width:88%;text-align:center;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.row{display:flex;margin:2px 0}
+.row.in{justify-content:flex-start}
+.row.out{justify-content:flex-end}
+.bub{max-width:82%;padding:7px 10px 6px;border-radius:9px;font-size:14px;line-height:1.38;
+  box-shadow:0 1px 1px rgba(0,0,0,.12);position:relative;white-space:pre-wrap;word-wrap:break-word}
+.in .bub{background:var(--wa-in);border-top-left-radius:2px}
+.out .bub{background:var(--wa-out);border-top-right-radius:2px}
+.meta{font-size:10px;color:#8b98a0;text-align:right;margin-top:3px;user-select:none}
+.meta .tick{color:#53bdeb;font-size:11px;letter-spacing:-2px}
+.typing .bub{background:var(--wa-in);display:inline-flex;gap:4px;padding:11px 14px}
+.dot{width:7px;height:7px;border-radius:50%;background:#9ab;animation:blink 1.1s infinite}
+.dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+
+/* coach */
+.coach{align-self:center;max-width:92%;margin:8px auto;font-size:12.5px;line-height:1.4;border-radius:10px;
+  padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.coach b{display:block;margin-bottom:2px;font-size:12px}
+.coach.g{background:#e2f6e6;border-left:4px solid var(--good);color:#0d4f28}
+.coach.m{background:#fff4dc;border-left:4px solid var(--mid);color:#6b4300}
+.coach.b{background:#ffe3e3;border-left:4px solid var(--bad);color:#7f1d1d}
+
+/* ---------- options ---------- */
+#opts{flex:0 0 auto;background:#f0f2f5;border-top:1px solid #e0e0e0;padding:8px;display:none;max-height:46vh;overflow-y:auto}
+#opts .optlabel{font-size:11px;color:#556;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin:2px 4px 7px}
+.opt{background:#fff;border:1.5px solid #d7dde3;border-radius:12px;padding:10px 12px;font-size:13.5px;
+  line-height:1.4;margin-bottom:7px;cursor:pointer;transition:border-color .12s, background .12s}
+.opt:hover{border-color:var(--wa-teal2);background:#f4fbf9}
+.opt:active{background:#e8f5f0}
+.optnum{display:inline-flex;width:19px;height:19px;border-radius:50%;background:var(--wa-teal);color:#fff;
+  font-size:11px;font-weight:700;align-items:center;justify-content:center;margin-right:7px;vertical-align:-4px}
+#next{display:none;text-align:center;padding:10px}
+#next button, .bigbtn{background:var(--wa-teal);color:#fff;border:0;border-radius:24px;padding:11px 26px;
+  font-size:14.5px;font-weight:600;cursor:pointer}
+#next button:active{background:var(--wa-teal2)}
+
+/* ---------- overlays ---------- */
+.overlay{position:absolute;inset:0;background:rgba(8,20,30,.78);display:none;align-items:center;
+  justify-content:center;z-index:20;padding:18px}
+.card{background:#fff;border-radius:16px;max-width:400px;width:100%;max-height:92%;overflow-y:auto;padding:20px 18px}
+.card h2{font-size:18px;color:var(--hap);margin-bottom:8px}
+.card p{font-size:13.5px;color:#334;line-height:1.5;margin-bottom:10px}
+.card .tagcap{display:inline-block;font-size:11px;font-weight:700;color:var(--hap);background:#eaf0ff;border-radius:8px;padding:3px 9px;margin-bottom:8px}
+.stars{font-size:34px;text-align:center;letter-spacing:4px;margin:4px 0 2px}
+.scorebig{text-align:center;font-size:15px;color:#334;margin-bottom:12px}
+.scorebig b{font-size:22px;color:var(--hap)}
+.stg{display:flex;align-items:center;gap:8px;font-size:12.5px;margin-bottom:6px;color:#334}
+.stg .nm{width:96px;flex:0 0 96px;font-weight:600}
+.bar{flex:1;height:9px;background:#e8ecf1;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#25a35a,#7ed957)}
+.stg .pc{width:40px;text-align:right;font-weight:700}
+.flags{background:#fff3f3;border:1px solid #ffcdd2;border-radius:10px;padding:9px 12px;margin:10px 0}
+.flags h3{font-size:12.5px;color:var(--bad);margin-bottom:4px}
+.flags li{font-size:12px;color:#7f1d1d;margin-left:16px;line-height:1.5}
+.rev{border-top:1px solid #eee;padding-top:8px;margin-top:6px}
+.rev h3{font-size:13px;color:#334;margin-bottom:6px}
+.rev-item{font-size:12px;color:#445;background:#f7f8fa;border-radius:8px;padding:7px 9px;margin-bottom:6px;line-height:1.45}
+.rev-item b{color:var(--bad)}
+.rev-item .ok{color:var(--good);font-weight:600}
+.btnrow{display:flex;gap:8px;margin-top:14px}
+.btnrow button{flex:1;border:0;border-radius:22px;padding:11px 0;font-size:14px;font-weight:600;cursor:pointer}
+.btn-p{background:var(--hap);color:#fff}
+.btn-s{background:#e8ecf1;color:#334}
+</style>
+</head>
+<body>
+<div id="phone">
+  <header>
+    <span class="back" id="btnBack">‹</span>
+    <div class="av" id="hAv" style="background:var(--hap)">💬</div>
+    <div class="hinfo">
+      <div class="hname" id="hName">Simulador de Conversa</div>
+      <div class="hstatus" id="hStatus">EugenIA Learn · Roteiros &amp; Scripts</div>
+    </div>
+    <div class="brand">Hapvida<br>Vendas Digital</div>
+  </header>
+
+  <div id="home">
+    <div class="intro">
+      <h1>💬 Simulador de Conversa</h1>
+      <p>Pratique os roteiros da EugenIA Learn num chat estilo WhatsApp. Em cada mensagem do cliente,
+      escolha a melhor resposta — a EugenIA avalia cada escolha e no final você recebe sua nota por etapa do POP
+      (Qualificação · Negociação · Fechamento · Implantação) e os alertas de compliance.</p>
+    </div>
+    <div id="chatlist"></div>
+    <div class="homefoot">EugenIA Learn · baseado nos Caps. 20, 21, 22 e 26 (Roteiros | Scripts)<br><a href="index.html" style="color:#0956c6;font-weight:600;text-decoration:none">‹ Voltar à EugenIA Learn</a></div>
+  </div>
+
+  <div id="chat"></div>
+
+  <div id="opts">
+    <div class="optlabel">✍️ Escolha a sua resposta</div>
+    <div id="optbtns"></div>
+  </div>
+  <div id="next"><button id="btnNext">Continuar ›</button></div>
+
+  <div class="overlay" id="ovMission"><div class="card">
+    <span class="tagcap" id="mCap"></span>
+    <h2 id="mTitle"></h2>
+    <p id="mText"></p>
+    <p style="font-size:12px;color:#889">Dica: as respostas aparecem em ordem aleatória. Leia com atenção — algumas parecem boas, mas ferem o roteiro ou o compliance.</p>
+    <div class="btnrow">
+      <button class="btn-s" id="mBack">‹ Voltar</button>
+      <button class="btn-p" id="mStart">Iniciar conversa</button>
+    </div>
+  </div></div>
+
+  <div class="overlay" id="ovResult"><div class="card" id="resCard"></div></div>
+</div>
+
+<script>
+const DATA = [{"id": "geral", "cap": "Cap. 20 · Roteiro Geral (POP)", "nome": "Juliana Andrade", "sub": "34 anos · SP capital · lead da EugenIA · plano só para ela", "avatar": "JA", "cor": "#7e57c2", "preview": "Oi, fiz uma cotação no site de vocês…", "missao": "Juliana cotou no site (veio da EugenIA) e quer saber preço logo de cara. Conduza pelo POP: qualifique antes de precificar, gere valor, trate objeções e feche.", "turns": [{"stage": "q", "client": ["Oi, boa tarde! Fiz uma cotação no site de vocês. Queria saber o valor do plano 🙂"], "opts": [{"t": "Olá, Juliana! Aqui é o(a) [seu nome], consultor(a) Hapvida 😊 Nosso atendimento fica registrado, ok? Antes de falar de valores, deixa eu entender rapidinho seu perfil para indicar a opção que realmente faça sentido pra você.", "p": 2, "fb": "Abertura do roteiro: nome + empresa + aviso de registro (LGPD) e diagnóstico ANTES do preço."}, {"t": "Boa tarde! Segue a tabela: Nosso Médico R$ 79,35 · Smart Up R$ 95,38 · Smart Flex R$ 115,46. Qual você prefere?", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "Preço nunca vem antes do diagnóstico — sem entender o perfil, a conversa vira leilão de preço."}, {"t": "Oi Juliana, tudo bem? Quanto você pretende investir por mês?", "p": 1, "fb": "Simpático, mas começar pelo orçamento ancora a conversa no preço — e faltou se apresentar (nome + empresa) e avisar do registro (LGPD)."}]}, {"stage": "q", "client": ["Ah, mas eu já preenchi um monte de coisa com a EugenIA no site… vou ter que repetir tudo? 😩"], "opts": [{"t": "Não precisa! Já estou com seus dados aqui: São Paulo, 34 anos, plano só pra você. Só me confirma uma coisa: você tem plano de saúde hoje?", "p": 2, "fb": "Cliente veio da EugenIA → aproveite os dados já coletados e valide apenas o necessário."}, {"t": "Preciso sim, é o procedimento: me passa nome completo, cidade, idade e CPF, por favor.", "p": 0, "fb": "Repetir perguntas já respondidas deixa o atendimento burocrático — o roteiro manda usar o histórico da EugenIA."}, {"t": "Pode deixar, vou ser rápida! Só me diz de novo sua cidade e sua idade?", "p": 1, "fb": "Melhorou o tom, mas ainda repetiu o que a EugenIA já coletou."}]}, {"stage": "q", "client": ["Não tenho plano, não.", "Cansei de pagar consulta particular e esperar agenda… quero mais praticidade."], "opts": [{"t": "Entendi! E me conta: com que frequência você costuma passar em consultas, fazer exames ou acompanhar com algum especialista?", "p": 2, "fb": "A pergunta-chave da frequência de uso — é ela que define a modalidade com ou sem coparticipação."}, {"t": "Legal! E o que é mais importante pra você: valor, hospital, médico ou atendimento?", "p": 1, "fb": "Boa pergunta do diagnóstico, mas a pergunta-chave (frequência de uso) ficou de fora."}, {"t": "Perfeito, então o Smart Flex resolve! Posso fechar pra você?", "p": 0, "fb": "Pular a sondagem e empurrar produto é o oposto da venda consultiva."}]}, {"stage": "q", "client": ["Ah, vou pouco ao médico… umas duas vezes por ano, um check-up e olhe lá."], "opts": [{"t": "Pelo seu perfil de uso, uma opção COM coparticipação costuma compensar: mensalidade menor e você só paga um valor pequeno quando usa. Faz sentido?", "p": 2, "fb": "Usa pouco → coparticipação compensa (mensalidade menor). Recomendação alinhada ao perfil."}, {"t": "Então recomendo um plano SEM coparticipação, pra você ter previsibilidade total.", "p": 0, "fb": "Sem coparticipação é indicado para quem usa MUITO; para uso eventual, encarece sem necessidade."}, {"t": "Temos com e sem coparticipação, os dois são ótimos. Você que sabe! 😄", "p": 1, "fb": "O consultor recomenda com base no perfil — devolver a decisão sem orientação não é consultivo."}]}, {"stage": "q", "client": ["Coparticipação? Como assim? 😅"], "opts": [{"t": "Funciona assim: a mensalidade fica mais baixa e você paga um valor pequeno só quando usa, tipo numa consulta ou exame. Se usar pouco, economiza; e se precisar, a cobertura tá garantida do mesmo jeito 😉", "p": 2, "fb": "Explicação sem tecnicismos — exatamente o script do roteiro."}, {"t": "É um percentual de custeio incidente sobre o evento assistencial, conforme cláusula contratual.", "p": 0, "fb": "Tecnicês afasta o cliente. Explique em linguagem simples."}, {"t": "Depois te explico direitinho! Deixa eu te passar os valores primeiro.", "p": 1, "fb": "Dúvida não respondida agora vira objeção na hora do fechamento."}]}, {"stage": "n", "client": ["Entendi! Gostei.", "E quanto fica então?"], "opts": [{"t": "Só confirmando: você busca praticidade pra consultas e exames, plano só pra você, com uso eventual. Certo? Hoje uma consulta particular custa de R$ 300 a R$ 500. Te trago 2 opções que cabem nisso: a recomendada (com copart) fica em R$ XX/mês, e tenho também uma econômica.", "p": 2, "fb": "Validação do entendimento + ancoragem no custo particular + 2 opções antes do número. Negociação completa."}, {"t": "Fica R$ XX por mês.", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "Preço seco, sem valor construído nem ancoragem — o cliente só tem o número pra avaliar."}, {"t": "R$ XX por mês e você é atendida na hora, sem fila — no máximo 24h pra qualquer consulta!", "p": 0, "flag": "RN 566 — prazos máximos", "fb": "⚠️ Compliance: a RN 566 define prazos MÁXIMOS regulamentares. Nunca prometa atendimento imediato nem prazos menores."}]}, {"stage": "n", "client": ["Hmm, achei um pouco caro 😕"], "opts": [{"t": "Entendo! Caro comparado com o quê? Uma única consulta particular pode custar num dia mais do que a mensalidade do plano. E se o valor for mesmo o ponto central, te mostro a opção econômica com coparticipação, mantendo a segurança da rede Hapvida.", "p": 2, "fb": "Tratamento do roteiro para \"achei caro\": pergunta de descoberta + comparação + alternativa que preserva a rede."}, {"t": "Consigo ver um desconto especial, mas só se fechar hoje! 🔥", "p": 0, "fb": "Desconto inventado não existe no roteiro — cria falsa promessa e queima a credibilidade."}, {"t": "Mas o plano vale muito a pena! Tem teleconsulta, clube de vantagens, rede enorme…", "p": 1, "fb": "Listar benefícios soltos, sem conectar com a necessidade dela, não trata a objeção real."}]}, {"stage": "n", "client": ["Vou conversar com meu marido antes, ok?"], "opts": [{"t": "Claro, decisão de vocês dois! O que você acha que ele vai querer saber? Já te deixo com os pontos na mão: cobertura, rede e o custo menor que o particular. Posso te chamar amanhã às 19h pra gente fechar juntos?", "p": 2, "fb": "Valida a decisão conjunta, antecipa as dúvidas do cônjuge, arma a cliente e agenda o retorno."}, {"t": "O plano é pra você, ele nem precisa participar, né? 😅", "p": 0, "fb": "Desvalorizar a decisão conjunta quebra a confiança — a influência de terceiros é real."}, {"t": "Tranquilo! Qualquer coisa me chama 👍", "p": 1, "fb": "Sem próximo passo combinado, a venda esfria. Sempre agende o retorno."}]}, {"stage": "f", "client": ["Falei com ele, vamos fechar! 🎉"], "opts": [{"t": "Que ótima notícia! 🎉 Vou iniciar seu cadastro. Me envia: foto do RG (com CPF) ou CNH, comprovante de residência; e por escrito: peso/altura, e-mail e celular que receba SMS. Ah, e você tem alguma condição de saúde em tratamento? Essa informação entra na sua Declaração de Saúde, tá?", "p": 2, "fb": "Fechamento assumido: avança para os documentos do roteiro e coleta a Declaração de Saúde com naturalidade."}, {"t": "Legal! Então… você quer mesmo fechar? Tem certeza? Posso mandar a lista de documentos?", "p": 1, "fb": "O roteiro pede fechamento ASSUMIDO: em vez de perguntar de novo, avance para o próximo passo."}, {"t": "Ótimo! Ah, e na Declaração de Saúde marca que não tem nenhuma doença, agiliza a análise 😉", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Compliance GRAVE: nunca induza omissão na Declaração de Saúde. Condições preexistentes passam pela análise prevista (CPT), conforme a ANS."}]}, {"stage": "i", "client": ["Enviei tudo! E agora?"], "opts": [{"t": "Recebi toda a documentação e já iniciei a implantação ✅ Sua proposta vai para análise e eu te aviso de cada atualização. Quando aprovar, chega um link por SMS/e-mail pro seu 1º acesso — e eu te oriento no pagamento e nas carteirinhas. Qualquer dúvida, me chama!", "p": 2, "fb": "Implantação com acompanhamento: o cliente sente que continua assistido até o plano ativar."}, {"t": "Show. Agora é só aguardar o sistema. Qualquer coisa liga na central!", "p": 0, "fb": "Abandonar o cliente no pós-venda gera desistência — acompanhe até a implantação."}, {"t": "Recebido! ✅", "p": 1, "fb": "Confirmou, mas faltou explicar os próximos passos (análise, 1º acesso, pagamento)."}]}], "outro": "Perfeito! Obrigada pela atenção 💙"}, {"id": "kids", "cap": "Cap. 21 · Roteiro 0 a 18 anos", "nome": "Camila Souza", "sub": "Mãe do Théo (7 anos) · busca segurança e prevenção", "avatar": "CS", "cor": "#ef6c00", "preview": "Quero ver plano de saúde pro meu filho…", "missao": "Camila quer um plano para o filho Théo, de 7 anos. Foco do roteiro 0-18: segurança, prevenção e tranquilidade — sem presumir o plano pela idade e com atenção à CPT (ele faz fono).", "turns": [{"stage": "q", "client": ["Oi! Quero ver plano de saúde pro meu filho Théo, ele tem 7 anos."], "opts": [{"t": "Olá, Camila! Sou [seu nome], consultor(a) Hapvida 😊 Que legal cuidar da saúde do Théo! Nosso atendimento fica registrado, tudo bem? Me conta: além dele, mais alguém da família teria interesse, ou o plano é só pra ele?", "p": 2, "fb": "Abertura do roteiro: apresentação + LGPD + primeira pergunta do diagnóstico (quem entra no plano)."}, {"t": "Boa tarde! Plano infantil sai a partir de R$ XX. Quer que eu simule?", "p": 1, "fb": "Respondeu rápido, mas já abriu pelo preço — o roteiro manda entender a necessidade antes."}, {"t": "Oi! Segue a tabela de valores por idade. Me avisa qual você quer 👇", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "Tabela de preço sem nenhuma sondagem: a conversa nasce como comparação de preço."}]}, {"stage": "q", "client": ["Só ele mesmo.", "É mais por segurança, sabe?"], "opts": [{"t": "Entendo perfeitamente! Muitos pais buscam justamente esse amparo: saber que, se o Théo precisar, já existe uma estrutura pronta pra atender. E hoje, quando ele precisa de consulta, como vocês fazem?", "p": 2, "fb": "Valida a motivação (variando o vocabulário: \"amparo\") e avança a sondagem para o acesso atual."}, {"t": "Legal! E qual valor cabe no seu bolso por mês?", "p": 1, "fb": "Pular direto para orçamento interrompe a sondagem — ainda faltava entender uso e acesso atual."}, {"t": "Criança dá muito gasto mesmo, né? Melhor prevenir 😅", "p": 0, "fb": "Tom inadequado: enquadrar o filho como \"gasto\" destoa do acolhimento que o roteiro pede."}]}, {"stage": "q", "client": ["Hoje usamos o SUS quando precisa."], "opts": [{"t": "O SUS atende muitas famílias e é uma alternativa importante. Muitos pais contratam o plano justamente pra complementar: mais comodidade nas rotinas do Théo, com consultas, exames e especialistas com previsibilidade.", "p": 2, "fb": "Script do roteiro: respeita o SUS e posiciona o plano como complemento de comodidade e previsibilidade."}, {"t": "SUS é fila e demora, né? Com a Hapvida você esquece isso pra sempre!", "p": 0, "fb": "Nunca desqualifique o SUS — além de deselegante, cria promessa implícita de agilidade (risco de compliance)."}, {"t": "Entendi! Então deixa eu te passar os valores.", "p": 1, "fb": "Perdeu a chance de gerar valor sobre o complemento ao SUS antes do preço."}]}, {"stage": "q", "client": ["Ele vai bastante ao pediatra e faz fono 1x por semana."], "opts": [{"t": "Então uma modalidade SEM coparticipação pra consultas e exames traz mais previsibilidade pra família. Só te adianto com transparência: terapias, como a fono, têm coparticipação conforme as regras do plano. E esse acompanhamento é importante — vou registrar a informação, ela entra na análise da contratação, tá bom?", "p": 2, "fb": "Uso frequente → sem copart; terapias SEMPRE têm copart; e a fono é registrada sem alarmar (possível CPT)."}, {"t": "A fono vai estar 100% coberta desde o primeiro dia, pode confiar!", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Compliance: nunca prometa cobertura imediata — acompanhamento contínuo pode passar por análise (CPT/carências)."}, {"t": "Então o melhor é um plano com coparticipação, que é mais em conta!", "p": 1, "fb": "Recomendação invertida: quem usa MUITO tende a pagar mais no mês a mês com coparticipação."}]}, {"stage": "q", "client": ["Tá bom! E aí, qual plano você indica?"], "opts": [{"t": "Só confirmando antes: você busca um plano pro Théo, de 7 anos, que vai bastante ao pediatra e faz fono, priorizando segurança e previsibilidade nos custos. É isso mesmo?", "p": 2, "fb": "Validação antes da oferta — o cliente confirma e a recomendação nasce personalizada."}, {"t": "O Smart Flex! É o que mais vendo pra criança.", "p": 1, "fb": "Foi direto ao produto sem validar o entendimento — a recomendação parece genérica."}, {"t": "Pro Théo, com certeza o plano mais completo da casa. Criança usa muito, não dá pra economizar.", "p": 0, "fb": "Não presuma o plano pela idade — a recomendação considera motivo, frequência e realidade financeira."}]}, {"stage": "n", "client": ["Isso! 👏"], "opts": [{"t": "Então a opção ideal: sem coparticipação pra consultas e exames, com toda a rede Hapvida, urgência 24h e acompanhamento do crescimento dele. E já incluso, sem custo extra, o Clube de Vantagens — desconto em farmácia ajuda demais com criança em casa 😉 Pra comparar: uma consulta pediátrica particular custa R$ 250 a R$ 400. Essa opção fica em R$ XX/mês.", "p": 2, "fb": "Benefícios conectados à sondagem + Clube de Vantagens personalizado (farmácia) + ancoragem antes do preço."}, {"t": "Fica R$ XX por mês. Fechamos?", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "Sem gerar valor antes do número, o preço parece maior do que é."}, {"t": "É um plano excelente: tem teleconsulta, rede enorme, clube de vantagens, urgência…", "p": 1, "fb": "Benefícios listados sem conectar com o que ELA contou (pediatra frequente, fono) perdem força."}]}, {"stage": "n", "client": ["Achei carinho… e ele quase não fica doente 🙈"], "opts": [{"t": "Que ótimo que ele é saudável! E é justamente o melhor momento: o plano não é só pra doença — é acompanhamento do crescimento, consultas de rotina e estar pronta se algo surgir. E se o valor for o ponto, te mostro a opção com coparticipação mantendo a mesma rede.", "p": 2, "fb": "Objeção \"quase não fica doente\" → prevenção e desenvolvimento; e alternativa de copart preservando a rede."}, {"t": "Criança fica doente do nada, Camila… melhor não arriscar, né?", "p": 0, "fb": "Vender por medo é o oposto do acolhimento do roteiro 0-18."}, {"t": "Entendo! Vou ver com meu gerente se consigo baixar o valor.", "p": 1, "fb": "Promessa vaga de desconto adia a decisão e não trata a objeção real (percepção de valor)."}]}, {"stage": "n", "client": ["Vou pesquisar outros planos antes."], "opts": [{"t": "Você está certíssima em comparar! Só uma dica: compare opções equivalentes — rede, cobertura e o que está incluso — pra decisão ser justa. Se quiser, te mando uma comparação lado a lado aqui mesmo. Qual plano você está cotando e qual valor te passaram?", "p": 2, "fb": "Script do roteiro: valida a pesquisa, orienta comparar equivalentes e usa o Comparativo — mantendo a conversa ativa."}, {"t": "Os outros são todos piores, pode acreditar em mim.", "p": 0, "fb": "Desqualificar concorrentes genericamente não gera confiança — dê critérios objetivos."}, {"t": "Ok! Depois me conta o que achou 😊", "p": 1, "fb": "Educado, mas passivo: sem critérios de comparação nem retorno combinado, o lead esfria."}]}, {"stage": "f", "client": ["Gostei de você, viu? Vamos fechar o do Théo!"], "opts": [{"t": "Que alegria, Camila! 🎉 Vou iniciar o cadastro: me envia documento com CPF seu e do Théo, comprovante de residência e, se houver, a carteirinha de plano anterior. E me confirma: ele tem alguma condição de saúde em tratamento além da fono? Essas informações entram na Declaração de Saúde, tá bom?", "p": 2, "fb": "Fechamento assumido com os documentos do roteiro (responsável + criança) e Declaração de Saúde transparente."}, {"t": "Quer mesmo fechar? Tem certeza? Posso te dar mais um tempo pra pensar…", "p": 1, "fb": "Na hora do sim, avance! Reabrir a decisão planta dúvida."}, {"t": "Fechado! Sobre a fono, nem precisa declarar, é coisa pequena 😉", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Compliance GRAVE: induzir omissão na Declaração de Saúde é vedado — a informação passa pela análise prevista (CPT), conforme a ANS."}]}, {"stage": "i", "client": ["Docs enviados!"], "opts": [{"t": "Recebi tudo ✅ A proposta segue pra análise e eu te aviso de cada passo. Camila, parabéns pela escolha de cuidar da saúde do Théo! Qualquer dúvida durante o processo, estou por aqui. Sejam muito bem-vindos à Hapvida! 💙", "p": 2, "fb": "Encerramento acolhedor do roteiro: reforça a decisão e deixa canal aberto — reduz desistência na implantação."}, {"t": "Ok! Qualquer coisa a central entra em contato.", "p": 0, "fb": "Encerramento frio e repasse pra central: o roteiro pede acompanhamento do consultor até a implantação."}, {"t": "Recebido ✅", "p": 1, "fb": "Confirmou, mas perdeu o encerramento acolhedor (parabenizar + canal aberto) que reduz desistência."}]}], "outro": "Obrigada! O Théo agradece 😄"}, {"id": "senior", "cap": "Cap. 22 · Roteiro 59+", "nome": "Sr. Antônio", "sub": "63 anos · aposentado · acompanhamento com cardiologista", "avatar": "A", "cor": "#00897b", "preview": "Boa tarde. Queria informações sobre plano…", "missao": "Seu Antônio tem 63 anos, já tem plano (caro) e faz acompanhamento com cardiologista. Use os diferenciais do roteiro 59+: Nosso Médico, portabilidade e o argumento-chave — sem reajuste por faixa etária a partir dos 59.", "turns": [{"stage": "q", "client": ["Boa tarde. Queria informações sobre plano de saúde. Tenho 63 anos."], "opts": [{"t": "Boa tarde, seu Antônio! Meu nome é [seu nome], sou consultor(a) da Hapvida. É um prazer falar com o senhor! Nosso atendimento fica registrado, tudo bem? Me conta: o plano seria só para o senhor, ou existe interesse em incluir mais alguém da família?", "p": 2, "fb": "Abertura do 59+: apresentação clara, tom respeitoso e calmo, LGPD e primeira pergunta do diagnóstico."}, {"t": "Opa! 63 anos, né? Já te aviso que nessa idade o plano é mais caro, viu 😅", "p": 0, "fb": "Presumir e abrir pela idade/preço é exatamente o que o roteiro manda evitar."}, {"t": "Boa tarde! Me passa seu CPF que eu já faço a cotação.", "p": 1, "fb": "Educado, mas frio e burocrático — sem apresentação, sem LGPD, sem sondagem."}]}, {"stage": "q", "client": ["Só pra mim, minha esposa já tem o dela.", "Quero um plano pra me cuidar melhor."], "opts": [{"t": "Excelente decisão, seu Antônio! Cuidar da saúde de forma preventiva é o que garante qualidade de vida e independência por muitos anos. E o que motivou procurar agora: fazer um acompanhamento mais frequente, ter mais facilidade pra consultas, ou aconteceu alguma situação?", "p": 2, "fb": "Script do roteiro: valoriza a prevenção e investiga a motivação sem pressa."}, {"t": "Entendi! E quanto o senhor pode pagar por mês?", "p": 1, "fb": "A pergunta de orçamento veio cedo demais — primeiro entenda a necessidade."}, {"t": "Certo. Vou te mandar a tabela de preços por idade.", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "Tabela por idade logo de cara: zero acolhimento e a conversa nasce no preço."}]}, {"stage": "q", "client": ["Tenho plano de outra operadora há 8 anos, mas ficou muito caro.", "E faço acompanhamento com cardiologista, tomo remédio de pressão todo dia."], "opts": [{"t": "Entendi, isso me ajuda muito. Como o senhor está há 8 anos no plano, podemos verificar Aproveitamento ou Portabilidade de Carências, conforme as regras — o objetivo é uma transição segura, sem o senhor ficar desprotegido em nenhum momento. E vou registrar o acompanhamento com o cardiologista: essa informação entra na análise da contratação, com toda a transparência.", "p": 2, "fb": "Dois pontos-chave do 59+: portabilidade/aproveitamento para transição segura + registro da condição de saúde sem alarmar (CPT/DLP)."}, {"t": "Cancela o seu hoje mesmo que o nosso sai mais barato!", "p": 0, "fb": "Orientar cancelar antes de garantir a transição pode deixar o cliente desprotegido — o oposto do roteiro."}, {"t": "Ótimo, com 8 anos dá pra fazer portabilidade! Vou cotar aqui.", "p": 1, "fb": "Acertou a portabilidade, mas ignorou a informação de saúde (cardiologista/uso contínuo) — ponto sensível no 59+."}]}, {"stage": "q", "client": ["E como funciona pra quem usa bastante? Passo no médico quase todo mês."], "opts": [{"t": "Pra quem usa com frequência, como o senhor, a modalidade SEM coparticipação em consultas e exames traz mais previsibilidade: o senhor se cuida sem se preocupar com custo a cada atendimento. Só as terapias têm coparticipação, conforme as regras do produto.", "p": 2, "fb": "Uso frequente → SEM coparticipação (previsibilidade). No 59+, copart pode encarecer o mês a mês de quem usa muito."}, {"t": "Recomendo com coparticipação, a mensalidade é bem mais baixa!", "p": 0, "fb": "Recomendação invertida para o perfil: quem usa quase todo mês paga mais com coparticipação."}, {"t": "Temos as duas modalidades, o senhor escolhe a que preferir.", "p": 1, "fb": "O papel do consultor é recomendar com base no uso — não devolver a escolha sem orientação."}]}, {"stage": "n", "client": ["Sei… e o que esse plano teria de bom pra mim?"], "opts": [{"t": "O grande diferencial pro seu perfil é o Nosso Médico: um médico de referência que acompanha o senhor ao longo do tempo — conhece seu histórico, seus exames e sua evolução. E um ponto muito importante: a partir dos 59 anos não existe mais reajuste por faixa etária. O valor não sobe por causa da idade — é a última faixa prevista pela ANS.", "p": 2, "fb": "Os dois argumentos de ouro do 59+: Nosso Médico (continuidade do cuidado) + sem reajuste por faixa etária (previsibilidade)."}, {"t": "Tem rede enorme, teleconsulta, aplicativo moderno, tudo digital!", "p": 1, "fb": "Benefícios genéricos: para este perfil, o que pesa é continuidade do cuidado e previsibilidade — conecte com a sondagem."}, {"t": "Tem desconto em farmácia e cinema no Clube de Vantagens! 🍿", "p": 0, "fb": "Abrir pelos descontos ignora a necessidade principal (acompanhamento contínuo) levantada na sondagem."}]}, {"stage": "n", "client": ["E quanto fica?"], "opts": [{"t": "Antes do número, um comparativo: uma única consulta particular com especialista custa de R$ 300 a R$ 500, sem contar exames. Considerando tudo o que conversamos, essa opção fica em R$ XX por mês — com acompanhamento contínuo e sem reajuste por faixa etária daqui pra frente.", "p": 2, "fb": "Ancoragem no custo particular + amarração com os diferenciais construídos — o preço chega com contexto."}, {"t": "R$ XX por mês.", "p": 0, "fb": "Preço seco: todo o valor construído na conversa ficou de fora da resposta."}, {"t": "R$ XX, e consulta com cardiologista em no máximo 3 dias, garantido!", "p": 0, "flag": "RN 566 — prazos máximos", "fb": "⚠️ Compliance: a RN 566 define prazos MÁXIMOS — não prometa prazos menores nem \"garantias\" de agenda."}]}, {"stage": "n", "client": ["Achei caro. Vivo de aposentadoria, meu filho."], "opts": [{"t": "Entendo perfeitamente, seu Antônio — com orçamento planejado, cada real importa. Mas veja: um exame ou consulta particular pode custar num único dia mais do que a mensalidade. E tem um ponto a seu favor: o valor não sobe mais por idade. Se o investimento for o ponto principal, te apresento também uma opção mais acessível mantendo a rede Hapvida.", "p": 2, "fb": "Objeção 1 do roteiro 59+: acolhe a renda fixa, compara com o particular, reforça o sem-reajuste e oferece alternativa."}, {"t": "É o preço justo pela sua idade, infelizmente. Não tenho o que fazer.", "p": 0, "fb": "Culpar a idade e encerrar sem alternativa: perde a venda e fere o acolhimento do roteiro."}, {"t": "Deixa eu ver se consigo um desconto pro senhor…", "p": 1, "fb": "Promessa vaga: o roteiro resolve com comparação + opção mais acessível, não com desconto incerto."}]}, {"stage": "n", "client": ["Vou conversar com minha filha antes de decidir."], "opts": [{"t": "Claro, faz todo sentido decidir em conjunto! Se preferir, podemos incluir sua filha agora na conversa, ou eu retorno num horário combinado pra falar com vocês dois. Qual fica melhor pro senhor?", "p": 2, "fb": "Script do roteiro: valida a decisão em família e oferece incluir a filha ou agendar — mantém o controle do processo."}, {"t": "O senhor é quem manda na sua vida, não precisa de autorização 😄", "p": 0, "fb": "No 59+ a participação da família é comum e legítima — desrespeitar isso quebra a confiança."}, {"t": "Tudo bem! Me avisa depois, tá?", "p": 1, "fb": "Sem agendar retorno nem munir o cliente de argumentos, a conversa em família acontece sem você."}]}, {"stage": "f", "client": ["Minha filha gostou. Mas vou te falar uma coisa…", "Tenho esse problema de pressão. Tenho medo de não ter cobertura."], "opts": [{"t": "Fico feliz que o senhor me contou, e pode ficar tranquilo: vou registrar essa informação e ela passa por uma análise no processo de contratação, conforme as regras da ANS. O importante é que o senhor fica coberto para todo o restante desde o início — e ainda verificamos o aproveitamento de carências do seu plano atual. Meu papel é encontrar a melhor forma de o senhor ficar protegido.", "p": 2, "fb": "Objeção 5 do roteiro, na íntegra: acolhe o medo, explica a análise (CPT) com transparência e reforça a proteção do restante."}, {"t": "Relaxa! Pressão alta todo mundo tem, nem precisa declarar isso.", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Compliance GRAVE: induzir omissão na Declaração de Saúde. A condição deve ser declarada e analisada conforme a ANS."}, {"t": "Cobre tudo desde o primeiro dia, sem carência nenhuma!", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Promessa falsa de cobertura imediata — condições preexistentes podem ter CPT; carências seguem o contrato."}]}, {"stage": "i", "client": ["Então tá certo. Vamos fechar."], "opts": [{"t": "Parabéns pela decisão de cuidar ainda mais da sua saúde, seu Antônio! 👏 Vou iniciar seu cadastro: me envia documento com CPF, comprovante de residência e a carteirinha do plano atual (pra verificarmos as carências). Eu acompanho cada etapa e vou te avisando de tudo por aqui. Seja muito bem-vindo à Hapvida!", "p": 2, "fb": "Fechamento assumido + documentos (incluindo a carteirinha p/ portabilidade) + encerramento acolhedor com acompanhamento."}, {"t": "Ok, me manda RG e CPF.", "p": 1, "fb": "Faltaram o comprovante, a carteirinha do plano atual (portabilidade!) e o encerramento acolhedor."}, {"t": "Fechou! Depois a central te liga com os próximos passos.", "p": 0, "fb": "Repassar pra central abandona o cliente na etapa mais sensível — acompanhe até a implantação."}]}], "outro": "Obrigado, meu filho. Deus abençoe 🙏"}, {"id": "pme", "cap": "Cap. 26 · Roteiro PME · decisão pelo Hospital", "nome": "Ricardo Mendes", "sub": "Sócio de empresa (LTDA) · 14 vidas · quer o Hospital São Lucas", "avatar": "RM", "cor": "#1565c0", "preview": "Tenho uma empresa com 14 funcionários…", "missao": "Ricardo contrata pelo CNPJ e a decisão gira em torno de um hospital. Siga o eixo do Cap. 26: descobrir o hospital → CONFIRMAR na rede → casar o produto (subindo de nível só até cobri-lo). Atenção ao porte: 14 vidas = Super Simples (2–29).", "turns": [{"stage": "q", "client": ["Boa tarde! Tenho uma empresa com 14 funcionários e quero um plano que atenda no Hospital São Lucas. Quanto custa?"], "opts": [{"t": "Boa tarde, Ricardo! Sou [seu nome], consultor(a) Hapvida — nosso atendimento fica registrado, ok? Vou entender o perfil da sua empresa e principalmente esse ponto do hospital, porque é ele que define o plano certo. Primeiro: a empresa é MEI ou Não MEI? E as 14 vidas incluem dependentes?", "p": 2, "fb": "Abertura do Cap. 26: LGPD + diagnóstico da empresa (natureza jurídica define a tabela; vidas definem o porte) com o hospital como eixo."}, {"t": "Boa tarde! Sai a partir de R$ XX por vida. Fechando este mês tem condição especial!", "p": 0, "flag": "Preço antes do diagnóstico", "fb": "O hospital é o critério nº 1 deste cliente — gere valor por ele, não pelo preço."}, {"t": "Boa tarde! Me conta mais sobre a empresa: quantas vidas ao todo e em qual cidade vocês estão?", "p": 1, "fb": "Começou o diagnóstico, mas sem apresentação/LGPD e sem capturar o eixo da venda: o hospital."}]}, {"stage": "q", "client": ["Não somos MEI, é uma LTDA. 14 vidas, tudo funcionário, aqui em São Paulo mesmo."], "opts": [{"t": "Perfeito: Não MEI define a tabela, e com 14 vidas vocês entram como Super Simples (2 a 29 vidas). Agora a pergunta que decide: por que o Hospital São Lucas é importante pra vocês? Proximidade, maternidade, algum médico, uma especialidade?", "p": 2, "fb": "Porte correto (14 vidas = Super Simples 2–29) + a \"pergunta que decide\" do roteiro: o PORQUÊ do hospital."}, {"t": "Show! E qual valor por funcionário vocês têm em mente?", "p": 1, "fb": "Voltou pro preço e deixou passar a pergunta que decide (o motivo do hospital)."}, {"t": "Ótimo! 14 vidas entra como PME 30–99, então vocês têm carência zero! 🎉", "p": 0, "flag": "Erro técnico (porte/carência)", "fb": "Erro técnico: carência zero é do porte PME 30–99. Com 14 vidas é Super Simples (2–29) — prometer carência zero geraria um problemão."}]}, {"stage": "q", "client": ["É do lado da empresa, e nossa diretora fez uma cirurgia lá.", "O pessoal confia muito nesse hospital."], "opts": [{"t": "Entendi: proximidade + confiança do time, anotado! Antes de te apresentar qualquer plano, vou confirmar na nossa ferramenta de Rede em quais produtos o São Lucas atende — assim eu só te ofereço o que a rede confirmar. Me dá 1 minuto?", "p": 2, "fb": "O passo decisivo do Cap. 26: confirmar na rede ANTES de ofertar. Nunca prometa hospital sem confirmar."}, {"t": "Com certeza ele atende em todos os nossos planos, pode ficar tranquilo!", "p": 0, "flag": "Rede não confirmada", "fb": "⚠️ Regra de ouro violada: nunca prometa que um hospital atende sem confirmar na ferramenta de Rede / aba Rede do Cotador."}, {"t": "Legal! Vou te mandar as opções de planos então, olha só:", "p": 1, "fb": "Ofertou sem confirmar a rede — se o hospital não estiver no plano apresentado, a venda desmonta (ou vira cancelamento)."}]}, {"stage": "n", "client": ["Claro, confirma aí 👍"], "sys": "🔎 Você consultou a ferramenta de Rede: Hospital São Lucas é CREDENCIADO — atende a partir do Smart Flex (própria + credenciada).", "opts": [{"t": "Boa notícia! O São Lucas atende sim: ele é da rede credenciada, disponível a partir do Smart Flex. Ou seja, não precisa ir pro plano mais caro — o Smart Flex já cobre exatamente o hospital que vocês querem.", "p": 2, "fb": "Casar o produto ao hospital, subindo de nível SÓ até cobri-lo — é o eixo do Cap. 26."}, {"t": "Atende! Mas te recomendo já o Infinity, nosso top de linha, pra não ter erro nenhum.", "p": 0, "fb": "Oversell: subir além do nível necessário fere a lógica do roteiro (e o bolso do cliente) — o Smart Flex já cobre o São Lucas."}, {"t": "Atende no Nosso Médico, que é o mais barato de todos!", "p": 0, "flag": "Rede não confirmada", "fb": "Nosso Médico é rede PRÓPRIA — o São Lucas é credenciado e não estaria coberto. Essa promessa gera frustração e cancelamento."}]}, {"stage": "n", "client": ["Boa! E quanto fica o Smart Flex pra gente?"], "opts": [{"t": "Te trago 2 opções que atendem no São Lucas: o Smart Flex sem coparticipação (recomendado, mais previsibilidade) e com coparticipação (econômico). Pra comparar: um pronto-socorro particular custa fácil R$ 600+ por atendimento. A opção econômica fica em R$ XX por vida/mês.", "p": 2, "fb": "2 opções que cobrem o hospital (recomendada + econômica) + ancoragem no particular antes do número."}, {"t": "R$ XX por vida por mês.", "p": 0, "fb": "Preço seco e opção única: o roteiro pede 2 opções que atendam no hospital + ancoragem."}, {"t": "R$ XX por vida, e seus funcionários serão atendidos na hora no São Lucas, sem espera!", "p": 0, "flag": "RN 566 — prazos máximos", "fb": "⚠️ Compliance: RN 566 define prazos MÁXIMOS — nunca prometa atendimento imediato/sem espera."}]}, {"stage": "n", "client": ["Ficou um pouco acima do que a gente pagava… 😬"], "opts": [{"t": "Entendo! E dá pra ajustar sem abrir mão do São Lucas: a versão com coparticipação mantém o hospital na rede com mensalidade menor — quem usa pouco praticamente só paga quando precisa. Quer que eu simule as duas pro seu comparativo?", "p": 2, "fb": "Objeção \"ficou caro\" do Cap. 26: opção com copart/econômica que MANTÉM o hospital."}, {"t": "Então a gente tira o São Lucas da conta que fica bem mais barato!", "p": 0, "fb": "O hospital é o critério nº 1 do cliente — removê-lo mata o valor da proposta."}, {"t": "Esse é o preço, infelizmente… plano de saúde subiu muito.", "p": 1, "fb": "Sem alternativa, a objeção fica sem tratamento — o roteiro tem saída pronta (copart mantendo o hospital)."}]}, {"stage": "n", "client": ["Deixa eu pensar com meu sócio e semana que vem te falo."], "opts": [{"t": "Claro! Só um ponto pro planejamento de vocês: quanto antes o contrato ativa, antes as carências começam a contar — e o time já fica amparado no São Lucas. Que tal eu apresentar pros dois numa call de 15 minutos amanhã? Aí a decisão sai com todo mundo alinhado.", "p": 2, "fb": "Objeção \"vou pensar\": urgência REAL (carências contam a partir da ativação) + próximo passo agendado com o decisor."}, {"t": "Sem problema! Com 14 vidas vocês têm carência zero mesmo, então nem tem pressa 😉", "p": 0, "flag": "Erro técnico (porte/carência)", "fb": "Erro técnico de novo: carência zero é só no porte 30–99. Com 14 vidas há carências — e o argumento ainda joga contra a venda."}, {"t": "Tranquilo, fico no aguardo! 🙏", "p": 1, "fb": "Sem urgência real nem retorno combinado, \"semana que vem\" vira nunca."}]}, {"stage": "f", "client": ["Fechado, meu sócio topou! O que você precisa?"], "opts": [{"t": "Excelente! 🎉 Me envia: cartão CNPJ, contrato social e a relação de vidas (titulares e dependentes). Cada beneficiário preenche a Declaração de Saúde — com naturalidade e sem omitir nada, tá? Se houver condição preexistente, passa pela análise conforme a ANS. E um ponto importante que quero que você saiba ANTES de assinar: o contrato PME tem fidelidade de 12 meses.", "p": 2, "fb": "Fechamento do Cap. 26 completo: docs da empresa + Declaração de Saúde transparente + fidelidade de 12 meses informada antes da assinatura."}, {"t": "Me envia o cartão CNPJ, o contrato social e a relação de vidas que eu monto a proposta!", "p": 1, "fb": "Docs certos, mas faltou a Declaração de Saúde e principalmente informar a fidelidade de 12 meses antes de assinar."}, {"t": "Manda os docs! E orienta o pessoal a não declarar nada na Declaração de Saúde, agiliza a análise 😉", "p": 0, "flag": "Declaração de Saúde / CPT", "fb": "⚠️ Compliance GRAVE: induzir omissão na Declaração de Saúde é vedado — cada beneficiário declara e a análise segue a ANS."}]}, {"stage": "i", "client": ["Tudo enviado! Quanto tempo demora?"], "opts": [{"t": "A análise leva até 5 dias úteis. Depois vem a vigência, o 1º acesso e o pagamento — eu te acompanho em cada etapa e vou te avisando por aqui, combinado?", "p": 2, "fb": "Prazo correto (análise em até 5 dias úteis) + acompanhamento ativo na implantação."}, {"t": "Rapidinho! Uns 2 dias no máximo.", "p": 0, "fb": "Prometer prazo menor que o processo gera frustração logo na largada — o correto é até 5 dias úteis."}, {"t": "Uns dias aí. Te aviso.", "p": 1, "fb": "Vago: informe o prazo real e como será o acompanhamento."}]}, {"stage": "i", "client": ["Plano implantado! Valeu demais 🙌"], "opts": [{"t": "Parabéns pela escolha, Ricardo! 🎉 Última dica: abre o app comigo e busca o Hospital São Lucas no Guia Médico — quero que você veja com seus próprios olhos que o hospital que motivou a escolha de vocês está lá na rede. Qualquer coisa, me chama por aqui!", "p": 2, "fb": "Boas-vindas do Cap. 26: mostrar no app/guia médico que o hospital que motivou a escolha está na rede — entregar o que o cliente pediu reduz desistência."}, {"t": "De nada! Até mais 👋", "p": 1, "fb": "Cordial, mas perdeu o fechamento de ouro: provar no app que o São Lucas está na rede."}, {"t": "Agora qualquer problema é com a central 😅", "p": 0, "fb": "Além de frio, transfere o relacionamento — o pós-venda bem feito é o que segura o contrato (fidelidade de 12 meses!)."}]}], "outro": "Mostrei pro time aqui, todo mundo curtiu! 👏"}];
+const STAGES = {"q": "Qualificação", "n": "Negociação", "f": "Fechamento", "i": "Implantação"};
+
+const $ = s => document.querySelector(s);
+const chat = $('#chat'), home = $('#home'), opts = $('#opts'), optbtns = $('#optbtns');
+let S=null, ti=0, score=0, max=0, stg={}, stgMax={}, flags=[], misses=[], clock=null, ended=false;
+
+function fmtClock(){ clock.setMinutes(clock.getMinutes()+1+Math.floor(Math.random()*2));
+  return clock.toTimeString().slice(0,5); }
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function scrollBottom(){ chat.scrollTop = chat.scrollHeight; }
+
+function bestKey(id){ return 'hlsim_best_'+id; }
+function starsFor(pct){ return pct>=90?3:pct>=70?2:pct>=50?1:0; }
+function starStr(n){ return '★'.repeat(n)+'☆'.repeat(3-n); }
+
+/* ---------- home ---------- */
+function renderHome(){
+  const cl = $('#chatlist'); cl.innerHTML='';
+  DATA.forEach(sc=>{
+    const best = localStorage.getItem(bestKey(sc.id));
+    const div = document.createElement('div'); div.className='chat-item';
+    div.innerHTML = `<div class="av" style="background:${sc.cor}">${sc.avatar}</div>
+      <div class="ci-body">
+        <div class="ci-top"><span class="ci-name">${esc(sc.nome)}</span><span class="ci-cap">${esc(sc.cap.split('·')[0].trim())}</span></div>
+        <div class="ci-prev">${esc(sc.preview)}</div>
+        <div class="ci-sub">${esc(sc.sub)}</div>
+        ${best?`<div class="ci-best">Melhor resultado: ${starStr(starsFor(+best))} ${best}%</div>`:'<div class="ci-best" style="color:#8fa">● Nunca praticado</div>'}
+      </div>`;
+    div.onclick = ()=> openMission(sc);
+    cl.appendChild(div);
+  });
+}
+
+function openMission(sc){
+  S = sc;
+  $('#mCap').textContent = sc.cap;
+  $('#mTitle').textContent = sc.nome + ' — ' + sc.sub;
+  $('#mText').textContent = sc.missao;
+  $('#ovMission').style.display='flex';
+}
+$('#mBack').onclick = ()=> $('#ovMission').style.display='none';
+$('#mStart').onclick = ()=> { $('#ovMission').style.display='none'; startChat(); };
+
+/* ---------- chat flow ---------- */
+function startChat(){
+  ti=0; score=0; max=0; stg={}; stgMax={}; flags=[]; misses=[]; ended=false;
+  clock = new Date(); clock.setHours(14,2,0);
+  chat.innerHTML = `<div class="chip">Hoje</div><div class="chip">🔒 Simulação de treinamento — as mensagens são fictícias</div>`;
+  home.style.display='none'; chat.style.display='block';
+  $('#btnBack').style.display='block';
+  $('#hAv').textContent = S.avatar; $('#hAv').style.background = S.cor;
+  $('#hName').textContent = S.nome; $('#hStatus').textContent='online';
+  playTurn();
+}
+
+function addBubble(dir, text){
+  const row=document.createElement('div'); row.className='row '+dir;
+  const t=fmtClock();
+  row.innerHTML=`<div class="bub">${esc(text)}<div class="meta">${t}${dir==='out'?' <span class="tick">✓✓</span>':''}</div></div>`;
+  chat.appendChild(row); scrollBottom();
+}
+function addChip(text){ const c=document.createElement('div'); c.className='chip'; c.innerHTML=esc(text); chat.appendChild(c); scrollBottom(); }
+function addCoach(p, fb){
+  const c=document.createElement('div');
+  c.className='coach '+(p===2?'g':p===1?'m':'b');
+  c.innerHTML=`<b>${p===2?'✔ EugenIA: boa escolha!':p===1?'▲ EugenIA: dava pra ir melhor':'✖ EugenIA: cuidado!'}</b>${esc(fb)}`;
+  chat.appendChild(c); scrollBottom();
+}
+function typing(cb, ms){
+  $('#hStatus').textContent='digitando…';
+  const row=document.createElement('div'); row.className='row in typing';
+  row.innerHTML='<div class="bub"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  chat.appendChild(row); scrollBottom();
+  setTimeout(()=>{ row.remove(); $('#hStatus').textContent='online'; cb(); }, ms);
+}
+
+function playTurn(){
+  if(ti >= S.turns.length){ return finishChat(); }
+  const turn = S.turns[ti];
+  const msgs = turn.client.slice();
+  const sendNext = ()=>{
+    if(!msgs.length){
+      if(turn.sys) addChip(turn.sys);
+      return showOpts(turn);
+    }
+    typing(()=>{ addBubble('in', msgs.shift()); setTimeout(sendNext, 420); }, 750+Math.random()*550);
+  };
+  setTimeout(sendNext, 500);
+}
+
+function showOpts(turn){
+  optbtns.innerHTML='';
+  const order = turn.opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+  order.forEach((oi,vis)=>{
+    const o = turn.opts[oi];
+    const d = document.createElement('div'); d.className='opt';
+    d.innerHTML = `<span class="optnum">${vis+1}</span>${esc(o.t)}`;
+    d.onclick = ()=> choose(turn, o);
+    optbtns.appendChild(d);
+  });
+  opts.style.display='block'; scrollBottom();
+}
+
+function choose(turn, o){
+  opts.style.display='none';
+  addBubble('out', o.t);
+  score += o.p; max += 2;
+  stg[turn.stage]=(stg[turn.stage]||0)+o.p; stgMax[turn.stage]=(stgMax[turn.stage]||0)+2;
+  if(o.flag && !flags.includes(o.flag)) flags.push(o.flag);
+  if(o.p<2){
+    const best = turn.opts.find(x=>x.p===2);
+    misses.push({cli:turn.client[turn.client.length-1], chose:o, best:best});
+  }
+  setTimeout(()=>{ addCoach(o.p, o.fb); ti++; setTimeout(playTurn, 1000); }, 550);
+}
+
+function finishChat(){
+  typing(()=>{ addBubble('in', S.outro);
+    setTimeout(showResult, 900);
+  }, 900);
+}
+
+/* ---------- results ---------- */
+function showResult(){
+  ended=true;
+  try{ if(window.HL && HL.recordAssistido) HL.recordAssistido(); }catch(e){}
+  const pct = Math.round(100*score/max);
+  const st = starsFor(pct);
+  const prev = +(localStorage.getItem(bestKey(S.id))||0);
+  if(pct>prev) localStorage.setItem(bestKey(S.id), pct);
+  let stgHtml='';
+  Object.keys(STAGES).forEach(k=>{
+    if(!stgMax[k]) return;
+    const p = Math.round(100*(stg[k]||0)/stgMax[k]);
+    stgHtml += `<div class="stg"><span class="nm">${STAGES[k]}</span><div class="bar"><i style="width:${p}%"></i></div><span class="pc">${p}%</span></div>`;
+  });
+  let flagHtml='';
+  if(flags.length){
+    flagHtml = `<div class="flags"><h3>⚠️ Alertas de compliance nesta conversa</h3><ul>`+
+      flags.map(f=>`<li>${esc(f)}</li>`).join('')+`</ul></div>`;
+  }
+  let revHtml='';
+  if(misses.length){
+    revHtml = `<div class="rev"><h3>📝 Onde melhorar (${misses.length})</h3>`+
+      misses.map(m=>`<div class="rev-item">Cliente: “${esc(m.cli)}”<br><b>Sua escolha:</b> ${esc(m.chose.fb)}<br><span class="ok">Resposta do roteiro:</span> ${esc(m.best.t)}</div>`).join('')+
+      `</div>`;
+  } else {
+    revHtml = `<div class="rev"><h3>🏆 Conversa perfeita — 100% no roteiro!</h3></div>`;
+  }
+  const msg = pct>=90?'Excelente! Você dominou este roteiro.':pct>=70?'Muito bom! Revise os pontos abaixo e busque o Ouro.':pct>=50?'Bom começo — reveja o capítulo do roteiro e tente de novo.':'Vale reassistir o capítulo na EugenIA Learn antes de tentar de novo.';
+  $('#resCard').innerHTML = `
+    <span class="tagcap">${esc(S.cap)}</span>
+    <h2>Resultado — ${esc(S.nome)}</h2>
+    <div class="stars">${'⭐'.repeat(st)||'—'}</div>
+    <div class="scorebig"><b>${pct}%</b> · ${score} de ${max} pontos<br><span style="font-size:12px;color:#667">${msg}</span></div>
+    ${stgHtml}${flagHtml}${revHtml}
+    <div class="btnrow"><button class="btn-s" id="rHome">‹ Conversas</button><button class="btn-p" id="rRetry">Refazer</button></div>`;
+  $('#ovResult').style.display='flex';
+  $('#rHome').onclick=()=>{ $('#ovResult').style.display='none'; goHome(); };
+  $('#rRetry').onclick=()=>{ $('#ovResult').style.display='none'; startChat(); };
+}
+
+function goHome(){
+  chat.style.display='none'; opts.style.display='none';
+  home.style.display='flex'; $('#btnBack').style.display='none';
+  $('#hAv').textContent='💬'; $('#hAv').style.background='var(--hap)';
+  $('#hName').textContent='Simulador de Conversa';
+  $('#hStatus').textContent='EugenIA Learn · Roteiros & Scripts';
+  renderHome();
+}
+$('#btnBack').onclick = ()=>{ if(confirm('Sair da conversa? O progresso desta simulação será perdido.')) goHome(); };
+
+renderHome();
+</script>
+</body>
+</html>

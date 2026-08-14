@@ -345,7 +345,11 @@
     {cap:31, id:"cap31-asi", trilha:"sistemas", href:"cap31-asi.html",
      titulo:"Sistema ASI",
      desc:"Cotação e cadastro de vidas: acesso e Minha Área, dados do cliente e seleção do plano, Jornada do Orçamento, resumo do produto, cadastro de titular e dependentes com Declaração de Saúde, endereço com comprovante e finalização.",
-     dur:"~8 min + quiz", pub:"2026-08-13"}
+     dur:"~8 min + quiz", pub:"2026-08-13"},
+    {cap:32, id:"simulador-conversa", trilha:"roteiros", href:"simulador-conversa.html", noquiz:true,
+     titulo:"Simulador de Conversa (WhatsApp)",
+     desc:"Pratique os roteiros num chat estilo WhatsApp: 4 clientes simulados (Geral, 0 a 18, 59+ e PME pelo hospital), 3 respostas por mensagem, feedback da EugenIA a cada escolha, nota por etapa do POP e alertas de compliance.",
+     dur:"prática · 4 conversas", pub:"2026-08-14"}
   ];
 
   function diasDesde(iso){ try{ return Math.floor((Date.now()-new Date(iso+"T00:00:00").getTime())/86400000); }catch(e){ return 9999; } }
