@@ -60,7 +60,7 @@
       <label>E-mail corporativo</label><input type="email" id="hlFE" placeholder="nome@hapvida.com.br" autocomplete="email">\
       <button class="go" id="hlFbtn">Enviar código de recuperação</button>\
       <div id="hlOtpWrap" style="display:none">\
-        <label>Código de 6 dígitos (chegou no seu e-mail)</label><input type="text" id="hlFC" placeholder="000000" inputmode="numeric" maxlength="6" autocomplete="one-time-code">\
+        <label>Código de recuperação (chegou no seu e-mail)</label><input type="text" id="hlFC" placeholder="000000" inputmode="numeric" maxlength="10" autocomplete="one-time-code">\
         <button class="go" id="hlFVbtn">Validar código</button>\
       </div>\
       <div style="text-align:center;margin-top:10px"><a href="#" id="hlFback" style="font-size:12px;color:#5b6b82;text-decoration:none">← Voltar para Entrar</a></div>\
@@ -179,12 +179,12 @@
     q("hlFbtn").disabled=false;
     if(r.error){ msg("Não foi possível enviar. Confira o e-mail e tente de novo.","err"); return; }
     q("hlOtpWrap").style.display="block"; try{ q("hlFC").focus(); }catch(e){}
-    msg("Enviamos um código de 6 dígitos para o seu e-mail. Digite-o abaixo para definir uma nova senha.","ok");
+    msg("Enviamos um código de recuperação para o seu e-mail. Digite-o abaixo para definir uma nova senha.","ok");
   }
   async function doVerifyCode(){
     var email=q("hlFE").value.trim(), code=(q("hlFC").value||"").replace(/\D/g,"");
     if(!email){ msg("Informe o seu e-mail.","err"); return; }
-    if(code.length<6){ msg("Digite o código de 6 dígitos do e-mail.","err"); return; }
+    if(code.length<6){ msg("Digite o código completo que chegou no e-mail.","err"); return; }
     q("hlFVbtn").disabled=true; msg("Validando…");
     var r=await sb.auth.verifyOtp({email:email,token:code,type:"recovery"});
     q("hlFVbtn").disabled=false;
