@@ -46,7 +46,7 @@
 
   var HTML = '\
   <div class="box">\
-    <div class="brand"><span>❋</span><b>Hapvida Learn</b></div>\
+    <div class="brand"><span>❋</span><b>HapOn Learn</b></div>\
     <div class="sub">Academia de Vendas · acesso do time</div>\
     <div class="tabs"><button data-tab="login" class="on">Entrar</button><button data-tab="signup">Criar conta</button></div>\
     <div data-panel="login" class="on">\
