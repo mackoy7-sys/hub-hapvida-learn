@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Simulador de Conversa · EugenIA Learn</title>
+<title>Simulador de Conversa · HapOn Learn</title>
 <script src="hl-auth.js"></script>
 <style>
 :root{
@@ -124,7 +124,7 @@ header .brand{font-size:10px;text-align:right;opacity:.9;line-height:1.25}
     <div class="av" id="hAv" style="background:var(--hap)">💬</div>
     <div class="hinfo">
       <div class="hname" id="hName">Simulador de Conversa</div>
-      <div class="hstatus" id="hStatus">EugenIA Learn · Roteiros &amp; Scripts</div>
+      <div class="hstatus" id="hStatus">HapOn Learn · Roteiros &amp; Scripts</div>
     </div>
     <div class="brand">Hapvida<br>Vendas Digital</div>
   </header>
@@ -132,12 +132,12 @@ header .brand{font-size:10px;text-align:right;opacity:.9;line-height:1.25}
   <div id="home">
     <div class="intro">
       <h1>💬 Simulador de Conversa</h1>
-      <p>Pratique os roteiros da EugenIA Learn num chat estilo WhatsApp. Em cada mensagem do cliente,
+      <p>Pratique os roteiros da HapOn Learn num chat estilo WhatsApp. Em cada mensagem do cliente,
       escolha a melhor resposta — a EugenIA avalia cada escolha e no final você recebe sua nota por etapa do POP
       (Qualificação · Negociação · Fechamento · Implantação) e os alertas de compliance.</p>
     </div>
     <div id="chatlist"></div>
-    <div class="homefoot">EugenIA Learn · baseado nos Caps. 20, 21, 22 e 26 (Roteiros | Scripts)<br><a href="index.html" style="color:#0956c6;font-weight:600;text-decoration:none">‹ Voltar à EugenIA Learn</a></div>
+    <div class="homefoot">HapOn Learn · baseado nos Caps. 20, 21, 22 e 26 (Roteiros | Scripts)<br><a href="index.html" style="color:#0956c6;font-weight:600;text-decoration:none">‹ Voltar à HapOn Learn</a></div>
   </div>
 
   <div id="chat"></div>
@@ -313,7 +313,7 @@ function showResult(){
   } else {
     revHtml = `<div class="rev"><h3>🏆 Conversa perfeita — 100% no roteiro!</h3></div>`;
   }
-  const msg = pct>=90?'Excelente! Você dominou este roteiro.':pct>=70?'Muito bom! Revise os pontos abaixo e busque o Ouro.':pct>=50?'Bom começo — reveja o capítulo do roteiro e tente de novo.':'Vale reassistir o capítulo na EugenIA Learn antes de tentar de novo.';
+  const msg = pct>=90?'Excelente! Você dominou este roteiro.':pct>=70?'Muito bom! Revise os pontos abaixo e busque o Ouro.':pct>=50?'Bom começo — reveja o capítulo do roteiro e tente de novo.':'Vale reassistir o capítulo na HapOn Learn antes de tentar de novo.';
   $('#resCard').innerHTML = `
     <span class="tagcap">${esc(S.cap)}</span>
     <h2>Resultado — ${esc(S.nome)}</h2>
@@ -331,7 +331,7 @@ function goHome(){
   home.style.display='flex'; $('#btnBack').style.display='none';
   $('#hAv').textContent='💬'; $('#hAv').style.background='var(--hap)';
   $('#hName').textContent='Simulador de Conversa';
-  $('#hStatus').textContent='EugenIA Learn · Roteiros & Scripts';
+  $('#hStatus').textContent='HapOn Learn · Roteiros & Scripts';
   renderHome();
 }
 $('#btnBack').onclick = ()=>{ if(confirm('Sair da conversa? O progresso desta simulação será perdido.')) goHome(); };

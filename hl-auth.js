@@ -1,5 +1,5 @@
 /* ============================================================
-   Hapvida Learn — autenticação + progresso (Supabase)
+   HapOn Learn — autenticação + progresso (Supabase)
    Inclua com: <script src="hl-auth.js"></script>
    Deriva o capítulo do nome do arquivo (ou window.HL_CAP).
    API: window.HL.recordAssistido() · HL.recordQuiz(acertos,total)
