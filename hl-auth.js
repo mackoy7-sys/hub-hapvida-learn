@@ -132,7 +132,7 @@
     q("hlLbtn").disabled=true; msg("Entrando…");
     var r=await sb.auth.signInWithPassword({email:email,password:pw});
     q("hlLbtn").disabled=false;
-    if(r.error){ msg("E-mail ou senha inválidos.","err"); return; }
+    if(r.error){ msg("E-mail ou senha inválidos. Se é o seu primeiro acesso, use \"Criar conta\".","err"); return; }
     user=r.data.user; await tryPending(); await ensurePerfil();
     if(!perfil){ showPanel("code"); return; }
     finish();
@@ -179,7 +179,7 @@
     q("hlFbtn").disabled=false;
     if(r.error){ msg("Não foi possível enviar. Confira o e-mail e tente de novo.","err"); return; }
     q("hlOtpWrap").style.display="block"; try{ q("hlFC").focus(); }catch(e){}
-    msg("Enviamos um código de recuperação para o seu e-mail. Digite-o abaixo para definir uma nova senha.","ok");
+    msg("Se houver conta com este e-mail, o código chega em alguns minutos (confira o lixo eletrônico). Não chegou? Provavelmente sua conta foi criada com OUTRO endereço — use \"Criar conta\" com o e-mail que você quer usar.","ok");
   }
   async function doVerifyCode(){
     var email=q("hlFE").value.trim(), code=(q("hlFC").value||"").replace(/\D/g,"");
