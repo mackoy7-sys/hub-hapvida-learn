@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teste de Vendas HapON · HapOn Learn</title>
+<script src="hl-auth.js"></script>
+<style>
+:root{
+  --wa-teal:#00584f; --wa-teal2:#00776b; --wa-bg:#e4dcd4; --wa-out:#d9fdd3;
+  --wa-in:#ffffff; --hap:#013BA6; --lar:#e8720c; --good:#1b8a4c; --mid:#b26a00; --bad:#c62828;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#0f172a;display:flex;justify-content:center;align-items:stretch;min-height:100vh}
+#phone{width:100%;max-width:470px;background:var(--wa-bg);display:flex;flex-direction:column;
+  height:100vh;height:100dvh;position:relative;box-shadow:0 0 60px rgba(0,0,0,.5)}
+@media(min-width:520px){#phone{margin:14px 0;height:calc(100vh - 28px);border-radius:22px;overflow:hidden}}
+
+/* ---------- header ---------- */
+header{background:var(--wa-teal);color:#fff;padding:9px 12px;display:flex;align-items:center;gap:10px;
+  min-height:58px;flex:0 0 auto;z-index:6}
+header .back{font-size:24px;cursor:pointer;padding:0 4px;border-radius:50%;user-select:none;display:none;line-height:1}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:14px;flex:0 0 38px}
+header .hinfo{flex:1;min-width:0}
+header .hname{font-weight:600;font-size:15.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .hstatus{font-size:11.5px;opacity:.85;height:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .brand{font-size:9.5px;text-align:right;opacity:.9;line-height:1.25}
+#btnFim{display:none;background:rgba(255,255,255,.16);border:0;color:#fff;font-size:11.5px;font-weight:700;
+  padding:7px 10px;border-radius:16px;cursor:pointer;white-space:nowrap}
+#btnFim:active{background:rgba(255,255,255,.3)}
+
+/* ---------- barra de progresso do POP ---------- */
+#pop{display:none;background:#00463e;color:#fff;padding:7px 10px;gap:6px;align-items:center;flex:0 0 auto;z-index:5}
+#pop .tm{flex:0 0 78px;background:rgba(255,255,255,.18);border-radius:10px;height:15px;position:relative;overflow:hidden}
+#pop .tm i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#c62828,#f9a825 55%,#25a35a);
+  border-radius:10px;transition:width .5s}
+#pop .tm b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:8.5px;font-weight:800;letter-spacing:.3px;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+#pop .st{flex:1;min-width:0;display:flex;gap:3px;justify-content:flex-end;overflow:hidden}
+#pop .st span{font-size:8.5px;font-weight:700;background:rgba(255,255,255,.12);border-radius:5px;
+  padding:3px 4px;opacity:.45;transition:.3s;white-space:nowrap}
+#pop .st span.on{opacity:1;background:var(--lar)}
+
+/* ---------- home ---------- */
+#home{flex:1;overflow-y:auto;background:#fff;display:flex;flex-direction:column}
+.intro{background:linear-gradient(135deg,var(--hap),#0653d3);color:#fff;padding:18px 16px 16px}
+.intro h1{font-size:19px;margin-bottom:5px}
+.intro p{font-size:12.5px;opacity:.93;line-height:1.5}
+.intro .tag{display:inline-block;font-size:10px;font-weight:800;background:var(--lar);border-radius:6px;
+  padding:2px 7px;margin-bottom:8px;letter-spacing:.4px}
+.chat-item{display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:center;background:#fff}
+.chat-item:hover{background:#f6f6f6}
+.chat-item .av{width:49px;height:49px;flex:0 0 49px;font-size:17px}
+.ci-body{flex:1;min-width:0}
+.ci-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ci-name{font-weight:600;font-size:15.5px;color:#111}
+.ci-cap{font-size:10px;color:var(--hap);font-weight:700;background:#eaf0ff;border-radius:8px;padding:2px 7px;white-space:nowrap}
+.ci-prev{font-size:13px;color:#667;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.ci-sub{font-size:11px;color:#99a;margin-top:2px}
+.ci-best{font-size:11px;margin-top:3px;font-weight:600}
+.homefoot{padding:14px 16px;font-size:11px;color:#889;text-align:center;margin-top:auto;line-height:1.6}
+
+/* ---------- chat ---------- */
+#chat{flex:1;overflow-y:auto;padding:12px 10px 8px;display:none;
+  background:var(--wa-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" opacity="0.05"><circle cx="12" cy="14" r="4" fill="%23000"/><rect x="52" y="8" width="9" height="9" rx="2" fill="%23000"/><path d="M20 60 l8 -10 8 10z" fill="%23000"/><circle cx="70" cy="66" r="5" fill="none" stroke="%23000" stroke-width="2"/></svg>')}
+.chip{align-self:center;background:#dff3fb;color:#111;font-size:11.5px;padding:5px 12px;border-radius:8px;
+  margin:8px auto;max-width:90%;text-align:center;box-shadow:0 1px 1px rgba(0,0,0,.08);line-height:1.45}
+.chip.warn{background:#ffe3e3;color:#7f1d1d}
+.chip.ok{background:#e2f6e6;color:#0d4f28}
+.row{display:flex;margin:2px 0}
+.row.in{justify-content:flex-start}
+.row.out{justify-content:flex-end}
+.bub{max-width:82%;padding:7px 10px 6px;border-radius:9px;font-size:14px;line-height:1.38;
+  box-shadow:0 1px 1px rgba(0,0,0,.12);position:relative;white-space:pre-wrap;word-wrap:break-word}
+.in .bub{background:var(--wa-in);border-top-left-radius:2px}
+.out .bub{background:var(--wa-out);border-top-right-radius:2px}
+.meta{font-size:10px;color:#8b98a0;text-align:right;margin-top:3px;user-select:none}
+.meta .tick{color:#53bdeb;font-size:11px;letter-spacing:-2px}
+.typing .bub{background:var(--wa-in);display:inline-flex;gap:4px;padding:11px 14px}
+.dot{width:7px;height:7px;border-radius:50%;background:#9ab;animation:blink 1.1s infinite}
+.dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.coach{align-self:center;max-width:92%;margin:7px auto;font-size:12px;line-height:1.45;border-radius:10px;
+  padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.12);background:#fff4dc;border-left:4px solid var(--mid);color:#6b4300}
+.coach b{display:block;font-size:11px;margin-bottom:2px}
+
+/* ---------- composer ---------- */
+#composer{flex:0 0 auto;background:#f0f2f5;border-top:1px solid #e0e0e0;padding:8px;display:none;gap:8px;align-items:flex-end}
+#composer textarea{flex:1;border:1.5px solid #d7dde3;border-radius:20px;padding:10px 14px;font-size:14px;
+  font-family:inherit;resize:none;max-height:110px;outline:none;line-height:1.35}
+#composer textarea:focus{border-color:var(--wa-teal2)}
+#composer button{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:50%;background:var(--wa-teal);
+  color:#fff;font-size:19px;cursor:pointer}
+#composer button:disabled{opacity:.45;cursor:default}
+#hint{display:none;font-size:10.5px;color:#8a94a0;text-align:center;padding:0 10px 7px;background:#f0f2f5}
+
+/* ---------- overlays ---------- */
+.overlay{position:absolute;inset:0;background:rgba(8,20,30,.8);display:none;align-items:center;
+  justify-content:center;z-index:20;padding:16px}
+.card{background:#fff;border-radius:16px;max-width:410px;width:100%;max-height:94%;overflow-y:auto;padding:20px 18px}
+.card h2{font-size:18px;color:var(--hap);margin-bottom:8px}
+.card p{font-size:13.5px;color:#334;line-height:1.55;margin-bottom:10px}
+.tagcap{display:inline-block;font-size:11px;font-weight:700;color:var(--hap);background:#eaf0ff;border-radius:8px;padding:3px 9px;margin-bottom:8px}
+.difs{display:flex;gap:6px;margin:4px 0 6px}
+.dif{flex:1;border:2px solid #e4ebf5;border-radius:12px;padding:9px 6px;text-align:center;cursor:pointer;transition:.15s}
+.dif.on{border-color:var(--hap);background:#f2f6ff}
+.dif b{display:block;font-size:12.5px;color:#223}
+.dif span{font-size:18px}
+.difdesc{font-size:11.5px;color:#667;min-height:32px;line-height:1.4;margin-bottom:6px}
+.togg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#334;background:#f7f8fa;border-radius:10px;padding:9px 11px;cursor:pointer}
+.togg input{width:16px;height:16px}
+.btnrow{display:flex;gap:8px;margin-top:14px}
+.btnrow button{flex:1;border:0;border-radius:22px;padding:12px 0;font-size:14px;font-weight:600;cursor:pointer}
+.btn-p{background:var(--hap);color:#fff}
+.btn-s{background:#e8ecf1;color:#334}
+
+/* ---------- resultado ---------- */
+.vd{text-align:center;border-radius:14px;padding:14px 12px;margin-bottom:12px;color:#fff}
+.vd.comprou{background:linear-gradient(135deg,#1b8a4c,#25a35a)}
+.vd.quase{background:linear-gradient(135deg,#b26a00,#e0902a)}
+.vd.nao_comprou{background:linear-gradient(135deg,#a01d1d,#c62828)}
+.vd .em{font-size:34px;line-height:1}
+.vd .tt{font-size:17px;font-weight:800;margin-top:4px;letter-spacing:.3px}
+.vd .nt{font-size:12px;opacity:.95;margin-top:3px}
+.vd .nt b{font-size:22px}
+.stg{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:6px;color:#334}
+.stg .nm{width:88px;flex:0 0 88px;font-weight:600}
+.bar{flex:1;height:9px;background:#e8ecf1;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#25a35a,#7ed957)}
+.bar i.m{background:linear-gradient(90deg,#e0902a,#f7c65a)}
+.bar i.b{background:linear-gradient(90deg,#c62828,#ef6c6c)}
+.stg .pc{width:34px;text-align:right;font-weight:700}
+.sec{font-size:12.5px;font-weight:800;color:#223;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
+.li{font-size:12.5px;color:#334;background:#f7f8fa;border-radius:9px;padding:8px 10px;margin-bottom:6px;line-height:1.5}
+.li b{color:#111}
+.li.g{background:#e9f7ed}
+.li.w{background:#fff3f3;color:#7f1d1d}
+.li .como{display:block;margin-top:4px;color:#0d4f28;background:#fff;border-left:3px solid var(--good);
+  padding:5px 8px;border-radius:5px;font-style:italic}
+.falac{background:#fff;border:1px solid #e4ebf5;border-radius:12px;border-top-left-radius:2px;
+  padding:10px 12px;font-size:13px;color:#223;line-height:1.45;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.load{text-align:center;padding:26px 10px;color:#445;font-size:13.5px}
+.load .sp{width:34px;height:34px;border:3px solid #e4ebf5;border-top-color:var(--hap);border-radius:50%;
+  margin:0 auto 12px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="phone">
+  <header>
+    <span class="back" id="btnBack">‹</span>
+    <div class="av" id="hAv" style="background:var(--hap)">🎯</div>
+    <div class="hinfo">
+      <div class="hname" id="hName">Teste de Vendas HapON</div>
+      <div class="hstatus" id="hStatus">HapOn Learn · simulador de compra com IA</div>
+    </div>
+    <button id="btnFim">Encerrar</button>
+    <div class="brand" id="hBrand">Hapvida<br>Vendas Digital</div>
+  </header>
+
+  <div id="pop">
+    <div class="tm"><i id="tmFill" style="width:30%"></i><b id="tmTxt">INTERESSE 30%</b></div>
+    <div class="st" id="stEt"></div>
+  </div>
+
+  <div id="home">
+    <div class="intro">
+      <span class="tag">NOVO · COM IA</span>
+      <h1>🎯 Teste de Vendas HapON</h1>
+      <p>Aqui a IA é o <b>cliente</b> — e ela não facilita. Você atende por escrito, do jeito que
+      atenderia no WhatsApp: qualifica, gera valor, trata as objeções e tenta fechar. No final ela
+      decide se <b>compra ou não</b> o plano e te devolve a nota por etapa do POP, os alertas de
+      compliance e o que você deveria ter dito.</p>
+    </div>
+    <div id="chatlist"></div>
+    <div class="homefoot">Baseado nos Caps. 19, 20, 21, 22 e 26 (SPIN, Roteiros e PME) da HapOn Learn.<br>
+    O cliente é simulado por IA · nenhuma conversa real é usada.<br><a href="index.html" style="color:#013BA6;text-decoration:none">‹ voltar para a HapOn Learn</a></div>
+  </div>
+
+  <div id="chat"></div>
+  <div id="composer">
+    <textarea id="txt" rows="1" placeholder="Escreva seu atendimento…" maxlength="900"></textarea>
+    <button id="btnSend" title="Enviar">➤</button>
+  </div>
+  <div id="hint">Enter envia · Shift+Enter pula linha</div>
+
+  <div class="overlay" id="ovMission"><div class="card">
+    <span class="tagcap" id="mCap"></span>
+    <h2 id="mTitle"></h2>
+    <p id="mText"></p>
+    <div class="sec" style="margin-top:4px">Nível do cliente</div>
+    <div class="difs" id="mDifs"></div>
+    <div class="difdesc" id="mDifDesc"></div>
+    <label class="togg"><input type="checkbox" id="mDicas">
+      <span>Modo aprendizado: mostrar dica do coach depois de cada resposta minha</span></label>
+    <div class="btnrow">
+      <button class="btn-s" id="mBack">‹ Voltar</button>
+      <button class="btn-p" id="mStart">Iniciar atendimento</button>
+    </div>
+  </div></div>
+
+  <div class="overlay" id="ovResult"><div class="card" id="resCard"></div></div>
+</div>
+
+<script>
+const DATA = {"personas": [{"id": "geral", "cap": "Cap. 20 · Roteiro Geral", "nome": "Juliana Andrade", "avatar": "JA", "cor": "#7e57c2", "sub": "34 anos · São Paulo · plano só para ela · veio da EugenIA", "preview": "Oi, fiz uma cotação no site de vocês…", "briefing": "Juliana cotou no site (lead da EugenIA) e quer saber o preço logo de cara. Ela vai ao médico umas 2x por ano. Conduza pelo POP: qualifique antes de precificar, explique coparticipação sem tecnicismo, gere valor, trate as objeções e feche.", "abertura": ["Oi, boa tarde! Fiz uma cotação no site de vocês 🙂", "Queria saber o valor do plano"]}, {"id": "kids", "cap": "Cap. 21 · Roteiro 0 a 18", "nome": "Camila Souza", "avatar": "CS", "cor": "#ef6c00", "sub": "Mãe do Théo (7 anos) · busca segurança e prevenção", "preview": "Quero ver plano de saúde pro meu filho…", "briefing": "Camila quer plano para o filho Théo, de 7 anos, que faz fono 1x por semana. Foco do roteiro 0-18: acolhimento, prevenção e transparência — sem presumir o plano pela idade, sem desqualificar o SUS e com cuidado na CPT da fono.", "abertura": ["Oi! Quero ver plano de saúde pro meu filho", "Théo, ele tem 7 anos"]}, {"id": "senior", "cap": "Cap. 22 · Roteiro 59+", "nome": "Sr. Antônio", "avatar": "SA", "cor": "#00695c", "sub": "63 anos · aposentado · cardiologista e remédio de pressão", "preview": "Boa tarde. Queria informações sobre plano…", "briefing": "Seu Antônio tem 63 anos, já tem plano há 8 anos (ficou caro) e faz acompanhamento com cardiologista. Use os diferenciais do 59+: Nosso Médico, portabilidade/aproveitamento de carências e o argumento de ouro — a partir dos 59 não há mais reajuste por faixa etária.", "abertura": ["Boa tarde.", "Queria informações sobre plano de saúde. Tenho 63 anos."]}, {"id": "pme", "cap": "Cap. 26 · Roteiro PME Receptivo", "nome": "Ricardo Mendes", "avatar": "RM", "cor": "#1565c0", "sub": "47 anos · Zona Leste SP · CNPJ próprio (não MEI)", "preview": "Preenchi o formulário pedindo cotação pelo CNPJ…", "briefing": "Ricardo é lead receptivo: pediu cotação PME pelo CNPJ. Siga as 9 etapas do Roteiro Comercial Unificado — rapport com o gancho do CNPJ, qualificação (região/idade/MEI), rede da região certa, 2 modalidades explicadas, cotação com valores preenchidos, demonstração da rede — e guarde o desconto para o FINAL.", "abertura": ["Oi, boa tarde!", "Preenchi o formulário no site pedindo cotação de plano pelo CNPJ. Podem me ajudar?"]}], "dificuldades": [{"id": "treino", "nome": "Treino", "emoji": "🌤️", "desc": "Cliente colaborativo. Perdoa deslizes e ajuda a conversa a andar."}, {"id": "real", "nome": "Realista", "emoji": "🌥️", "desc": "Como no dia a dia: cobra preço, questiona e testa o roteiro."}, {"id": "osso", "nome": "Osso duro", "emoji": "⛈️", "desc": "Apressado, cético e comparando com a concorrência. Só compra com execução impecável."}]};
+const API   = "https://teste-vendas-hapon.vercel.app";
+const TOKEN = "hapon-learn-2026";
+const ET = [["abertura","Abert."],["qualificacao","Qualif."],["valor","Valor"],
+            ["objecoes","Objeç."],["fechamento","Fech."],["implantacao","Impl."]];
+const MAX_TURNOS = 30;
+
+const $ = (id) => document.getElementById(id);
+let S = null, difSel = "real", pendente = null;
+
+/* ------------------------------------------------ home ------------------ */
+function melhorDe(id){ try{ return JSON.parse(localStorage.getItem("tv_best_"+id)||"null"); }catch(e){ return null; } }
+function salvaMelhor(id,nota,veredito){
+  const at = melhorDe(id);
+  if(!at || nota > at.nota) localStorage.setItem("tv_best_"+id, JSON.stringify({nota:nota,veredito:veredito}));
+}
+function renderHome(){
+  $("chatlist").innerHTML = DATA.personas.map(function(p){
+    const b = melhorDe(p.id);
+    const bt = b ? '<div class="ci-best" style="color:'+(b.nota>=75?"#1b8a4c":b.nota>=55?"#b26a00":"#c62828")+
+      '">Melhor resultado: '+b.nota+'/100 · '+rotulo(b.veredito)+'</div>' : "";
+    return '<div class="chat-item" data-id="'+p.id+'">'+
+      '<div class="av" style="background:'+p.cor+'">'+p.avatar+'</div>'+
+      '<div class="ci-body"><div class="ci-top"><span class="ci-name">'+p.nome+'</span>'+
+      '<span class="ci-cap">'+p.cap+'</span></div>'+
+      '<div class="ci-prev">'+p.preview+'</div><div class="ci-sub">'+p.sub+'</div>'+bt+'</div></div>';
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".chat-item"), function(el){
+    el.onclick = function(){ abreBriefing(el.getAttribute("data-id")); };
+  });
+}
+function rotulo(v){ return v==="comprou"?"Comprou":v==="quase"?"Ficou em dúvida":"Não comprou"; }
+
+/* --------------------------------------------- briefing ----------------- */
+function abreBriefing(id){
+  const p = DATA.personas.filter(function(x){return x.id===id;})[0];
+  pendente = p;
+  $("mCap").textContent = p.cap;
+  $("mTitle").textContent = p.nome + " quer comprar";
+  $("mText").textContent = p.briefing;
+  $("mDifs").innerHTML = DATA.dificuldades.map(function(d){
+    return '<div class="dif'+(d.id===difSel?" on":"")+'" data-d="'+d.id+'"><span>'+d.emoji+'</span><b>'+d.nome+'</b></div>';
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".dif"), function(el){
+    el.onclick = function(){ difSel = el.getAttribute("data-d"); pintaDifs(); };
+  });
+  pintaDifs();
+  $("ovMission").style.display = "flex";
+}
+function pintaDifs(){
+  Array.prototype.forEach.call(document.querySelectorAll(".dif"), function(el){
+    el.classList.toggle("on", el.getAttribute("data-d")===difSel);
+  });
+  const d = DATA.dificuldades.filter(function(x){return x.id===difSel;})[0];
+  $("mDifDesc").textContent = d ? d.desc : "";
+}
+
+/* ------------------------------------------------ chat ------------------ */
+function hora(){ const d=new Date(); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function scroll(){ const c=$("chat"); c.scrollTop = c.scrollHeight; }
+function bolha(lado, texto){
+  const r = document.createElement("div"); r.className = "row "+lado;
+  r.innerHTML = '<div class="bub">'+esc(texto)+'<div class="meta">'+hora()+
+    (lado==="out"?' <span class="tick">✓✓</span>':'')+'</div></div>';
+  $("chat").appendChild(r); scroll();
+}
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function chip(texto, cls){
+  const d = document.createElement("div"); d.className = "chip"+(cls?" "+cls:"");
+  d.textContent = texto; $("chat").appendChild(d); scroll();
+}
+function coach(texto){
+  const d = document.createElement("div"); d.className = "coach";
+  d.innerHTML = "<b>💡 COACH</b>"+esc(texto); $("chat").appendChild(d); scroll();
+}
+function digitando(on){
+  const ex = $("tp"); if(ex) ex.remove();
+  if(!on) return;
+  const r = document.createElement("div"); r.id="tp"; r.className="row in typing";
+  r.innerHTML = '<div class="bub"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  $("chat").appendChild(r); scroll();
+}
+function trava(on){
+  $("btnSend").disabled = on; $("txt").disabled = on;
+  $("hStatus").textContent = on ? "digitando…" : "online";
+}
+function pintaPop(){
+  $("tmFill").style.width = S.temp+"%";
+  $("tmTxt").textContent = "INTERESSE "+S.temp+"%";
+  $("stEt").innerHTML = ET.map(function(e){
+    return '<span class="'+(S.etapas[e[0]]?"on":"")+'">'+e[1]+'</span>';
+  }).join("");
+}
+
+function iniciar(){
+  const p = pendente;
+  S = { p:p, dif:difSel, dicas:$("mDicas").checked, hist:[], temp:30,
+        etapas:{}, fim:"nao", alertas:[], turnos:0, avaliando:false };
+  $("ovMission").style.display = "none";
+  $("home").style.display = "none";
+  $("chat").style.display = "flex"; $("chat").style.flexDirection = "column";
+  $("composer").style.display = "flex"; $("hint").style.display = "block";
+  $("pop").style.display = "flex"; $("btnFim").style.display = "block";
+  $("btnBack").style.display = "block"; $("hBrand").style.display = "none";
+  $("hAv").textContent = p.avatar; $("hAv").style.background = p.cor;
+  $("hName").textContent = p.nome; $("hStatus").textContent = "online";
+  $("chat").innerHTML = "";
+  const d = DATA.dificuldades.filter(function(x){return x.id===difSel;})[0];
+  chip("Atendimento simulado · nível "+d.emoji+" "+d.nome+". Responda como responderia no WhatsApp.");
+  pintaPop();
+  trava(true); digitando(true);
+  p.abertura.forEach(function(t,i){
+    setTimeout(function(){
+      if(i===0) digitando(false);
+      bolha("in", t); S.hist.push({quem:"cliente", texto:t});
+      if(i === p.abertura.length-1){ trava(false); $("txt").focus(); }
+      else digitando(true);
+    }, 700 + i*900);
+  });
+}
+
+async function chamaApi(payload){
+  const r = await fetch(API+"/api/simular", {
+    method:"POST",
+    headers:{ "content-type":"application/json", "x-hapon-token":TOKEN },
+    body: JSON.stringify(payload),
+  });
+  const j = await r.json().catch(function(){ return {erro:"resposta inválida"}; });
+  if(!r.ok) throw new Error(j.erro || ("HTTP "+r.status));
+  return j;
+}
+
+async function enviar(){
+  const t = $("txt").value.trim();
+  if(!t || !S || S.avaliando) return;
+  $("txt").value = ""; $("txt").style.height = "auto";
+  bolha("out", t); S.hist.push({quem:"vendedor", texto:t}); S.turnos++;
+  trava(true); digitando(true);
+  try{
+    const out = await chamaApi({ acao:"turno", cenario:S.p.id, dificuldade:S.dif, historico:S.hist });
+    digitando(false);
+    if(typeof out.temperatura === "number") S.temp = Math.max(0, Math.min(100, out.temperatura));
+    if(out.etapas) Object.keys(out.etapas).forEach(function(k){ if(out.etapas[k]) S.etapas[k]=true; });
+    pintaPop();
+    if(out.alerta){ S.alertas.push(out.alerta); chip("⚠️ Alerta de conduta: "+out.alerta, "warn"); }
+    const msgs = out.mensagens || [];
+    for(let i=0;i<msgs.length;i++){
+      if(i>0){ digitando(true); await espera(700 + Math.min(1200, msgs[i].length*22)); digitando(false); }
+      bolha("in", msgs[i]); S.hist.push({quem:"cliente", texto:msgs[i]});
+    }
+    if(S.dicas && out.dica) coach(out.dica);
+    trava(false);
+    if(out.encerrar && out.encerrar !== "nao"){
+      S.fim = out.encerrar;
+      chip(out.encerrar==="comprou" ? "✅ O cliente decidiu fechar." : "❌ O cliente encerrou a conversa.",
+           out.encerrar==="comprou" ? "ok" : "warn");
+      setTimeout(function(){ avaliar(); }, 900);
+    } else if(S.turnos >= MAX_TURNOS){
+      chip("Limite de mensagens do treino atingido — vamos ao resultado.");
+      setTimeout(function(){ avaliar(); }, 700);
+    } else {
+      $("txt").focus();
+    }
+  }catch(e){
+    digitando(false); trava(false);
+    chip("Falha ao falar com o cliente ("+e.message+"). Tente enviar de novo.", "warn");
+  }
+}
+function espera(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+/* --------------------------------------------- resultado ---------------- */
+async function avaliar(){
+  if(!S || S.avaliando) return;
+  if(S.turnos < 2){ chip("Você precisa atender um pouco antes de pedir o resultado 🙂"); return; }
+  S.avaliando = true; trava(true); $("hStatus").textContent = "avaliando o atendimento…";
+  $("resCard").innerHTML = '<div class="load"><div class="sp"></div>Analisando seu atendimento contra o roteiro…</div>';
+  $("ovResult").style.display = "flex";
+  try{
+    const v = await chamaApi({ acao:"veredito", cenario:S.p.id, dificuldade:S.dif,
+                              historico:S.hist, desfecho:S.fim });
+    renderResultado(v);
+    salvaMelhor(S.p.id, v.nota, v.veredito);
+    try{ if(window.HL && HL.recordAssistido) HL.recordAssistido(); }catch(e){}
+  }catch(e){
+    $("resCard").innerHTML = '<h2>Não deu para avaliar</h2><p>'+esc(e.message)+
+      '</p><div class="btnrow"><button class="btn-s" id="rClose">Voltar ao atendimento</button></div>';
+    $("rClose").onclick = function(){ $("ovResult").style.display="none"; S.avaliando=false; trava(false); };
+  }
+}
+
+function renderResultado(v){
+  const EM = {comprou:"🎉", quase:"🤔", nao_comprou:"😕"};
+  const NOM = [["abertura","Abertura"],["qualificacao","Qualificação"],["valor","Valor/oferta"],
+               ["objecoes","Objeções"],["fechamento","Fechamento"],["conduta","Conduta"]];
+  let h = '<div class="vd '+v.veredito+'"><div class="em">'+(EM[v.veredito]||"🤔")+'</div>'+
+    '<div class="tt">'+rotulo(v.veredito).toUpperCase()+'</div>'+
+    '<div class="nt">Sua nota: <b>'+v.nota+'</b>/100</div></div>';
+  h += '<p>'+esc(v.resumo||"")+'</p>';
+  h += '<div class="sec">Nota por etapa do POP</div>';
+  h += NOM.map(function(n){
+    const val = Math.max(0, Math.min(100, (v.notas && v.notas[n[0]]) || 0));
+    const cls = val>=70 ? "" : val>=45 ? "m" : "b";
+    return '<div class="stg"><span class="nm">'+n[1]+'</span><span class="bar"><i class="'+cls+
+      '" style="width:'+val+'%"></i></span><span class="pc">'+val+'</span></div>';
+  }).join("");
+  if(v.alertas && v.alertas.length){
+    h += '<div class="sec" style="color:var(--bad)">⚠️ Alertas de conduta</div>';
+    h += v.alertas.map(function(a){ return '<div class="li w"><b>'+esc(a.titulo)+'</b><br>'+esc(a.detalhe)+'</div>'; }).join("");
+  }
+  if(v.acertos && v.acertos.length){
+    h += '<div class="sec">✅ O que você fez bem</div>';
+    h += v.acertos.map(function(a){ return '<div class="li g">'+esc(a)+'</div>'; }).join("");
+  }
+  if(v.melhorar && v.melhorar.length){
+    h += '<div class="sec">🎯 O que treinar</div>';
+    h += v.melhorar.map(function(m){
+      return '<div class="li"><b>'+esc(m.titulo)+'</b><span class="como">"'+esc(m.como)+'"</span></div>';
+    }).join("");
+  }
+  if(v.fala_cliente){
+    h += '<div class="sec">💬 '+esc(S.p.nome)+' diria</div><div class="falac">'+esc(v.fala_cliente)+'</div>';
+  }
+  h += '<div class="btnrow"><button class="btn-s" id="rHome">Início</button>'+
+       '<button class="btn-p" id="rAgain">Tentar de novo</button></div>';
+  $("resCard").innerHTML = h;
+  $("rHome").onclick = paraHome;
+  $("rAgain").onclick = function(){ $("ovResult").style.display="none"; abreBriefing(S.p.id); };
+}
+
+function paraHome(){
+  S = null;
+  $("ovResult").style.display="none"; $("ovMission").style.display="none";
+  $("chat").style.display="none"; $("composer").style.display="none"; $("hint").style.display="none";
+  $("pop").style.display="none"; $("btnFim").style.display="none"; $("btnBack").style.display="none";
+  $("hBrand").style.display="block";
+  $("hAv").textContent="🎯"; $("hAv").style.background="var(--hap)";
+  $("hName").textContent="Teste de Vendas HapON";
+  $("hStatus").textContent="HapOn Learn · simulador de compra com IA";
+  $("home").style.display="flex"; renderHome();
+}
+
+/* ------------------------------------------------ eventos --------------- */
+$("btnSend").onclick = enviar;
+$("txt").addEventListener("keydown", function(e){
+  if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); enviar(); }
+});
+$("txt").addEventListener("input", function(){
+  this.style.height="auto"; this.style.height=Math.min(110, this.scrollHeight)+"px";
+});
+$("btnFim").onclick = function(){
+  if(S && confirm("Encerrar o atendimento e ver seu resultado?")) avaliar();
+};
+$("btnBack").onclick = function(){ if(confirm("Sair do atendimento? O progresso é perdido.")) paraHome(); };
+$("mBack").onclick = function(){ $("ovMission").style.display="none"; };
+$("mStart").onclick = iniciar;
+renderHome();
+</script>
+</body>
+</html>
