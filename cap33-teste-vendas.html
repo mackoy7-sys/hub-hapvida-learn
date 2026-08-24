@@ -303,7 +303,7 @@ function pintaPop(){
 function iniciar(){
   const p = pendente;
   S = { p:p, dif:difSel, dicas:$("mDicas").checked, hist:[], temp:30,
-        etapas:{}, fim:"nao", alertas:[], turnos:0, avaliando:false };
+        etapas:{}, fim:"nao", alertas:[], turnos:0, avaliando:false, avisouLocal:false };
   $("ovMission").style.display = "none";
   $("home").style.display = "none";
   $("chat").style.display = "flex"; $("chat").style.flexDirection = "column";
@@ -350,6 +350,10 @@ async function enviar(){
     if(typeof out.temperatura === "number") S.temp = Math.max(0, Math.min(100, out.temperatura));
     if(out.etapas) Object.keys(out.etapas).forEach(function(k){ if(out.etapas[k]) S.etapas[k]=true; });
     pintaPop();
+    if(out.modo === "local" && !S.avisouLocal){
+      S.avisouLocal = true;
+      chip("Cliente em modo roteiro (sem IA): ele segue o script da persona e avalia seu atendimento por etapa. O cliente que improvisa entra quando a chave da IA for configurada.");
+    }
     if(out.alerta){ S.alertas.push(out.alerta); chip("⚠️ Alerta de conduta: "+out.alerta, "warn"); }
     const msgs = out.mensagens || [];
     for(let i=0;i<msgs.length;i++){
