@@ -196,7 +196,7 @@
   }
 </style>
 
-<!-- HapOn Learn · login/progresso -->
+<!-- Hapvida Learn · login/progresso -->
 <script src="hl-auth.js"></script>
 
 <div class="player-shell">
@@ -318,13 +318,13 @@ const scenes = [
     html:`<div class="kicker">Linha Advance · 600</div><h1>Advance 600</h1>
       <ul class="points" style="gap:9px;font-size:14.5px">
         <li style="animation-delay:.1s"><span class="ic">👤</span><div>A partir de <b>1 vida</b> · acomodação enfermaria ou apartamento</div></li>
-        <li class="good" style="animation-delay:.35s"><span class="ic">💸</span><div>Reembolso consulta <b>R$ 75,00</b> <small>(em 7 dias)</small> · coleta domiciliar · abrangência nacional</div></li>
+        <li class="good" style="animation-delay:.35s"><span class="ic">💸</span><div>Reembolso consulta <b>R$ 90,00</b> <small>(em 7 dias)</small> · coleta domiciliar · abrangência nacional</div></li>
         <li style="animation-delay:.6s"><span class="ic">🏥</span><div>Rede: São Lucas (Rio), Santa Paula, Nipo-Brasileiro, São Luiz São Bernardo, Christóvão da Gama, Portinari</div></li>
         <li style="animation-delay:.85s"><span class="ic">🔬</span><div>Laboratórios: Notrelabs, Lavoisier e Tecnolab</div></li>
       </ul>
       <div class="sub" style="margin-top:9px">🦷 <b>Cobertura odontológica nacional</b> inclusa, sem custo adicional</div>`,
     narration:["Começando pelo Advance 600, o porta de entrada da linha de Livre Escolha, a partir de uma vida.",
-      "Tem abrangência nacional, coleta domiciliar e reembolso de consulta de setenta e cinco reais, em até sete dias.",
+      "Tem abrangência nacional, coleta domiciliar e reembolso de consulta de noventa reais, em até sete dias.",
       "A rede inclui hospitais como o São Lucas no Rio, o Santa Paula, o Nipo-Brasileiro, o São Luiz de São Bernardo, o Christóvão da Gama e o Portinari, além dos laboratórios Notrelabs, Lavoisier e Tecnolab, e uma ampla rede própria e credenciada."]
   },
   {
@@ -373,14 +373,14 @@ const scenes = [
     kicker:"Infinity 1.000", title:"Infinity 1.000",
     html:`<div class="kicker">Linha Infinity · 1.000</div><h1>Infinity 1.000 — o topo</h1>
       <ul class="points" style="gap:8px;font-size:14px">
-        <li style="animation-delay:.1s"><span class="ic">👑</span><div>A partir de <b>5 vidas</b> · reembolso consulta <b>R$ 400,00</b> (3 dias)</div></li>
+        <li style="animation-delay:.1s"><span class="ic">👑</span><div>A partir de <b>5 vidas</b> · reembolso consulta <b>R$ 435,00</b> (3 dias)</div></li>
         <li class="good" style="animation-delay:.3s"><span class="ic">★</span><div>Serviço concierge · vacinas a domicílio · assistência a viagens · check-up (titulares)</div></li>
         <li style="animation-delay:.55s"><span class="ic">🏥</span><div>Rede: BP Mirante, Pro Matre, Infantil Sabará, Albert Einstein, Sírio-Libanês, São Luiz SCSul</div></li>
         <li style="animation-delay:.8s"><span class="ic">🔬</span><div>Laboratórios: Alta e Fleury</div></li>
       </ul>
       <div class="sub" style="margin-top:9px">🦷 <b>Cobertura odontológica nacional</b> inclusa, sem custo adicional</div>`,
     narration:["No topo do portfólio está o Infinity mil, a partir de cinco vidas.",
-      "Ele oferece o maior reembolso, de quatrocentos reais em três dias, além de serviço concierge, vacinas a domicílio, assistência a viagens e check-up para os titulares.",
+      "Ele oferece o maior reembolso, de quatrocentos e trinta e cinco reais em três dias, além de serviço concierge, vacinas a domicílio, assistência a viagens e check-up para os titulares.",
       "A rede é de referência máxima: BP Mirante, Pró Matre, Infantil Sabará, Albert Einstein, Sírio-Libanês e o São Luiz de São Caetano, com os laboratórios Alta e Fleury."]
   },
   {
@@ -616,9 +616,9 @@ document.addEventListener("keydown",e=>{
 /* ================= QUIZ ================= */
 const quizData=[
   { q:"O que caracteriza a linha NotreDame Saúde da Hapvida?", opts:["Somente rede própria regional", "Livre escolha de médicos e hospitais, com reembolso", "Plano exclusivamente odontológico", "Atendimento apenas em um estado"], a:1, why:"O NotreDame Saúde é a linha de Livre Escolha: o cliente escolhe médicos e hospitais, dentro ou fora da rede, com reembolso e abrangência nacional." },
-  { q:"Qual produto é o topo do portfólio NotreDame Saúde?", opts:["Infinity 1.000", "Premium 900", "Advance 600", "Advance 700"], a:0, why:"O Infinity 1.000 é o topo: a partir de 5 vidas, maior reembolso (R$ 400) e mais benefícios." },
+  { q:"Qual produto é o topo do portfólio NotreDame Saúde?", opts:["Infinity 1.000", "Premium 900", "Advance 600", "Advance 700"], a:0, why:"O Infinity 1.000 é o topo: a partir de 5 vidas, maior reembolso (R$ 435) e mais benefícios." },
   { q:"A partir de quantas vidas é vendido o Advance 600?", opts:["5 vidas", "2 vidas", "3 vidas", "1 vida"], a:3, why:"O Advance 600 (e o 700) são vendidos a partir de 1 vida. Premium Care a partir de 2, Premium 900 a partir de 3 e Infinity a partir de 5." },
-  { q:"O reembolso de consulta do Infinity 1.000 é de:", opts:["R$ 400,00", "R$ 96,00", "R$ 240,00", "R$ 75,00"], a:0, why:"O reembolso de consulta sobe conforme a linha: R$ 75 (Advance 600), R$ 96 (Advance 700), R$ 240 (Premium) e R$ 400 (Infinity)." },
+  { q:"O reembolso de consulta do Infinity 1.000 é de:", opts:["R$ 435,00", "R$ 96,00", "R$ 240,00", "R$ 90,00"], a:0, why:"O reembolso de consulta sobe conforme a linha: R$ 90 (Advance 600), R$ 96 (Advance 700), R$ 240 (Premium) e R$ 435 (Infinity)." },
   { q:"A retaguarda no Albert Einstein e Sírio-Libanês é cobertura de qual plano?", opts:["Advance 600", "Todos os planos NotreDame Saúde", "Somente o Infinity", "Somente o Premium 900"], a:2, why:"A retaguarda de Pronto-Socorro e honorários de internação no Einstein e no Sírio-Libanês é cobertura exclusiva do plano Infinity." },
   { q:"Sobre a odontologia no NotreDame Saúde, é correto afirmar:", opts:["É um custo adicional obrigatório", "Só cobre urgência", "Vem inclusa sem custo adicional, com cobertura nacional", "Não existe no NotreDame Saúde"], a:2, why:"O plano odontológico completo vem incluso, sem custo adicional: cobertura nacional, +20 mil dentistas, urgência 24h. Válido para Individual, Super Simples e PME (até 99 vidas)." },
   { q:"Quais produtos NÃO aceitam agregados nem prestador de serviço?", opts:["Advance 600 e 700", "Premium 900 e Infinity", "Todos aceitam", "Nenhum aceita"], a:1, why:"Premium 900 e Infinity não aceitam agregados nem prestador de serviço; nas demais linhas os agregados entram até 53 anos." },
