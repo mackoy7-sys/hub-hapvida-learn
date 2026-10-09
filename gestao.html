@@ -158,6 +158,9 @@ const CAPS=[
 ];
 const PAPEL={vendedor:["v","Vendedor"],supervisor:["s","Supervisor"],gerente:["g","Gerente"],diretor:["d","Diretor"]};
 let PROG={}, PERFIS=[], EQUIPES={}, RESUMO=[], MIGRADO=true, INCOMPLETOS=[];
+// === Admins de equipes: SÓ estes e-mails criam equipes/códigos e aprovam cadastros ===
+const ADMIN_EQUIPES=["tamires.ciboff@hapvida.com.br","vinicius.lcruz@hapvida.com.br"];
+let EH_ADMIN_EQ=false;
 let FILTRO=""; // equipe_id selecionada (gerente/diretor)
 
 function scoreOf(uid){
@@ -193,10 +196,11 @@ function baixarCSV(nome, cabec, linhas){
 
 async function init(){
   const p=HL.perfil;
+  EH_ADMIN_EQ=ADMIN_EQUIPES.indexOf(((((HL.user&&HL.user.email))||"")+"").trim().toLowerCase())>=0;
   document.getElementById("loading").style.display="none";
-  if(!p || p.papel==="vendedor"){ document.getElementById("denied").style.display="block"; return; }
+  if(!p || (p.papel==="vendedor" && !EH_ADMIN_EQ)){ document.getElementById("denied").style.display="block"; return; }
   document.getElementById("app").style.display="block";
-  document.getElementById("whoName").textContent=(p.nome||HL.user.email)+" · "+(PAPEL[p.papel]?PAPEL[p.papel][1]:p.papel);
+  document.getElementById("whoName").textContent=(p.nome||HL.user.email)+" · "+(PAPEL[p.papel]?PAPEL[p.papel][1]:p.papel)+(EH_ADMIN_EQ?" · Admin de equipes":"");
   document.getElementById("sair").onclick=(e)=>{e.preventDefault();HL.logout();};
   await carregar();
 }
@@ -226,7 +230,7 @@ function vendsFiltrados(){
 }
 
 function render(){
-  const p=HL.perfil, gestor=(p.papel==="gerente"||p.papel==="diretor");
+  const p=HL.perfil, gestor=(p.papel==="gerente"||p.papel==="diretor"||EH_ADMIN_EQ);
   const vends=vendsFiltrados();
   // colaboradores = todos os papéis (respeita filtro de equipe) — para os KPIs
   const colabs=FILTRO?PERFIS.filter(x=>x.equipe_id===FILTRO):PERFIS.slice();
@@ -272,7 +276,7 @@ function render(){
     document.getElementById("provCnt").textContent=pendAprov.length;
     document.querySelector("#tblProv tbody").innerHTML=pendAprov.map(v=>
       `<tr><td class="nome"><b>${esc(v.nome)||"—"}</b><small>${esc(v.email)||""} · ${esc(nomeEquipe(v.equipe_id))}</small></td>
-       <td class="c"><button class="btn" data-aprovar="${v.id}">Aprovar</button></td></tr>`).join("");
+       <td class="c">${EH_ADMIN_EQ?`<button class="btn" data-aprovar="${v.id}">Aprovar</button>`:`<span class="nota" style="background:#eef2f8;color:#5b6b82">aguardando admin</span>`}</td></tr>`).join("");
     document.querySelectorAll("[data-aprovar]").forEach(b=>b.onclick=()=>aprovar(b.getAttribute("data-aprovar"),b));
   } else cardP.style.display="none";
 
@@ -325,13 +329,13 @@ function renderTimes(gestor){
         tools=document.getElementById("timesTools"), title=document.getElementById("timesTitle"),
         cnt=document.getElementById("timesCnt");
   hint.innerHTML=""; tools.innerHTML="";
-  if(!MIGRADO){
+  if(!MIGRADO && EH_ADMIN_EQ){
     hint.innerHTML=`<div class="hint">⚙️ Para criar equipes e gerar códigos pelo painel, rode a migração <b>supabase_times.sql</b> no SQL Editor do Supabase (uma vez). O acompanhamento abaixo já funciona.</div>`;
   }
   if(gestor){
     title.textContent="Times / Equipes";
     cnt.textContent=Object.keys(EQUIPES).length+" equipes";
-    if(MIGRADO) tools.innerHTML=`<button class="btn sm" id="btNovaEq">+ Criar equipe</button>`;
+    if(MIGRADO && EH_ADMIN_EQ) tools.innerHTML=`<button class="btn sm" id="btNovaEq">+ Criar equipe</button>`;
     const lista=(RESUMO.length?RESUMO:Object.values(EQUIPES).map(e=>({equipe_id:e.id,nome:e.nome,gerente_nome:e.gerente_nome,vendedores:PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===e.id).length,codigo_vendedor:null})));
     body.innerHTML = lista.length? lista.map(t=>{
       const con=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===t.equipe_id&&scoreOf(x.id).feitos===CAPS.length).length;
@@ -339,7 +343,7 @@ function renderTimes(gestor){
         <div class="ti"><b>${esc(t.nome)}</b><small>Líder: ${esc(t.gerente_nome)||"—"} · ${t.vendedores} vendedor(es) · ${con} concluíram</small></div>
         <div class="ra">
           ${t.codigo_vendedor?`<span>código vendedor: <span class="code" data-copy="${t.codigo_vendedor}" title="clique para copiar">${t.codigo_vendedor}</span></span>`:""}
-          ${MIGRADO?`<button class="btn ghost sm" data-gerarv="${t.equipe_id}">Gerar cód. vendedor</button>`:""}
+          ${(MIGRADO&&EH_ADMIN_EQ)?`<button class="btn ghost sm" data-gerarv="${t.equipe_id}">Gerar cód. vendedor</button>`:""}
           <button class="btn ghost sm" data-vereq="${t.equipe_id}">Ver time</button>
         </div></div>`;
     }).join(""):`<div class="empty">Nenhuma equipe cadastrada.</div>`;
@@ -349,12 +353,12 @@ function renderTimes(gestor){
     const eqId=HL.perfil.equipe_id, minha=RESUMO.find(t=>t.equipe_id===eqId);
     const nome=nomeEquipe(eqId), nv=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===eqId).length;
     const con=PERFIS.filter(x=>x.papel==="vendedor"&&x.equipe_id===eqId&&scoreOf(x.id).feitos===CAPS.length).length;
-    if(MIGRADO) tools.innerHTML=`<button class="btn sm" id="btNovaEq">Criar minha equipe</button>`;
+    if(MIGRADO && EH_ADMIN_EQ) tools.innerHTML=`<button class="btn sm" id="btNovaEq">Criar minha equipe</button>`;
     body.innerHTML=`<div class="teamrow">
       <div class="ti"><b>${esc(nome)}</b><small>${nv} vendedor(es) · ${con} concluíram</small></div>
       <div class="ra">
         ${minha&&minha.codigo_vendedor?`<span>compartilhe o código: <span class="code" data-copy="${minha.codigo_vendedor}" title="clique para copiar">${minha.codigo_vendedor}</span></span>`
-          :(MIGRADO?`<button class="btn ghost sm" data-gerarv="${eqId}">Gerar código de vendedor</button>`:"")}
+          :((MIGRADO&&EH_ADMIN_EQ)?`<button class="btn ghost sm" data-gerarv="${eqId}">Gerar código de vendedor</button>`:"")}
       </div></div>
       <div class="hint" style="background:#eef2f8;color:#5b6b82;margin-top:2px">Compartilhe o código com seus vendedores para eles se cadastrarem no seu time. Depois, aprove-os no bloco acima.</div>`;
   }
